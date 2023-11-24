@@ -1,5 +1,6 @@
 return {
   { "max397574/better-escape.nvim", enabled = false },
+  { import = "astrocommunity.media.vim-wakatime" },
   {
     "tpope/vim-fugitive",
     cmd = {
