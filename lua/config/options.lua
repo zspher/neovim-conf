@@ -18,5 +18,7 @@ vim.opt.list = true
 vim.opt.listchars:append { tab = "│→", extends = "⟩", precedes = "⟨", trail = "·", nbsp = "␣" }
 
 vim.opt.spell = true
+vim.opt.spellfile = vim.fn.expand "~/.config/nvim/spell/en.utf-8.add"
+vim.opt.thesaurus = vim.fn.expand "~/.config/nvim/spell/mthesaur.txt"
 
 vim.g.mapleader = " "
