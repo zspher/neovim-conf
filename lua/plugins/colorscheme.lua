@@ -10,6 +10,11 @@ return {
     "catppuccin/nvim",
     name = "catppuccin",
     opts = {
+      custom_highlights = function(colors)
+        return {
+          NeoTreeTitleBar = { fg = colors.mantle, bg = colors.blue },
+        }
+      end,
       flavour = "mocha",
       transparent_background = true,
       integrations = {
