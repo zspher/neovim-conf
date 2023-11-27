@@ -46,4 +46,33 @@ return {
       }
     end,
   },
+  {
+    "stevearc/overseer.nvim",
+    lazy = false,
+    cmd = {
+      "OverseerOpen",
+      "OverseerClose",
+      "OverseerToggle",
+      "OverseerSaveBundle",
+      "OverseerLoadBundle",
+      "OverseerDeleteBundle",
+      "OverseerRunCmd",
+      "OverseerRun",
+      "OverseerInfo",
+      "OverseerBuild",
+      "OverseerQuickAction",
+      "OverseerTaskAction ",
+      "OverseerClearCache",
+    },
+    opts = {
+      strategy = "toggleterm",
+    },
+    keys = function()
+      local prefix = "<leader>r"
+      return {
+        { prefix .. "o", "<Cmd>OverseerToggle<cr>", desc = "Task: Open" },
+        { prefix .. "t", "<Cmd>OverseerRun<cr>", desc = "Task: Run" },
+      }
+    end,
+  },
 }
