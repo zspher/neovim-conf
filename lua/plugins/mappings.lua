@@ -29,7 +29,7 @@ return {
         },
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus
-        ["<leader>r"] = { desc = (vim.g.icons_enabled and " " or "") .. "Run" },
+        ["<leader>r"] = { desc = " Run" },
       },
       t = {
         -- setting a mapping to false will disable it
