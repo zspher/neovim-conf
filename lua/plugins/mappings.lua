@@ -30,6 +30,8 @@ return {
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus
         ["<leader>r"] = { desc = " Run" },
+        ["[q"] = { "<Cmd>cp<cr>", desc = "Previous quickfix" },
+        ["]q"] = { "<Cmd>cn<cr>", desc = "Next quickfix" },
       },
       t = {
         -- setting a mapping to false will disable it
