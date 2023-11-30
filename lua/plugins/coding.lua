@@ -42,7 +42,7 @@ return {
         { prefix .. "r", "<Plug>SnipRunOperator", desc = "REPL: Run" },
         { prefix .. "c", "<Plug>SnipClose", desc = "REPL: Clear" },
         { prefix .. "l", "<Plug>SnipRun", desc = "REPL: Run line" },
-        { "r", "<Plug>SnipRun", desc = "REPL: Run", mode = { "v" } },
+        { prefix, "<Plug>SnipRun", desc = "REPL: Run", mode = { "v" } },
       }
     end,
   },
