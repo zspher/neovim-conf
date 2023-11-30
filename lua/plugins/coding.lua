@@ -92,4 +92,57 @@ return {
     --   )
     -- end,
   },
+  {
+    "ThePrimeagen/refactoring.nvim",
+    keys = function()
+      local prefix = "<leader>a"
+      require("astrocore").set_mappings {
+        v = { [prefix] = { desc = "𝌡 Refactor" } },
+        n = { [prefix] = { desc = "𝌡 Refactor" } },
+      }
+      return {
+        {
+          prefix .. "e",
+          mode = { "v" },
+          function() require("refactoring").refactor "Extract Function" end,
+          desc = "Extract Function",
+        },
+        {
+          prefix .. "f",
+          mode = { "v" },
+          function() require("refactoring").refactor "Extract Function To File" end,
+          desc = "Extract Function to File",
+        },
+        {
+          prefix .. "v",
+          mode = { "v" },
+          function() require("refactoring").refactor "extract variable" end,
+          desc = "Extract Variable",
+        },
+        {
+          prefix .. "I",
+          function() require("refactoring").refactor "Inline Function" end,
+          desc = "Inline Function",
+        },
+        {
+          prefix .. "i",
+          mode = { "v", "n" },
+          function() require("refactoring").refactor "Inline Variable" end,
+          desc = "Inline Variable",
+        },
+        {
+          prefix .. "b",
+          mode = { "v", "n" },
+          function() require("refactoring").refactor "Extract Block" end,
+          desc = "Inline Variable",
+        },
+        {
+          prefix .. "bf",
+          mode = { "v", "n" },
+          function() require("refactoring").refactor "Extract Block To File" end,
+          desc = "Inline Variable",
+        },
+      }
+    end,
+  },
 }
