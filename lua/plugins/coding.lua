@@ -48,7 +48,6 @@ return {
   },
   {
     "stevearc/overseer.nvim",
-    lazy = false,
     cmd = {
       "OverseerOpen",
       "OverseerClose",
@@ -65,6 +64,17 @@ return {
       "OverseerClearCache",
     },
     opts = {
+      component_aliases = {
+        -- Most tasks are initialized with the default components
+        default = {
+          { "display_duration", detail_level = 2 },
+          "on_output_summarize",
+          "on_exit_set_status",
+          "on_complete_notify",
+          "on_complete_dispose",
+          { "on_output_quickfix", close = true },
+        },
+      },
       strategy = "toggleterm",
     },
     keys = function()
@@ -74,5 +84,12 @@ return {
         { prefix .. "t", "<Cmd>OverseerRun<cr>", desc = "Task: Run" },
       }
     end,
+    -- config = function(_, opts)
+    --   require("overseer").setup(opts)
+    --   require("overseer").add_template_hook(
+    --     { name = "make" },
+    --     function(task_defn, util) util.add_component(task_defn, { "on_output_quickfix", open = true }) end
+    --   )
+    -- end,
   },
 }
