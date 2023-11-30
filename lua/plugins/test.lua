@@ -12,15 +12,19 @@ return {
         { prefix .. "e", function() require("neotest").run.stop() end, desc = "Test: Stop" },
       }
     end,
-    opts = function()
-      return {
-        adapters = {
-          require "neotest-python" {
-            dap = { justMyCode = false },
-            pytest_discover_instances = true,
-          },
+    opts = function(_, opts)
+      opts.adapters = {
+        require "neotest-python" {
+          dap = { justMyCode = false },
+          pytest_discover_instances = true,
         },
       }
+      opts.consumers = {
+        overseer = require "neotest.consumers.overseer",
+      }
     end,
+    dependencies = {
+      { "stevearc/overseer.nvim", optional = true },
+    },
   },
 }
