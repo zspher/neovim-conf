@@ -18,6 +18,7 @@ return {
     "onsails/lspkind.nvim",
     opts = {
       preset = "codicons",
+      symbol_map = { Codeium = "" },
     },
   },
   {
