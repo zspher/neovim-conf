@@ -81,7 +81,7 @@ return {
       local prefix = "<leader>r"
       return {
         { prefix .. "o", "<Cmd>OverseerToggle<cr>", desc = "Task: Open" },
-        { prefix .. "t", "<Cmd>OverseerRun<cr>", desc = "Task: Run" },
+        { prefix .. "b", "<Cmd>OverseerRun<cr>", desc = "Task: Run" },
       }
     end,
     -- config = function(_, opts)
