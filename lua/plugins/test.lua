@@ -5,7 +5,7 @@ return {
     keys = function()
       local prefix = "<leader>r"
       return {
-        { prefix .. "b", function() require("neotest").run.run(vim.fn.expand "%") end, desc = "Test: Run File" },
+        { prefix .. "t", function() require("neotest").run.run(vim.fn.expand "%") end, desc = "Test: Run File" },
         { prefix .. "T", function() require("neotest").run.run(vim.loop.cwd()) end, desc = "Test: Run All Test Files" },
         { prefix .. "S", function() require("neotest").summary.toggle() end, desc = "Test: Toggle Summary" },
         { prefix .. "O", function() require("neotest").output_panel.toggle() end, desc = "Test: Toggle Output Panel" },
