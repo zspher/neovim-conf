@@ -9,19 +9,6 @@ return {
     config.sources = {
       null_ls.builtins.formatting.shfmt.with { extra_args = { "-i", vim.o.tabstop, "-ci" } },
       null_ls.builtins.formatting.prettierd.with {
-        filetypes = {
-          "css",
-          "scss",
-          "less",
-          "html",
-          "json",
-          "jsonc",
-          "yaml",
-          "markdown",
-          "markdown.mdx",
-          "graphql",
-          "handlebars",
-        },
         extra_args = { "--tab-width=" .. vim.o.tabstop, "--config-precedence=prefer-file" },
       },
     }
