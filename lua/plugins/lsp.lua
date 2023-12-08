@@ -45,6 +45,16 @@ return {
           },
         },
       },
+      nil_ls = {
+        settings = {
+          ["nil"] = {
+            testSetting = 42,
+            formatting = {
+              command = { "alejandra" },
+            },
+          },
+        },
+      },
     },
     -- customize how language servers are attached
     setup_handlers = {
