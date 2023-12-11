@@ -1,18 +1,14 @@
 return {
-  { import = "astrocommunity.pack.rust" },
-  { import = "astrocommunity.pack.bash" },
-  { import = "astrocommunity.pack.html-css" },
-  { import = "astrocommunity.pack.lua" },
-  { import = "astrocommunity.markdown-and-latex.vimtex" },
+  { import = "plugins.lang.bash" },
+  { import = "lazyvim.plugins.extras.lang.tex" },
+  { import = "lazyvim.plugins.extras.lang.clangd" },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
       -- register file type with language
       vim.treesitter.language.register("bash", "zsh")
       -- add more things to the ensure_installed table protecting against community packs modifying it
-      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
-        -- "lua"
-      })
+      if type(opts.ensure_installed) == "table" then vim.list_extend(opts.ensure_installed, { "comment" }) end
     end,
   },
 }
