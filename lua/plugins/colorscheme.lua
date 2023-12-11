@@ -1,7 +1,6 @@
 return {
   {
-    "AstroNvim/astroui",
-    ---@type AstroUIOpts
+    "LazyVim/LazyVim",
     opts = {
       colorscheme = "catppuccin",
     },
@@ -10,11 +9,6 @@ return {
     "catppuccin/nvim",
     name = "catppuccin",
     opts = {
-      custom_highlights = function(colors)
-        return {
-          NeoTreeTitleBar = { fg = colors.mantle, bg = colors.blue },
-        }
-      end,
       flavour = "mocha",
       transparent_background = true,
       integrations = {
@@ -33,6 +27,13 @@ return {
         telescope = { enabled = true, style = "nvchad" },
         which_key = true,
       },
+    },
+  },
+  {
+    "rcarriga/nvim-notify",
+    opts = {
+      background_colour = "#000000",
+      timeout = 2000,
     },
   },
 }
