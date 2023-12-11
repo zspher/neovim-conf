@@ -1,6 +1,6 @@
 return {
-  { "max397574/better-escape.nvim", enabled = false },
-  { import = "astrocommunity.media.vim-wakatime" },
+  { "wakatime/vim-wakatime", event = "LazyFile" },
+  { import = "lazyvim.plugins.extras.coding.codeium" },
   {
     "tpope/vim-fugitive",
     cmd = {
@@ -45,6 +45,11 @@ return {
         { prefix, "<Plug>SnipRun", desc = "REPL: Run", mode = { "v" } },
       }
     end,
+    dependencies = {
+      "folke/which-key.nvim",
+      optional = true,
+      opts = { defaults = { ["<leader>r"] = { name = "+run/task", mode = "n" } } },
+    },
   },
   {
     "stevearc/overseer.nvim",
@@ -75,15 +80,19 @@ return {
           { "on_output_quickfix", close = true },
         },
       },
-      strategy = "toggleterm",
     },
     keys = function()
       local prefix = "<leader>r"
       return {
         { prefix .. "o", "<Cmd>OverseerToggle<cr>", desc = "Task: Open" },
-        { prefix .. "b", "<Cmd>OverseerRun<cr>", desc = "Task: Run" },
+        { prefix .. "t", "<Cmd>OverseerRun<cr>", desc = "Task: Run" },
       }
     end,
+    dependencies = {
+      "folke/which-key.nvim",
+      optional = true,
+      opts = { defaults = { ["<leader>r"] = { name = "+run/task", mode = "n" } } },
+    },
     -- config = function(_, opts)
     --   require("overseer").setup(opts)
     --   require("overseer").add_template_hook(
@@ -95,11 +104,7 @@ return {
   {
     "ThePrimeagen/refactoring.nvim",
     keys = function()
-      local prefix = "<leader>a"
-      require("astrocore").set_mappings {
-        v = { [prefix] = { desc = "𝌡 Refactor" } },
-        n = { [prefix] = { desc = "𝌡 Refactor" } },
-      }
+      local prefix = "<leader>c"
       return {
         {
           prefix .. "e",
@@ -108,7 +113,7 @@ return {
           desc = "Extract Function",
         },
         {
-          prefix .. "f",
+          prefix .. "E",
           mode = { "v" },
           function() require("refactoring").refactor "Extract Function To File" end,
           desc = "Extract Function to File",
@@ -132,36 +137,59 @@ return {
         },
         {
           prefix .. "b",
-          mode = { "v", "n" },
           function() require("refactoring").refactor "Extract Block" end,
-          desc = "Inline Variable",
+          desc = "Extract Block",
         },
         {
-          prefix .. "bf",
-          mode = { "v", "n" },
+          prefix .. "B",
           function() require("refactoring").refactor "Extract Block To File" end,
-          desc = "Inline Variable",
+          desc = "Extract Block to File",
         },
       }
     end,
   },
+
+  -- Use <tab> for completion and snippets (supertab)
+  -- first: disable default <tab> and <s-tab> behavior in LuaSnip
+  { "L3MON4D3/LuaSnip", keys = function() return {} end },
+  -- then: setup supertab in cmp
   {
-    "Exafunction/codeium.nvim",
-    cmd = "Codeium",
-    build = ":Codeium Auth",
-    opts = {},
-    dependencies = {
-      {
-        "nvim-cmp",
-        ---@param opts cmp.ConfigSchema
-        opts = function(_, opts)
-          table.insert(opts.sources, 1, {
-            name = "codeium",
-            group_index = 1,
-            priority = 1100,
-          })
-        end,
-      },
-    },
+    "hrsh7th/nvim-cmp",
+    ---@param opts cmp.ConfigSchema
+    opts = function(_, opts)
+      local has_words_before = function()
+        unpack = unpack or table.unpack
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
+      end
+
+      local luasnip = require "luasnip"
+      local cmp = require "cmp"
+
+      opts.mapping = vim.tbl_extend("force", opts.mapping, {
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+            -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+            -- this way you will only jump inside the snippet region
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          elseif has_words_before() then
+            cmp.complete()
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+      })
+    end,
   },
 }
