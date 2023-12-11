@@ -12,14 +12,13 @@ return {
         or require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git")
 
       opts.sources = vim.list_extend(opts.sources or {}, {
-        nls.builtins.formatting.fish_indent,
-        nls.builtins.diagnostics.fish,
-        nls.builtins.formatting.stylua,
-        nls.builtins.formatting.shfmt.with { extra_args = { "-i", vim.o.tabstop, "-ci" } },
         nls.builtins.formatting.prettierd.with {
           extra_args = { "--tab-width=" .. vim.o.tabstop, "--config-precedence=prefer-file" },
         },
       })
     end,
+    dependencies = {
+      "jay-babu/mason-null-ls.nvim",
+    },
   },
 }
