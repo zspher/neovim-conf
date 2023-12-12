@@ -29,7 +29,9 @@ return {
         ["markdown.mdx"] = { "prettierd" },
         graphql = { "prettierd" },
         handlebars = { "prettierd" },
+
         bash = { "shfmt" },
+        cs = { "csharpier" },
       },
       formatters = {
         shfmt = {
