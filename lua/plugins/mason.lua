@@ -1,3 +1,8 @@
+local function isNixOS()
+  if vim.fn.isdirectory "/nix/var/nix/profiles/system" then return false end
+  return true
+end
+
 return {
   {
     "williamboman/mason.nvim",
@@ -9,12 +14,17 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     optional = true,
+    opts = {
+      automatic_installation = isNixOS(),
+    },
   },
-  -- use mason-null-ls to configure Formatters/Linter installation for null-ls sources
   {
     "jay-babu/mason-null-ls.nvim",
     -- overrides `require("mason-null-ls").setup(...)`
     optional = true,
+    opts = {
+      automatic_installation = isNixOS(),
+    },
   },
   {
     "jay-babu/mason-nvim-dap.nvim",
