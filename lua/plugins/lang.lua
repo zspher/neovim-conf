@@ -34,4 +34,18 @@ return {
       end
     end,
   },
+
+  { import = "lazyvim.plugins.extras.lang.python" },
+  {
+
+    "nvim-neotest/neotest",
+    opts = function(_, opts)
+      opts.adapters = {
+        ["neotest-python"] = {
+          dap = { justMyCode = false },
+          pytest_discover_instances = true,
+        },
+      }
+    end,
+  },
 }
