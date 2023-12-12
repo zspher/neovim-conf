@@ -1,6 +1,6 @@
 # nvim
 
-**NOTE:** Uses [AstroNvim](https://github.com/AstroNvim/AstroNvim) v4+
+uses 💤 [LazyVim](https://www.lazyvim.org/)
 
 ## 🛠️ Installation
 
@@ -16,7 +16,7 @@ mv ~/.cache/nvim{,.bak}
 #### Clone the repository
 
 ```shell
-git clone https://github.com/portus-zephyr/astrovim_conf ~/.config/nvim
+git clone https://github.com/portus-zephyr/neovim-conf ~/.config/nvim
 ```
 
 #### Start Neovim
