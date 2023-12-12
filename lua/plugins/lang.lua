@@ -1,5 +1,6 @@
 return {
   { import = "plugins.lang.bash" },
+  { import = "plugins.lang.cs" },
   { import = "lazyvim.plugins.extras.lang.tex" },
   { import = "lazyvim.plugins.extras.lang.clangd" },
   {
