@@ -43,21 +43,13 @@ return {
 
     opts = function(_, opts)
       local nls = require "null-ls"
-
-      -- Check supported formatters and linters
-      -- https://github.com/nvimtools/none-ls.nvim/tree/main/lua/null-ls/builtins/formatting
-      -- https://github.com/nvimtools/none-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
       opts.root_dir = opts.root_dir
         or require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git")
-
-      opts.sources = vim.list_extend(opts.sources or {}, {
-        nls.builtins.formatting.prettierd.with {
-          extra_args = { "--tab-width=" .. vim.o.tabstop, "--config-precedence=prefer-file" },
-        },
-      })
+      opts.sources = {
+        nls.builtins.code_actions.shellcheck,
+        nls.builtins.code_actions.refactoring,
+        nls.builtins.code_actions.gitsigns,
+      }
     end,
-    dependencies = {
-      "jay-babu/mason-null-ls.nvim",
-    },
   },
 }
