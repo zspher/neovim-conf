@@ -1,5 +1,4 @@
 return {
-  { import = "lazyvim.plugins.extras.editor.aerial" },
   {
     "nvim-neo-tree/neo-tree.nvim",
     opts = {
