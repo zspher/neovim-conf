@@ -29,4 +29,13 @@ return {
       },
     },
   },
+  {
+    "folke/which-key.nvim",
+    opts = {
+      defaults = {
+        s = "which_key_ignore",
+        ["<S-s>"] = "which_key_ignore",
+      },
+    },
+  },
 }
