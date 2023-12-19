@@ -83,7 +83,26 @@ return {
   {
     "akinsho/bufferline.nvim",
     opts = {
-      options = { always_show_bufferline = true },
+      options = {
+        highlights = require("catppuccin.groups.integrations.bufferline").get(),
+        indicator = { style = "none" },
+        always_show_bufferline = true,
+        offsets = {
+          {
+            filetype = "OverseerList",
+            text_align = "left",
+            text = "Overseer",
+            separator = true,
+          },
+          {
+            filetype = "neo-tree",
+            text = "Neo-tree",
+            highlight = "Directory",
+            text_align = "left",
+            separator = true,
+          },
+        },
+      },
     },
   },
   { "echasnovski/mini.indentscope", enabled = false },
