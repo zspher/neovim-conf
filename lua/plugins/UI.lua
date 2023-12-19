@@ -15,7 +15,9 @@ return {
       options = {
         section_separators = "",
         component_separators = { left = "›", right = "|" },
-        disabled_filetypes = { winbar = { "aerial", "neo-tree", "dapui", "dap-repl", "qf", "help" } },
+        disabled_filetypes = {
+          winbar = { "dapui", "dap-repl", "qf", "help", "dashboard", "alpha", "starter" },
+        },
       },
       sections = {
         lualine_c = {
