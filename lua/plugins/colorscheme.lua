@@ -16,6 +16,7 @@ return {
         nvimtree = false,
 
         aerial = true,
+        harpoon = true,
         leap = true,
         lsp_trouble = true,
         mason = true,
