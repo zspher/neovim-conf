@@ -122,7 +122,7 @@ return {
         {
           prefix .. "v",
           mode = { "v" },
-          function() require("refactoring").refactor "extract variable" end,
+          function() require("refactoring").refactor "Extract Variable" end,
           desc = "Extract Variable",
         },
         {
