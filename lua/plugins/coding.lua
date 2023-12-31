@@ -78,7 +78,7 @@ return {
           "on_exit_set_status",
           "on_complete_notify",
           "on_complete_dispose",
-          { "on_output_quickfix", close = true },
+          { "on_output_quickfix" },
         },
       },
     },
@@ -87,6 +87,19 @@ return {
       return {
         { prefix .. "o", "<Cmd>OverseerToggle<cr>", desc = "Task: Open" },
         { prefix .. "t", "<Cmd>OverseerRun<cr>", desc = "Task: Run" },
+        {
+          prefix .. "s",
+          function()
+            local overseer = require "overseer"
+            local tasks = overseer.list_tasks { recent_first = true }
+            if vim.tbl_isempty(tasks) then
+              vim.notify("No tasks found", vim.log.levels.WARN)
+            else
+              overseer.run_action(tasks[1], "restart")
+            end
+          end,
+          desc = "Task: Restart",
+        },
       }
     end,
     dependencies = {
@@ -94,13 +107,6 @@ return {
       optional = true,
       opts = { defaults = { ["<leader>r"] = { name = "+run/task", mode = "n" } } },
     },
-    -- config = function(_, opts)
-    --   require("overseer").setup(opts)
-    --   require("overseer").add_template_hook(
-    --     { name = "make" },
-    --     function(task_defn, util) util.add_component(task_defn, { "on_output_quickfix", open = true }) end
-    --   )
-    -- end,
   },
   {
     "ThePrimeagen/refactoring.nvim",
