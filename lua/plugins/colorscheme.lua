@@ -29,6 +29,13 @@ return {
         telescope = { enabled = true, style = "nvchad" },
         which_key = true,
       },
+      custom_highlights = function(colors)
+        return {
+          LineNrAbove = { fg = colors.subtext0 },
+          LineNrBelow = { fg = colors.subtext0 },
+          CursorLineNr = { fg = colors.peach, style = { "bold" } },
+        }
+      end,
     },
   },
   {
