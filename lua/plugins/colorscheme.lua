@@ -26,7 +26,7 @@ return {
         notify = true,
         overseer = true,
         symbols_outline = true,
-        telescope = { enabled = true, style = "nvchad" },
+        telescope = { enabled = true },
         which_key = true,
       },
       custom_highlights = function(colors)
