@@ -1,48 +1,65 @@
 return {
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      if type(opts.ensure_installed) == "table" then vim.list_extend(opts.ensure_installed, { "c_sharp", "xml" }) end
-    end,
-  },
-  {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      { "Hoffs/omnisharp-extended-lsp.nvim" },
-      {
-        -- configure omnisharp-vim to use the omnisharp binary from mason
-        "OmniSharp/omnisharp-vim",
-        config = function()
-          vim.cmd [[
+    {
+        "nvim-treesitter/nvim-treesitter",
+        opts = function(_, opts)
+            if type(opts.ensure_installed) == "table" then
+                vim.list_extend(opts.ensure_installed, { "c_sharp", "xml" })
+            end
+        end,
+    },
+    {
+        "neovim/nvim-lspconfig",
+        dependencies = {
+            { "Hoffs/omnisharp-extended-lsp.nvim" },
+            {
+                -- configure omnisharp-vim to use the omnisharp binary from mason
+                "OmniSharp/omnisharp-vim",
+                config = function()
+                    vim.cmd [[
             let g:OmniSharp_server_path = expand('~') . "/.local/share/nvim/mason/bin/omnisharp"
           ]]
-        end,
-      },
-    },
-    ---@class PluginLspOpts
-    opts = {
-      servers = {
-        omnisharp = {
-          keys = {
-            { "gd", "<cmd>OmniSharpGotoDefinition<CR>", desc = "Goto Definition" },
-            { "gy", "<cmd>OmniSharpGotoTypeDefinition<CR>", desc = "Goto Type Definition" },
-          },
+                end,
+            },
         },
-      },
-      setup = {
-        omnisharp = function(_, opts)
-          -- FIX: https://github.com/OmniSharp/omnisharp-roslyn/issues/2238
-          opts.handlers = { ["textDocument/definition"] = require("omnisharp_extended").handler }
-        end,
-      },
+        ---@class PluginLspOpts
+        opts = {
+            servers = {
+                omnisharp = {
+                    keys = {
+                        {
+                            "gd",
+                            "<cmd>OmniSharpGotoDefinition<CR>",
+                            desc = "Goto Definition",
+                        },
+                        {
+                            "gy",
+                            "<cmd>OmniSharpGotoTypeDefinition<CR>",
+                            desc = "Goto Type Definition",
+                        },
+                    },
+                },
+            },
+            setup = {
+                omnisharp = function(_, opts)
+                    -- FIX: https://github.com/OmniSharp/omnisharp-roslyn/issues/2238
+                    opts.handlers = {
+                        ["textDocument/definition"] = require(
+                            "omnisharp_extended"
+                        ).handler,
+                    }
+                end,
+            },
+        },
     },
-  },
 
-  {
-    "jay-babu/mason-nvim-dap.nvim",
-    optional = true,
-    opts = function(_, opts)
-      if type(opts.ensure_installed) == "table" then vim.list_extend(opts.ensure_installed, { "coreclr" }) end -- netcoredbg
-    end,
-  },
+    {
+        "jay-babu/mason-nvim-dap.nvim",
+        optional = true,
+        opts = function(_, opts)
+            if type(opts.ensure_installed) == "table" then
+                -- netcoredbg
+                vim.list_extend(opts.ensure_installed, { "coreclr" })
+            end
+        end,
+    },
 }

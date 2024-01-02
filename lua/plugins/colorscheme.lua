@@ -1,48 +1,48 @@
 return {
-  { "folke/tokyonight.nvim", enabled = false },
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "catppuccin",
+    { "folke/tokyonight.nvim", enabled = false },
+    {
+        "LazyVim/LazyVim",
+        opts = {
+            colorscheme = "catppuccin",
+        },
     },
-  },
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    opts = {
-      flavour = "mocha",
-      transparent_background = true,
-      integrations = {
-        nvimtree = false,
+    {
+        "catppuccin/nvim",
+        name = "catppuccin",
+        opts = {
+            flavour = "mocha",
+            transparent_background = true,
+            integrations = {
+                nvimtree = false,
 
-        aerial = true,
-        harpoon = true,
-        leap = true,
-        lsp_trouble = true,
-        mason = true,
-        neotest = true,
-        neotree = true,
-        noice = true,
-        notify = true,
-        overseer = true,
-        symbols_outline = true,
-        telescope = { enabled = true },
-        which_key = true,
-      },
-      custom_highlights = function(colors)
-        return {
-          LineNrAbove = { fg = colors.subtext0 },
-          LineNrBelow = { fg = colors.subtext0 },
-          CursorLineNr = { fg = colors.peach, style = { "bold" } },
-        }
-      end,
+                aerial = true,
+                harpoon = true,
+                leap = true,
+                lsp_trouble = true,
+                mason = true,
+                neotest = true,
+                neotree = true,
+                noice = true,
+                notify = true,
+                overseer = true,
+                symbols_outline = true,
+                telescope = { enabled = true },
+                which_key = true,
+            },
+            custom_highlights = function(colors)
+                return {
+                    LineNrAbove = { fg = colors.subtext0 },
+                    LineNrBelow = { fg = colors.subtext0 },
+                    CursorLineNr = { fg = colors.peach, style = { "bold" } },
+                }
+            end,
+        },
     },
-  },
-  {
-    "rcarriga/nvim-notify",
-    opts = {
-      background_colour = "#000000",
-      timeout = 2000,
+    {
+        "rcarriga/nvim-notify",
+        opts = {
+            background_colour = "#000000",
+            timeout = 2000,
+        },
     },
-  },
 }
