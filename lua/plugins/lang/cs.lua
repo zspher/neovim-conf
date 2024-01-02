@@ -54,7 +54,6 @@ return {
 
     {
         "jay-babu/mason-nvim-dap.nvim",
-        optional = true,
         opts = function(_, opts)
             if type(opts.ensure_installed) == "table" then
                 -- netcoredbg
