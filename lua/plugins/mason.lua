@@ -19,6 +19,13 @@ return {
         },
     },
     {
+        "jay-babu/mason-null-ls.nvim",
+        opts = {
+            automatic_installation = isNixOS(),
+        },
+        optional = true,
+    },
+    {
         "jay-babu/mason-nvim-dap.nvim",
         -- overrides `require("mason-nvim-dap").setup(...)`
         optional = true,
