@@ -2,6 +2,28 @@ return {
     {
         "nvim-neo-tree/neo-tree.nvim",
         opts = {
+            window = {
+                mappings = {
+                    ["a"] = {
+                        "add",
+                        config = {
+                            show_path = "absolute",
+                        },
+                    },
+                    ["m"] = {
+                        "move",
+                        config = {
+                            show_path = "absolute",
+                        },
+                    },
+                    ["c"] = {
+                        "copy",
+                        config = {
+                            show_path = "absolute",
+                        },
+                    },
+                },
+            },
             filesystem = {
                 filtered_items = {
                     visible = true,
