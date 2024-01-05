@@ -3,6 +3,15 @@ return {
     -- first: disable default <tab> and <s-tab> behavior in LuaSnip
     {
         "L3MON4D3/LuaSnip",
+        keys = function()
+            return {
+                {
+                    "<leader>fs",
+                    function() require("luasnip.loaders").edit_snippet_files() end,
+                    desc = "find snippets",
+                },
+            }
+        end,
         config = function()
             require("luasnip.loaders.from_vscode").load {
                 paths = "./snippets",
