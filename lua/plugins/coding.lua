@@ -81,6 +81,7 @@ return {
     },
     {
         "ThePrimeagen/harpoon",
+        branch = "harpoon2",
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope.nvim",
@@ -94,68 +95,47 @@ return {
                 },
             },
         },
-        cmd = { "Harpoon" },
-        keys = function(_, keys)
+        opts = {
+            settings = {
+                save_on_toggle = true,
+            },
+        },
+        config = function(_, opts)
+            local harpoon = require "harpoon"
+            local extensions = require "harpoon.extensions"
+            harpoon:setup(opts)
+            harpoon:extend(extensions.builtins.navigate_with_number())
+        end,
+        keys = function()
             local prefix = "<leader>h"
-            local term_string = vim.fn.exists "$TMUX" == 1 and "tmux"
-                or "terminal"
+            local harpoon = require "harpoon"
             return {
                 {
                     prefix .. "a",
-                    function() require("harpoon.mark").add_file() end,
+                    function() harpoon:list():append() end,
                     desc = "Add file",
                 },
                 {
                     prefix .. "e",
-                    function() require("harpoon.ui").toggle_quick_menu() end,
+                    function()
+                        harpoon.ui:toggle_quick_menu(harpoon:list(), {
+                            border = "rounded",
+                            title_pos = "center",
+                            title = " Harpoon ",
+                            ui_max_width = 100,
+                        })
+                    end,
                     desc = "Toggle quick menu",
                 },
                 {
-                    prefix .. "i",
-                    function()
-                        vim.ui.input(
-                            { prompt = "Harpoon mark index: " },
-                            function(input)
-                                local num = tonumber(input)
-                                if num then
-                                    require("harpoon.ui").nav_file(num)
-                                end
-                            end
-                        )
-                    end,
-                    desc = "Goto index of mark",
-                },
-                {
                     "<C-p>",
-                    function() require("harpoon.ui").nav_prev() end,
+                    function() harpoon:list():prev { ui_nav_wrap = true } end,
                     desc = "Goto previous mark",
                 },
                 {
                     "<C-n>",
-                    function() require("harpoon.ui").nav_next() end,
+                    function() harpoon:list():next { ui_nav_wrap = true } end,
                     desc = "Goto next mark",
-                },
-                {
-                    prefix .. "m",
-                    "<cmd>Telescope harpoon marks<CR>",
-                    desc = "Show marks in Telescope",
-                },
-                {
-                    prefix .. "t",
-                    function()
-                        vim.ui.input(
-                            { prompt = term_string .. " window number: " },
-                            function(input)
-                                local num = tonumber(input)
-                                if num then
-                                    require("harpoon." .. term_string).gotoTerminal(
-                                        num
-                                    )
-                                end
-                            end
-                        )
-                    end,
-                    desc = "Go to " .. term_string .. " window",
                 },
             }
         end,
