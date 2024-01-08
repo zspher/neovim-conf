@@ -1,3 +1,4 @@
+---@type LazySpec[]
 return {
     { import = "plugins.lang.bash" },
     { import = "plugins.lang.cs" },
