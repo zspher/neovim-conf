@@ -7,6 +7,7 @@ local function disable_cond()
     end
 end
 
+---@type LazySpec[]
 return {
     { import = "lazyvim.plugins.extras.editor.aerial" },
     { -- overrides parts of aerial config

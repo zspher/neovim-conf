@@ -1,8 +1,10 @@
+---@type LazySpec[]
 return {
     -- Use <tab> for completion and snippets (supertab)
     -- first: disable default <tab> and <s-tab> behavior in LuaSnip
     {
         "L3MON4D3/LuaSnip",
+        --- @diagnostic disable-next-line: assign-type-mismatch
         keys = function()
             return {
                 {

@@ -3,6 +3,7 @@ local function isNixOS()
     return true
 end
 
+---@type LazySpec[]
 return {
     {
         "williamboman/mason.nvim",
