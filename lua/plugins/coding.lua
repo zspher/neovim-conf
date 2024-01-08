@@ -111,7 +111,7 @@ return {
                     desc = "Toggle quick menu",
                 },
                 {
-                    "<C-x>",
+                    prefix .. "i",
                     function()
                         vim.ui.input(
                             { prompt = "Harpoon mark index: " },
