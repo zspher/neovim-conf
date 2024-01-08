@@ -1,3 +1,4 @@
+---@type LazySpec[]
 return {
     { "echasnovski/mini.surround", enabled = false },
     { "wakatime/vim-wakatime", event = "LazyFile" },
@@ -22,6 +23,7 @@ return {
     },
     {
         "ThePrimeagen/refactoring.nvim",
+        --- @diagnostic disable-next-line: assign-type-mismatch
         keys = function()
             local prefix = "<leader>c"
             return {
@@ -106,6 +108,7 @@ return {
             harpoon:setup(opts)
             harpoon:extend(extensions.builtins.navigate_with_number())
         end,
+        --- @diagnostic disable-next-line: assign-type-mismatch
         keys = function()
             local prefix = "<leader>h"
             local harpoon = require "harpoon"

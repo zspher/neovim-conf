@@ -1,4 +1,6 @@
 local prefix = "<leader>r"
+
+---@type LazySpec[]
 return {
     {
 
