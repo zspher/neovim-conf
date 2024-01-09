@@ -16,7 +16,7 @@ return {
                 "OmniSharp/omnisharp-vim",
                 config = function()
                     vim.cmd [[
-            let g:OmniSharp_server_path = expand('~') . "/.local/share/nvim/mason/bin/omnisharp"
+            let g:OmniSharp_server_path = exepath("omnisharp")
           ]]
                 end,
             },
