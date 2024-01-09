@@ -11,7 +11,6 @@ return {
     {
         "neovim/nvim-lspconfig",
         dependencies = {
-            { "Hoffs/omnisharp-extended-lsp.nvim" },
             {
                 -- configure omnisharp-vim to use the omnisharp binary from mason
                 "OmniSharp/omnisharp-vim",
@@ -27,6 +26,7 @@ return {
             servers = {
                 omnisharp = {
                     keys = {
+                        -- FIX: https://github.com/OmniSharp/omnisharp-roslyn/issues/2238
                         {
                             "gd",
                             "<cmd>OmniSharpGotoDefinition<CR>",
@@ -39,16 +39,6 @@ return {
                         },
                     },
                 },
-            },
-            setup = {
-                omnisharp = function(_, opts)
-                    -- FIX: https://github.com/OmniSharp/omnisharp-roslyn/issues/2238
-                    opts.handlers = {
-                        ["textDocument/definition"] = require(
-                            "omnisharp_extended"
-                        ).handler,
-                    }
-                end,
             },
         },
     },
