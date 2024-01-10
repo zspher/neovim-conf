@@ -1,34 +1,37 @@
-local function isNixOS()
-    if vim.fn.isdirectory "/nix/var/nix/profiles/system" then return false end
-    return true
-end
-
 ---@type LazySpec[]
 return {
     {
         "williamboman/mason.nvim",
-        opts = {
-            PATH = "append",
-        },
         optional = true,
+        opts = function(_, opts)
+            if vim.fn.isdirectory "/nix/var/nix/profiles/system" == 1 then
+                opts.ensure_installed = {}
+            end
+            return {
+                ensure_installed = opts.ensure_installed,
+                PATH = "append",
+            }
+        end,
     },
     {
         "williamboman/mason-lspconfig.nvim",
         optional = true,
         opts = {
-            automatic_installation = isNixOS(),
+            automatic_installation = vim.fn.isdirectory "/nix/var/nix/profiles/system"
+                == 0,
         },
     },
     {
         "jay-babu/mason-null-ls.nvim",
-        opts = {
-            automatic_installation = isNixOS(),
-        },
         optional = true,
+        opts = {
+            automatic_installation = vim.fn.isdirectory "/nix/var/nix/profiles/system"
+                == 0,
+            handlers = {},
+        },
     },
     {
         "jay-babu/mason-nvim-dap.nvim",
-        -- overrides `require("mason-nvim-dap").setup(...)`
         optional = true,
     },
 }
