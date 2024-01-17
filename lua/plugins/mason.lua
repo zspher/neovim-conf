@@ -20,6 +20,8 @@ return {
             automatic_installation = vim.fn.isdirectory "/nix/var/nix/profiles/system"
                 == 0,
         },
+        -- TODO: because lazyvim lspconfig config calls mason-lspconfig
+        enabled = vim.fn.isdirectory "/nix/var/nix/profiles/system" == 0,
     },
     {
         "jay-babu/mason-null-ls.nvim",
