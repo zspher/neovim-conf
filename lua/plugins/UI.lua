@@ -136,4 +136,16 @@ return {
             main = "rainbow-delimiters.setup",
         },
     },
+    {
+        "nvchad/nvim-colorizer.lua",
+        opts = {
+            filetypes = {
+                "*",
+                css = { names = true },
+            },
+            user_default_options = {
+                names = false,
+            },
+        },
+    },
 }
