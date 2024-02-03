@@ -30,6 +30,8 @@ return {
                 },
                 nls.builtins.formatting.prettierd,
                 nls.builtins.formatting.biome,
+
+                nls.builtins.formatting.csharpier,
             }
         end,
         keys = {
