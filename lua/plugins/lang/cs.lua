@@ -15,9 +15,17 @@ return {
                 -- configure omnisharp-vim to use the omnisharp binary from mason
                 "OmniSharp/omnisharp-vim",
                 config = function()
-                    vim.cmd [[
-            let g:OmniSharp_server_path = exepath("omnisharp")
-          ]]
+                    local isNixos = vim.fn.isdirectory "/nix/var/nix/profiles/system"
+                        == 1
+                    if isNixos then
+                        vim.cmd [[
+                        let g:OmniSharp_server_path = exepath("OmniSharp")
+                    ]]
+                    else
+                        vim.cmd [[
+                        let g:OmniSharp_server_path = exepath("omnisharp")
+                    ]]
+                    end
                 end,
             },
         },
@@ -25,6 +33,7 @@ return {
         opts = {
             servers = {
                 omnisharp = {
+                    cmd = { "OmniSharp" },
                     keys = {
                         -- FIX: https://github.com/OmniSharp/omnisharp-roslyn/issues/2238
                         {
