@@ -4,6 +4,7 @@ return {
     ---@class PluginLspOpts
     opts = {
         servers = {
+            lemminx = {},
             clangd = {
                 capabilities = {
                     offsetEncoding = "utf-8",
