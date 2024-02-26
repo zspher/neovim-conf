@@ -34,6 +34,7 @@ return {
     },
     {
         "jay-babu/mason-nvim-dap.nvim",
+        enabled = vim.fn.isdirectory "/nix/var/nix/profiles/system" == 0,
         optional = true,
     },
 }
