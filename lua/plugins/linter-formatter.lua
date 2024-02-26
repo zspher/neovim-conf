@@ -20,7 +20,6 @@ return {
                     ".git"
                 )
             opts.sources = {
-                nls.builtins.code_actions.shellcheck,
                 nls.builtins.code_actions.refactoring,
                 nls.builtins.code_actions.gitsigns,
 
