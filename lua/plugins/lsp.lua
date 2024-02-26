@@ -5,11 +5,6 @@ return {
     opts = {
         servers = {
             lemminx = {},
-            clangd = {
-                capabilities = {
-                    offsetEncoding = "utf-8",
-                },
-            },
         },
     },
 }

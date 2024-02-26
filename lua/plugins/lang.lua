@@ -4,7 +4,7 @@ return {
     { import = "plugins.lang.cs" },
     { import = "plugins.lang.nix" },
     { import = "lazyvim.plugins.extras.lang.tex" },
-    { import = "lazyvim.plugins.extras.lang.clangd" },
+    { import = "plugins.lang.c-cpp" },
     {
         "nvim-treesitter/nvim-treesitter",
         opts = function(_, opts)
@@ -17,36 +17,6 @@ return {
             end
         end,
     },
-    {
-        "mfussenegger/nvim-dap",
-        opts = function()
-            local dap = require "dap"
-            for _, lang in ipairs { "c", "cpp" } do
-                dap.configurations[lang] = {
-                    {
-                        name = "LLDB: Launch",
-                        type = "codelldb",
-                        request = "launch",
-                        program = function()
-                            return vim.fn.input {
-                                input = "Path to executable: ",
-                                text = vim.fn.getcwd() .. "/",
-                                completion = "file",
-                            }
-                        end,
-                        cwd = "${workspaceFolder}",
-                        stopOnEntry = false,
-                        args = {},
-                        env = {
-                            UBSAN_OPTIONS = "print_stacktrace=1",
-                            ASAN_OPTIONS = "abort_on_error=1:fast_unwind_on_malloc=0:detect_leaks=0",
-                        },
-                    },
-                }
-            end
-        end,
-    },
-
     { import = "lazyvim.plugins.extras.lang.python" },
     {
 
