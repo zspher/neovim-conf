@@ -54,14 +54,46 @@ return {
             },
         },
     },
-
     {
-        "jay-babu/mason-nvim-dap.nvim",
-        opts = function(_, opts)
-            if type(opts.ensure_installed) == "table" then
-                -- netcoredbg
-                vim.list_extend(opts.ensure_installed, { "coreclr" })
+        "mfussenegger/nvim-dap",
+        optional = true,
+        opts = function()
+            local function get_dll()
+                return coroutine.create(function(dap_run_co)
+                    --- @type table
+                    --- @diagnostic disable-next-line: assign-type-mismatch
+                    local items = vim.fn.globpath(
+                        vim.fn.getcwd(),
+                        "**/bin/Debug/**/*.dll",
+                        0,
+                        1 --- @diagnostic disable-line: param-type-mismatch
+                    )
+                    local opts = {
+                        format_item = function(path)
+                            return vim.fn.fnamemodify(path, ":t")
+                        end,
+                    }
+                    local function cont(choice)
+                        if choice == nil then
+                            return nil
+                        else
+                            coroutine.resume(dap_run_co, choice)
+                        end
+                    end
+
+                    vim.ui.select(items, opts, cont)
+                end)
             end
+            local dap = require "dap"
+            dap.configurations.cs = {
+                {
+                    type = "coreclr",
+                    name = "NetCoreDbg: Launch",
+                    request = "launch",
+                    cwd = "${fileDirname}",
+                    program = get_dll,
+                },
+            }
         end,
     },
 }
