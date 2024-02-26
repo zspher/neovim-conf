@@ -3,6 +3,20 @@ return {
     { import = "lazyvim.plugins.extras.dap.core" },
     {
         "mfussenegger/nvim-dap",
+        opts = function()
+            local dap = require "dap"
+            dap.adapters["coreclr"] = {
+                type = "executable",
+                command = "netcoredbg",
+                args = { "--interpreter=vscode" },
+            }
+            dap.adapters["lldb"] = {
+                type = "executable",
+                command = "lldb-vscode",
+                name = "lldb",
+            }
+
+        end,
         keys = {
             {
                 "<F5>",
