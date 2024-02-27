@@ -24,13 +24,8 @@ return {
                 nls.builtins.code_actions.gitsigns,
 
                 nls.builtins.formatting.stylua,
-                nls.builtins.formatting.shfmt.with {
-                    extra_args = { "-i", vim.o.tabstop, "-ci" },
-                },
                 nls.builtins.formatting.prettierd,
                 nls.builtins.formatting.biome,
-
-                nls.builtins.formatting.csharpier,
             }
         end,
         keys = {
