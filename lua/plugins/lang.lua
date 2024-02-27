@@ -5,6 +5,7 @@ return {
     { import = "plugins.lang.nix" },
     { import = "lazyvim.plugins.extras.lang.tex" },
     { import = "plugins.lang.c-cpp" },
+    { import = "plugins.lang.rust" },
     {
         "nvim-treesitter/nvim-treesitter",
         opts = function(_, opts)
