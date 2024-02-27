@@ -14,6 +14,7 @@ return {
             {
                 -- configure omnisharp-vim to use the omnisharp binary from mason
                 "OmniSharp/omnisharp-vim",
+                ft = { "cs" },
                 config = function()
                     local isNixos = vim.fn.isdirectory "/nix/var/nix/profiles/system"
                         == 1
