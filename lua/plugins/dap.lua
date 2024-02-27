@@ -10,12 +10,18 @@ return {
                 command = "netcoredbg",
                 args = { "--interpreter=vscode" },
             }
-            dap.adapters["lldb"] = {
-                type = "executable",
-                command = "lldb-vscode",
-                name = "lldb",
+            dap.adapters["codelldb"] = {
+                type = "server",
+                host = "127.0.0.1",
+                port = "${port}",
+                executable = {
+                    command = "codelldb",
+                    args = {
+                        "--port",
+                        "${port}",
+                    },
+                },
             }
-
         end,
         keys = {
             {
