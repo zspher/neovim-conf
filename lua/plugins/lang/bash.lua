@@ -17,4 +17,15 @@ return {
             },
         },
     },
+    {
+        "nvimtools/none-ls.nvim",
+        optional = true,
+        opts = function(_, opts)
+            vim.list_extend(opts.sources, {
+                require("null-ls").builtins.formatting.shfmt.with {
+                    extra_args = { "-i", vim.o.tabstop, "-ci" },
+                },
+            })
+        end,
+    },
 }
