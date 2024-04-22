@@ -115,7 +115,7 @@ return {
             return {
                 {
                     prefix .. "a",
-                    function() harpoon:list():append() end,
+                    function() harpoon:list():add() end,
                     desc = "Add file",
                 },
                 {
