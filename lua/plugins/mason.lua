@@ -1,5 +1,6 @@
 ---@type LazySpec[]
 return {
+    -- disables mason on nixos
     {
         "williamboman/mason.nvim",
         optional = true,
@@ -20,7 +21,6 @@ return {
             automatic_installation = vim.fn.isdirectory "/nix/var/nix/profiles/system"
                 == 0,
         },
-        -- TODO: because lazyvim lspconfig config calls mason-lspconfig
         enabled = vim.fn.isdirectory "/nix/var/nix/profiles/system" == 0,
     },
     {
