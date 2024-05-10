@@ -100,12 +100,6 @@ return {
                 always_show_bufferline = true,
                 offsets = {
                     {
-                        filetype = "OverseerList",
-                        text_align = "left",
-                        text = "Overseer",
-                        separator = true,
-                    },
-                    {
                         filetype = "neo-tree",
                         text = "Neo-tree",
                         highlight = "Directory",
