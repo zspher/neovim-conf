@@ -25,7 +25,6 @@ return {
                 neotree = true,
                 noice = true,
                 notify = true,
-                overseer = true,
                 symbols_outline = true,
                 telescope = { enabled = true },
                 which_key = true,
