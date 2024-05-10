@@ -35,4 +35,7 @@ vim.filetype.add {
     extension = {
         axaml = "xml",
     },
+    pattern = {
+        [".*/hypr/.+%.conf"] = "hyprlang",
+    },
 }
