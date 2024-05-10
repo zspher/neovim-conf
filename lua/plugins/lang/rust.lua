@@ -1,75 +1,38 @@
 ---@type LazySpec[]
 return {
-    {
-        "nvim-treesitter/nvim-treesitter",
-        opts = function(_, opts)
-            if type(opts.ensure_installed) == "table" then
-                vim.list_extend(opts.ensure_installed, { "rust" })
-            end
-        end,
-    },
+    { import = "lazyvim.plugins.extras.lang.rust" },
     {
         "mrcjkb/rustaceanvim",
-        version = "^4",
-        ft = { "rust" },
+        optional = true,
         opts = {
             server = {
-                default_settings = {
-                    -- rust-analyzer language server configuration
-                    ["rust-analyzer"] = {
-                        cargo = {
-                            allFeatures = true,
-                            loadOutDirsFromCheck = true,
-                            runBuildScripts = true,
-                        },
-                        -- Add clippy lints for Rust.
-                        checkOnSave = {
-                            allFeatures = true,
-                            command = "clippy",
-                            extraArgs = { "--no-deps" },
-                        },
-                        procMacro = {
-                            enable = true,
-                        },
-                        completion = {
-                            postfix = {
-                                enable = false,
-                            },
-                        },
-                    },
-                },
-            },
-            dap = {
-                autoload_configurations = true,
-            },
-        },
-        config = function(_, opts)
-            vim.g.rustaceanvim = vim.tbl_deep_extend("force", {}, opts or {})
-        end,
-    },
-    {
-        "Saecki/crates.nvim",
-        event = { "BufRead Cargo.toml" },
-        opts = {
-            lsp = {
-                enabled = true,
-                name = "crates.nvim",
-                actions = true,
-                completion = true,
-                hover = true,
+                on_attach = function(_, bufnr)
+                    vim.keymap.set(
+                        "n",
+                        "<leader>cR",
+                        function() vim.cmd.RustLsp "codeAction" end,
+                        { desc = "Code Action", buffer = bufnr }
+                    )
+                    vim.keymap.set(
+                        "n",
+                        "<leader>dr",
+                        function() vim.cmd.RustLsp "debuggables" end,
+                        { desc = "Rust Debuggables", buffer = bufnr }
+                    )
+                    vim.keymap.set(
+                        "n",
+                        "<leader>rt",
+                        function() vim.cmd.RustLsp "runnables" end,
+                        { desc = "Rust run task", buffer = bufnr }
+                    )
+                    vim.keymap.set(
+                        "n",
+                        "<leader>rs",
+                        function() vim.cmd.RustLsp { "runnables", bang = true } end,
+                        { desc = "Rust restart task", buffer = bufnr }
+                    )
+                end,
             },
         },
-    },
-    {
-        "nvim-neotest/neotest",
-        optional = true,
-        opts = function(_, opts)
-            if not opts.adapters then opts.adapters = {} end
-            local rustaceanvim_avail, rustaceanvim =
-                pcall(require, "rustaceanvim.neotest")
-            if rustaceanvim_avail then
-                table.insert(opts.adapters, rustaceanvim)
-            end
-        end,
     },
 }
