@@ -9,6 +9,7 @@ end
 
 ---@type LazySpec[]
 return {
+    { import = "lazyvim.plugins.extras.ui.treesitter-context" },
     { import = "lazyvim.plugins.extras.editor.aerial" },
     { -- overrides parts of aerial config
         "nvim-lualine/lualine.nvim",
