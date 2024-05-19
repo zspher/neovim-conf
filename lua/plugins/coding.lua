@@ -1,6 +1,5 @@
 ---@type LazySpec[]
 return {
-    { "echasnovski/mini.surround", enabled = false },
     { "wakatime/vim-wakatime", event = "LazyFile" },
     {
         "tpope/vim-fugitive",
