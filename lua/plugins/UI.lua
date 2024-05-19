@@ -110,7 +110,6 @@ return {
             },
         },
     },
-    { "echasnovski/mini.indentscope", enabled = false },
     {
         "lukas-reineke/indent-blankline.nvim",
         branch = "current-indent",
