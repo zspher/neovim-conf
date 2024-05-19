@@ -2,6 +2,15 @@
 return {
     { import = "lazyvim.plugins.extras.lang.clangd" },
     {
+        "nvim-treesitter/nvim-treesitter",
+        opts = function(_, opts)
+            if type(opts.ensure_installed) == "table" then
+                vim.list_extend(opts.ensure_installed, { "doxygen" })
+                --
+            end
+        end,
+    },
+    {
         "mfussenegger/nvim-dap",
         optional = true,
         opts = function()
