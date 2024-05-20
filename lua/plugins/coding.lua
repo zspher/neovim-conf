@@ -3,22 +3,7 @@ return {
     { "wakatime/vim-wakatime", event = "LazyFile" },
     {
         "tpope/vim-fugitive",
-        cmd = {
-            "G",
-            "Git",
-            "Gdiffsplit",
-            "Gvdiffsplit",
-            "Gedit",
-            "Gsplit",
-            "Gread",
-            "Gwrite",
-            "Ggrep",
-            "Glgrep",
-            "Gmove",
-            "Gdelete",
-            "Gremove",
-            "Gbrowse",
-        },
+        event = "LazyFile",
     },
     {
         "ThePrimeagen/refactoring.nvim",
