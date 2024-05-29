@@ -5,6 +5,7 @@ return {
     opts = {
         servers = {
             lemminx = {},
+            mesonlsp = {},
         },
     },
 }
