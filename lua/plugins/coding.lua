@@ -2,10 +2,6 @@
 return {
     { "wakatime/vim-wakatime", event = "LazyFile" },
     {
-        "tpope/vim-fugitive",
-        event = "LazyFile",
-    },
-    {
         "ThePrimeagen/refactoring.nvim",
         --- @diagnostic disable-next-line: assign-type-mismatch
         keys = function()
