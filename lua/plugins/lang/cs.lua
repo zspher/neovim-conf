@@ -27,6 +27,15 @@ return {
                         let g:OmniSharp_server_path = exepath("omnisharp")
                     ]]
                     end
+                    vim.api.nvim_create_autocmd("BufWritePost", {
+                        callback = function()
+                            local buf = vim.api.nvim_get_current_buf()
+
+                            if vim.g.autoformat and vim.b[buf].autoformat then
+                                vim.fn["OmniSharp#actions#format#Format"]()
+                            end
+                        end,
+                    })
                 end,
             },
         },
@@ -95,14 +104,6 @@ return {
                     program = get_dll,
                 },
             }
-        end,
-    },
-    {
-        "nvimtools/none-ls.nvim",
-        opts = function(_, opts)
-            vim.list_extend(opts.sources, {
-                require("null-ls").builtins.formatting.csharpier,
-            })
         end,
     },
 }
