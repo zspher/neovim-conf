@@ -123,7 +123,7 @@ return {
         opts = {
             filetypes = {
                 "*",
-                css = { names = true },
+                css = { names = true, css = true },
             },
             user_default_options = {
                 names = false,
