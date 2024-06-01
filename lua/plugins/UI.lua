@@ -1,5 +1,3 @@
-local Util = require "lazyvim.util"
-local icons = require("lazyvim.config").icons
 local function disable_cond()
     return function()
         if vim.bo.bt == "nofile" then return false end
@@ -10,85 +8,130 @@ end
 ---@type LazySpec[]
 return {
     { import = "lazyvim.plugins.extras.ui.treesitter-context" },
-    { import = "lazyvim.plugins.extras.editor.aerial" },
-    { -- overrides parts of aerial config
+    {
         "nvim-lualine/lualine.nvim",
-        opts = {
-            options = {
-                section_separators = "",
-                component_separators = { left = "›", right = "|" },
-                disabled_filetypes = {
-                    winbar = {
-                        "dapui",
-                        "dap-repl",
-                        "qf",
-                        "help",
-                        "dashboard",
-                        "alpha",
-                        "starter",
-                    },
-                },
-            },
-            sections = {
-                lualine_c = {
-                    Util.lualine.root_dir(),
-                    {
-                        "diagnostics",
-                        symbols = {
-                            error = icons.diagnostics.Error,
-                            warn = icons.diagnostics.Warn,
-                            info = icons.diagnostics.Info,
-                            hint = icons.diagnostics.Hint,
+        opts = function()
+            local lualine_require = require "lualine_require"
+            lualine_require.require = require
+
+            local icons = require("lazyvim.config").icons
+
+            vim.o.laststatus = vim.g.lualine_laststatus
+
+            local opts = {
+                options = {
+                    section_separators = "",
+                    component_separators = { left = "›", right = "|" },
+                    disabled_filetypes = {
+                        winbar = {
+                            "dapui",
+                            "dap-repl",
+                            "qf",
+                            "help",
+                            "dashboard",
+                            "alpha",
+                            "starter",
                         },
                     },
                 },
-            },
-            winbar = {
-                lualine_c = {
-                    {
-                        "filename",
-                        file_status = true, -- Displays file status (readonly status, modified status)
-                        newfile_status = false, -- Display new file status (new file means no write after created)
-                        path = 3,
-                        -- 0: Just the filename
-                        -- 1: Relative path
-                        -- 2: Absolute path
-                        -- 3: Absolute path, with tilde as the home directory
-                        -- 4: Filename and parent dir, with tilde as the home directory
-
-                        shorting_target = 40, -- Shortens path to leave 40 spaces in the window
-                        symbols = {
-                            modified = "", -- Text to show when the file is modified.
-                            readonly = "", -- Text to show when the file is non-modifiable or readonly.
-                            unnamed = "", -- Text to show for unnamed buffers.
-                            newfile = "", -- Text to show for newly created file before first write
+                sections = {
+                    lualine_b = { "branch" },
+                    lualine_c = {
+                        LazyVim.lualine.root_dir(),
+                        {
+                            "diagnostics",
+                            symbols = {
+                                error = icons.diagnostics.Error,
+                                warn = icons.diagnostics.Warn,
+                                info = icons.diagnostics.Info,
+                                hint = icons.diagnostics.Hint,
+                            },
                         },
-                        cond = disable_cond(),
                     },
-                    {
-                        "aerial",
-                        sep = " › ", -- separator between symbols
-                        sep_icon = "", -- separator between icon and symbol
 
-                        -- The number of symbols to render top-down. In order to render only 'N' last
-                        -- symbols, negative numbers may be supplied. For instance, 'depth = -1' can
-                        -- be used in order to render only current symbol.
-                        depth = 5,
-
-                        -- When 'dense' mode is on, icons are not rendered near their symbols. Only
-                        -- a single icon that represents the kind of current symbol is rendered at
-                        -- the beginning of status line.
-                        dense = false,
-
-                        -- The separator to be used to separate symbols in dense mode.
-                        dense_sep = ".",
-
-                        -- Color the symbol icons.
-                        colored = true,
+                    lualine_x = {
+                        {
+                            function()
+                                --- @diagnostic disable-next-line: undefined-field
+                                return require("noice").api.status.command:get()
+                            end,
+                            cond = function()
+                                return package.loaded["noice"]
+                                    --- @diagnostic disable-next-line: undefined-field
+                                    and require("noice").api.status.command:has()
+                            end,
+                            color = LazyVim.ui.fg "Statement",
+                        },
+                        {
+                            function()
+                                return "  " .. require("dap").status()
+                            end,
+                            cond = function()
+                                return package.loaded["dap"]
+                                    and require("dap").status() ~= ""
+                            end,
+                            color = LazyVim.ui.fg "Debug",
+                        },
+                        {
+                            require("lazy.status").updates,
+                            cond = require("lazy.status").has_updates,
+                            color = LazyVim.ui.fg "Special",
+                        },
+                    },
+                    lualine_y = {
+                        "progress",
+                        {
+                            "location",
+                            separator = { left = " " },
+                            padding = { left = 0, right = 1 },
+                        },
+                    },
+                    lualine_z = {
+                        function() return " " .. os.date "%R" end,
                     },
                 },
-            },
-        },
+                winbar = {
+                    lualine_c = {
+                        {
+                            "filename",
+                            file_status = true, -- Displays file status (readonly status, modified status)
+                            newfile_status = false, -- Display new file status (new file means no write after created)
+                            path = 3,
+                            -- 0: Just the filename
+                            -- 1: Relative path
+                            -- 2: Absolute path
+                            -- 3: Absolute path, with tilde as the home directory
+                            -- 4: Filename and parent dir, with tilde as the home directory
+
+                            shorting_target = 40, -- Shortens path to leave 40 spaces in the window
+                            symbols = {
+                                modified = "", -- Text to show when the file is modified.
+                                readonly = "", -- Text to show when the file is non-modifiable or readonly.
+                                unnamed = "", -- Text to show for unnamed buffers.
+                                newfile = "", -- Text to show for newly created file before first write
+                            },
+                            cond = disable_cond(),
+                        },
+                    },
+                },
+            }
+
+            local trouble = require "trouble"
+            local symbols = trouble.statusline
+                and trouble.statusline {
+                    mode = "symbols",
+                    groups = {},
+                    title = false,
+                    filter = { range = true },
+                    format = "{kind_icon}{symbol.name:Normal}",
+                    hl_group = "lualine_c_normal",
+                }
+            table.insert(opts.winbar.lualine_c, {
+                symbols and symbols.get,
+                cond = symbols and symbols.has,
+            })
+            return opts
+        end,
     },
     {
         "akinsho/bufferline.nvim",
