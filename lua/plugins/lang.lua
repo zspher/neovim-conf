@@ -13,8 +13,7 @@ return {
             vim.treesitter.language.register("bash", "zsh")
             -- add more things to the ensure_installed table protecting against community packs modifying it
             if type(opts.ensure_installed) == "table" then
-                vim.list_extend(opts.ensure_installed, { "comment" })
-                --
+                vim.list_extend(opts.ensure_installed, { "comment", "css" })
             end
         end,
     },
