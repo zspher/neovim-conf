@@ -40,16 +40,15 @@ return {
             harpoon:extend(extensions.builtins.navigate_with_number())
         end,
         keys = function()
-            local prefix = "<leader>h"
             local harpoon = require "harpoon"
             return {
                 {
-                    prefix .. "a",
+                    "<leader>ha",
                     function() harpoon:list():add() end,
                     desc = "Add file",
                 },
                 {
-                    prefix .. "e",
+                    "<leader>he",
                     function()
                         harpoon.ui:toggle_quick_menu(harpoon:list(), {
                             border = "rounded",
