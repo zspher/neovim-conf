@@ -3,6 +3,16 @@ return {
     { "wakatime/vim-wakatime", event = "LazyFile" },
     { import = "lazyvim.plugins.extras.editor.refactoring" },
     {
+        "ThePrimeagen/refactoring.nvim",
+        keys = {
+            {
+                "<leader>rI",
+                function() require("refactoring").refactor "Inline Function" end,
+                desc = "Inline Function",
+            },
+        },
+    },
+    {
         "ThePrimeagen/harpoon",
         branch = "harpoon2",
         dependencies = {
