@@ -1,65 +1,7 @@
 ---@type LazySpec[]
 return {
     { "wakatime/vim-wakatime", event = "LazyFile" },
-    {
-        "ThePrimeagen/refactoring.nvim",
-        keys = function()
-            local prefix = "<leader>c"
-            return {
-                {
-                    prefix .. "e",
-                    mode = { "v" },
-                    function()
-                        require("refactoring").refactor "Extract Function"
-                    end,
-                    desc = "Extract Function",
-                },
-                {
-                    prefix .. "E",
-                    mode = { "v" },
-                    function()
-                        require("refactoring").refactor "Extract Function To File"
-                    end,
-                    desc = "Extract Function to File",
-                },
-                {
-                    prefix .. "v",
-                    mode = { "v" },
-                    function()
-                        require("refactoring").refactor "Extract Variable"
-                    end,
-                    desc = "Extract Variable",
-                },
-                {
-                    prefix .. "I",
-                    function()
-                        require("refactoring").refactor "Inline Function"
-                    end,
-                    desc = "Inline Function",
-                },
-                {
-                    prefix .. "i",
-                    mode = { "v", "n" },
-                    function()
-                        require("refactoring").refactor "Inline Variable"
-                    end,
-                    desc = "Inline Variable",
-                },
-                {
-                    prefix .. "b",
-                    function() require("refactoring").refactor "Extract Block" end,
-                    desc = "Extract Block",
-                },
-                {
-                    prefix .. "B",
-                    function()
-                        require("refactoring").refactor "Extract Block To File"
-                    end,
-                    desc = "Extract Block to File",
-                },
-            }
-        end,
-    },
+    { import = "lazyvim.plugins.extras.editor.refactoring" },
     {
         "ThePrimeagen/harpoon",
         branch = "harpoon2",
