@@ -9,13 +9,13 @@ return {
                 on_attach = function(_, bufnr)
                     vim.keymap.set(
                         "n",
-                        "<leader>rt",
+                        "<leader>ct",
                         function() vim.cmd.RustLsp "runnables" end,
                         { desc = "Rust run task", buffer = bufnr }
                     )
                     vim.keymap.set(
                         "n",
-                        "<leader>rs",
+                        "<leader>cT",
                         function() vim.cmd.RustLsp { "runnables", bang = true } end,
                         { desc = "Rust restart task", buffer = bufnr }
                     )
