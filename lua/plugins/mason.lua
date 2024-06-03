@@ -31,6 +31,7 @@ return {
                 == 0,
             handlers = {},
         },
+        enabled = vim.fn.isdirectory "/nix/var/nix/profiles/system" == 0,
     },
     {
         "jay-babu/mason-nvim-dap.nvim",
@@ -40,5 +41,6 @@ return {
                 == 0,
             handlers = {},
         },
+        enabled = vim.fn.isdirectory "/nix/var/nix/profiles/system" == 0,
     },
 }
