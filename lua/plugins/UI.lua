@@ -60,7 +60,7 @@ return {
                                     --- @diagnostic disable-next-line: undefined-field
                                     and require("noice").api.status.command:has()
                             end,
-                            color = LazyVim.ui.fg "Statement",
+                            color = function() return LazyVim.ui.fg "Statement" end,
                         },
                         {
                             function()
@@ -70,12 +70,12 @@ return {
                                 return package.loaded["dap"]
                                     and require("dap").status() ~= ""
                             end,
-                            color = LazyVim.ui.fg "Debug",
+                            color = function() return LazyVim.ui.fg "Debug" end,
                         },
                         {
                             require("lazy.status").updates,
                             cond = require("lazy.status").has_updates,
-                            color = LazyVim.ui.fg "Special",
+                            color = function() return LazyVim.ui.fg "Special" end,
                         },
                     },
                     lualine_y = {
