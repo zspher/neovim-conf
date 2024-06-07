@@ -6,6 +6,7 @@ return {
     { import = "lazyvim.plugins.extras.lang.tex" },
     { import = "plugins.lang.c-cpp" },
     { import = "plugins.lang.rust" },
+    { import = "plugins.lang.python" },
     {
         "nvim-treesitter/nvim-treesitter",
         opts = function(_, opts)
@@ -15,19 +16,6 @@ return {
             if type(opts.ensure_installed) == "table" then
                 vim.list_extend(opts.ensure_installed, { "comment", "css" })
             end
-        end,
-    },
-    { import = "lazyvim.plugins.extras.lang.python" },
-    {
-
-        "nvim-neotest/neotest",
-        opts = function(_, opts)
-            opts.adapters = {
-                ["neotest-python"] = {
-                    dap = { justMyCode = false },
-                    pytest_discover_instances = true,
-                },
-            }
         end,
     },
 }
