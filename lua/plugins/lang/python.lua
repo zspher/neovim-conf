@@ -4,14 +4,14 @@ return {
     {
         "nvim-neotest/neotest",
         optional = true,
-        opts = function(_, opts)
-            opts.adapters = {
+        opts = {
+            adapters = {
                 ["neotest-python"] = {
                     dap = { justMyCode = false },
                     pytest_discover_instances = true,
                 },
-            }
-        end,
+            },
+        },
     },
     {
         "mfussenegger/nvim-dap-python",
