@@ -9,13 +9,16 @@ return {
     { import = "plugins.lang.python" },
     {
         "nvim-treesitter/nvim-treesitter",
-        opts = function(_, opts)
+        opts = function()
             -- register file type with language
             vim.treesitter.language.register("bash", "zsh")
-            -- add more things to the ensure_installed table protecting against community packs modifying it
-            if type(opts.ensure_installed) == "table" then
-                vim.list_extend(opts.ensure_installed, { "comment", "css" })
-            end
+            local opts = {
+                ensure_installed = {
+                    "comment",
+                    "css",
+                },
+            }
+            return opts
         end,
     },
 }
