@@ -6,24 +6,15 @@ return {
         opts = {
             servers = {
                 clangd = {
-                    root_dir = function(fname)
-                        return require("lspconfig.util").find_git_ancestor(
-                            fname
-                        ) or require("lspconfig.util").root_pattern(
-                            "Makefile",
-                            "configure.ac",
-                            "configure.in",
-                            "config.h.in",
-                            "meson.build",
-                            "meson_options.txt",
-                            "build.ninja"
-                        )(fname) or require(
-                            "lspconfig.util"
-                        ).root_pattern(
-                            "compile_commands.json",
-                            "compile_flags.txt"
-                        )(fname)
-                    end,
+                    root_dir = require("lspconfig.util").root_pattern(
+                        ".clangd",
+                        ".clang-tidy",
+                        ".clang-format",
+                        "compile_commands.json",
+                        "compile_flags.txt",
+                        "configure.ac",
+                        ".git"
+                    ),
                 },
             },
         },
