@@ -20,8 +20,5 @@ return {
                 nls.builtins.formatting.biome,
             })
         end,
-        keys = {
-            { "<leader>cn", "<Cmd>NullLsInfo<cr>", desc = "Null-ls Info" },
-        },
     },
 }
