@@ -2,6 +2,17 @@
 return {
     { import = "lazyvim.plugins.extras.lang.omnisharp" },
     {
+        "nvimtools/none-ls.nvim",
+        optional = true,
+        opts = function(_, opts)
+            local nls = require "null-ls"
+            local last_elem = opts.sources[#opts.sources]
+            if last_elem == nls.builtins.formatting.csharpier then
+                table.remove(opts.sources)
+            end
+        end,
+    },
+    {
         "neovim/nvim-lspconfig",
         ---@class PluginLspOpts
         opts = {
