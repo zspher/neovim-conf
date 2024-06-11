@@ -1,61 +1,47 @@
 ---@type LazySpec[]
 return {
-    {
-        "nvim-treesitter/nvim-treesitter",
-        opts = {
-            ensure_installed = { "xml" },
-        },
-    },
+    { import = "lazyvim.plugins.extras.lang.omnisharp" },
     {
         "neovim/nvim-lspconfig",
-        dependencies = {
-            {
-                -- configure omnisharp-vim to use the omnisharp binary from mason
-                "OmniSharp/omnisharp-vim",
-                ft = { "cs" },
-                config = function()
-                    local isNixos = vim.fn.isdirectory "/nix/var/nix/profiles/system"
-                        == 1
-                    if isNixos then
-                        vim.cmd [[
-                        let g:OmniSharp_server_path = exepath("OmniSharp")
-                    ]]
-                    else
-                        vim.cmd [[
-                        let g:OmniSharp_server_path = exepath("omnisharp")
-                    ]]
-                    end
-                    vim.api.nvim_create_autocmd("BufWritePost", {
-                        callback = function()
-                            local buf = vim.api.nvim_get_current_buf()
-
-                            if vim.g.autoformat and vim.b[buf].autoformat then
-                                vim.fn["OmniSharp#actions#format#Format"]()
-                            end
-                        end,
-                    })
-                end,
-            },
-        },
         ---@class PluginLspOpts
         opts = {
             servers = {
                 omnisharp = {
                     cmd = { "OmniSharp" },
-                    enable_roslyn_analyzers = true,
-                    organize_imports_on_format = true,
-                    enable_import_completion = true,
                     keys = {
-                        -- FIX: https://github.com/OmniSharp/omnisharp-roslyn/issues/2238
                         {
                             "gd",
-                            "<cmd>OmniSharpGotoDefinition<CR>",
+                            function()
+                                require("omnisharp_extended").telescope_lsp_definitions {
+                                    reuse_win = true,
+                                }
+                            end,
                             desc = "Goto Definition",
                         },
                         {
+                            "gr",
+                            function()
+                                require("omnisharp_extended").telescope_lsp_references()
+                            end,
+                            desc = "References",
+                        },
+                        {
+                            "gI",
+                            function()
+                                require("omnisharp_extended").telescope_lsp_implementation {
+                                    reuse_win = true,
+                                }
+                            end,
+                            desc = "Goto Implementation",
+                        },
+                        {
                             "gy",
-                            "<cmd>OmniSharpGotoTypeDefinition<CR>",
-                            desc = "Goto Type Definition",
+                            function()
+                                require("omnisharp_extended").telescope_lsp_type_definition {
+                                    reuse_win = true,
+                                }
+                            end,
+                            desc = "Goto T[y]pe Definition",
                         },
                     },
                 },
