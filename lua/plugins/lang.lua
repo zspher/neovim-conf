@@ -12,13 +12,10 @@ return {
         opts = function()
             -- register file type with language
             vim.treesitter.language.register("bash", "zsh")
-            local opts = {
-                ensure_installed = {
-                    "comment",
-                    "css",
-                },
-            }
-            return opts
         end,
+    },
+    {
+        "nvim-treesitter/nvim-treesitter",
+        opts = { ensure_installed = { "comment", "css" } },
     },
 }
