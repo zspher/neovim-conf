@@ -1,85 +1,30 @@
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+local on_attach = function() end
+local function get_roslyn_dll()
+    local exe = vim.fn.exepath "Microsoft.CodeAnalysis.LanguageServer"
+    -- Find the parent directory of the executable
+    local parent_dir = vim.fn.fnamemodify(exe, ":h:h")
+
+    local dir = parent_dir
+        .. "/lib/roslyn-ls/Microsoft.CodeAnalysis.LanguageServer.dll"
+    return dir
+end
 ---@type LazySpec[]
 return {
-    { import = "lazyvim.plugins.extras.lang.omnisharp" },
     {
-        "nvimtools/none-ls.nvim",
-        optional = true,
-        opts = function(_, opts)
-            local nls = require "null-ls"
-            local last_elem = opts.sources[#opts.sources]
-            if last_elem == nls.builtins.formatting.csharpier then
-                table.remove(opts.sources)
-            end
+        "benjiwolff/roslyn.nvim",
+        branch = "allow-custom-roslyn-dll-path",
+        ft = "cs",
+        config = function()
+            require("roslyn").setup {
+                dotnet_cmd = "dotnet", -- this is the default
+                roslyn_version = "4.10.0-2.24124.2", -- this is the default
+                on_attach = on_attach,
+                capabilities = capabilities,
+                roslyn_lsp_dll_path = get_roslyn_dll(),
+            }
         end,
-    },
-    {
-        "neovim/nvim-lspconfig",
-        ---@class PluginLspOpts
-        opts = {
-            servers = {
-                omnisharp = {
-                    cmd = { "OmniSharp" },
-                    handlers = {
-                        ["textDocument/definition"] = function(...)
-                            return require("omnisharp_extended").definition_handler(
-                                ...
-                            )
-                        end,
-                        ["textDocument/typeDefinition"] = function(...)
-                            return require("omnisharp_extended").type_definition_handler(
-                                ...
-                            )
-                        end,
-                        ["textDocument/references"] = function(...)
-                            return require("omnisharp_extended").references_handler(
-                                ...
-                            )
-                        end,
-                        ["textDocument/implementation"] = function(...)
-                            return require("omnisharp_extended").implementation_handler(
-                                ...
-                            )
-                        end,
-                    },
-                    keys = {
-                        {
-                            "gd",
-                            function()
-                                require("omnisharp_extended").telescope_lsp_definitions {
-                                    reuse_win = true,
-                                }
-                            end,
-                            desc = "Goto Definition",
-                        },
-                        {
-                            "gr",
-                            function()
-                                require("omnisharp_extended").telescope_lsp_references()
-                            end,
-                            desc = "References",
-                        },
-                        {
-                            "gI",
-                            function()
-                                require("omnisharp_extended").telescope_lsp_implementation {
-                                    reuse_win = true,
-                                }
-                            end,
-                            desc = "Goto Implementation",
-                        },
-                        {
-                            "gy",
-                            function()
-                                require("omnisharp_extended").telescope_lsp_type_definition {
-                                    reuse_win = true,
-                                }
-                            end,
-                            desc = "Goto T[y]pe Definition",
-                        },
-                    },
-                },
-            },
-        },
     },
     {
         "mfussenegger/nvim-dap",
