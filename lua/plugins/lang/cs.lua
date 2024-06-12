@@ -13,6 +13,10 @@ end
 ---@type LazySpec[]
 return {
     {
+        "nvim-treesitter/nvim-treesitter",
+        opts = { ensure_installed = { "c_sharp" } },
+    },
+    {
         "benjiwolff/roslyn.nvim",
         branch = "allow-custom-roslyn-dll-path",
         ft = "cs",
