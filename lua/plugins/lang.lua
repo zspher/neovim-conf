@@ -18,6 +18,6 @@ return {
     },
     {
         "nvim-treesitter/nvim-treesitter",
-        opts = { ensure_installed = { "comment", "css" } },
+        opts = { ensure_installed = { "comment", "css", "latex" } },
     },
 }
