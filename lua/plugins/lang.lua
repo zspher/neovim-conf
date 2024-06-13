@@ -8,6 +8,7 @@ return {
     { import = "plugins.lang.rust" },
     { import = "plugins.lang.python" },
     { import = "plugins.lang.sql" },
+    { import = "lazyvim.plugins.extras.lang.git" },
     {
         "nvim-treesitter/nvim-treesitter",
         opts = function()
