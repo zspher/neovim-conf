@@ -7,6 +7,7 @@ return {
     { import = "plugins.lang.c-cpp" },
     { import = "plugins.lang.rust" },
     { import = "plugins.lang.python" },
+    { import = "plugins.lang.sql" },
     {
         "nvim-treesitter/nvim-treesitter",
         opts = function()
