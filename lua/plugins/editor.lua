@@ -19,6 +19,7 @@ return {
                 },
             },
             window = {
+                position = "current",
                 mappings = {
                     ["a"] = {
                         "add",
