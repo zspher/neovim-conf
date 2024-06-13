@@ -18,15 +18,6 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope.nvim",
-            {
-                "folke/which-key.nvim",
-                optional = true,
-                opts = {
-                    defaults = {
-                        ["<leader>h"] = { name = "+harpoon", mode = "n" },
-                    },
-                },
-            },
         },
         opts = {
             settings = {
@@ -42,6 +33,7 @@ return {
         keys = function()
             local harpoon = require "harpoon"
             return {
+                { "<leader>h", "", desc = "+harpoon", mode = { "n" } },
                 {
                     "<leader>ha",
                     function() harpoon:list():add() end,
