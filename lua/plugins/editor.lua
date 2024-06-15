@@ -1,5 +1,69 @@
 ---@type LazySpec[]
 return {
+    { "wakatime/vim-wakatime", event = "LazyFile" },
+    { import = "lazyvim.plugins.extras.editor.refactoring" },
+    {
+        "ThePrimeagen/refactoring.nvim",
+        keys = {
+            {
+                "<leader>rI",
+                function() require("refactoring").refactor "Inline Function" end,
+                desc = "Inline Function",
+            },
+        },
+    },
+    {
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope.nvim",
+        },
+        opts = {
+            settings = {
+                save_on_toggle = true,
+            },
+        },
+        config = function(_, opts)
+            local harpoon = require "harpoon"
+            local extensions = require "harpoon.extensions"
+            harpoon:setup(opts)
+            harpoon:extend(extensions.builtins.navigate_with_number())
+        end,
+        keys = function()
+            local harpoon = require "harpoon"
+            return {
+                { "<leader>h", "", desc = "+harpoon", mode = { "n" } },
+                {
+                    "<leader>ha",
+                    function() harpoon:list():add() end,
+                    desc = "Add file",
+                },
+                {
+                    "<leader>he",
+                    function()
+                        harpoon.ui:toggle_quick_menu(harpoon:list(), {
+                            border = "rounded",
+                            title_pos = "center",
+                            title = " Harpoon ",
+                            ui_max_width = 100,
+                        })
+                    end,
+                    desc = "Toggle quick menu",
+                },
+                {
+                    "<C-p>",
+                    function() harpoon:list():prev { ui_nav_wrap = true } end,
+                    desc = "Goto previous mark",
+                },
+                {
+                    "<C-n>",
+                    function() harpoon:list():next { ui_nav_wrap = true } end,
+                    desc = "Goto next mark",
+                },
+            }
+        end,
+    },
     {
         "nvim-neo-tree/neo-tree.nvim",
         opts = {
