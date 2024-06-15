@@ -24,4 +24,8 @@ return {
     },
     { import = "lazyvim.plugins.extras.coding.neogen" },
     { import = "lazyvim.plugins.extras.coding.luasnip" },
+    {
+        "L3MON4D3/LuaSnip",
+        opts = { enable_autosnippets = true },
+    },
 }

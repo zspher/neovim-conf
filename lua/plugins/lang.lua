@@ -3,7 +3,7 @@ return {
     { import = "plugins.lang.bash" },
     { import = "plugins.lang.cs" },
     { import = "plugins.lang.nix" },
-    { import = "lazyvim.plugins.extras.lang.tex" },
+    { import = "plugins.lang.tex" },
     { import = "plugins.lang.c-cpp" },
     { import = "plugins.lang.rust" },
     { import = "plugins.lang.python" },
@@ -18,6 +18,6 @@ return {
     },
     {
         "nvim-treesitter/nvim-treesitter",
-        opts = { ensure_installed = { "comment", "css", "latex" } },
+        opts = { ensure_installed = { "comment", "css" } },
     },
 }
