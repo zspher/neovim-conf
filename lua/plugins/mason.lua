@@ -41,5 +41,6 @@ return {
                 == 0,
             handlers = {},
         },
+        enabled = vim.fn.isdirectory "/nix/var/nix/profiles/system" == 0,
     },
 }
