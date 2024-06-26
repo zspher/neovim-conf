@@ -53,12 +53,12 @@ return {
                         {
                             function()
                                 --- @diagnostic disable-next-line: undefined-field
-                                return require("noice").api.status.command:get()
+                                return require("noice").api.status.command.get()
                             end,
                             cond = function()
                                 return package.loaded["noice"]
                                     --- @diagnostic disable-next-line: undefined-field
-                                    and require("noice").api.status.command:has()
+                                    and require("noice").api.status.command.has()
                             end,
                             color = function() return LazyVim.ui.fg "Statement" end,
                         },
@@ -122,22 +122,23 @@ return {
                     },
                 },
             }
-
-            local trouble = require "trouble"
-            local symbols = trouble.statusline
-                and trouble.statusline {
-                    mode = "symbols",
-                    groups = {},
-                    title = false,
-                    filter = { range = true },
-                    format = "{kind_icon}{symbol.name:Normal}",
-                    hl_group = "lualine_c_normal",
-                }
-            table.insert(opts.winbar.lualine_c, {
-                symbols and symbols.get,
-                cond = symbols and symbols.has,
-            })
-            return opts
+            if vim.g.trouble_lualine then
+                local trouble = require "trouble"
+                local symbols = trouble.statusline
+                    and trouble.statusline {
+                        mode = "symbols",
+                        groups = {},
+                        title = false,
+                        filter = { range = true },
+                        format = "{kind_icon}{symbol.name:Normal}",
+                        hl_group = "lualine_c_normal",
+                    }
+                table.insert(opts.winbar.lualine_c, {
+                    symbols and symbols.get,
+                    cond = symbols and symbols.has,
+                })
+                return opts
+            end
         end,
     },
     {
