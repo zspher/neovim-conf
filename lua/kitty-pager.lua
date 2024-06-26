@@ -5,6 +5,9 @@ return function(INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN)
     vim.opt.encoding = "utf-8"
     vim.opt.clipboard = { "unnamed", "unnamedplus" }
     vim.cmd.colorscheme "catppuccin"
+    vim.opt.spell = false
+    vim.opt.list = false
+    vim.opt.statuscolumn = ""
     vim.opt.compatible = false
     vim.opt.number = false
     vim.opt.relativenumber = false
