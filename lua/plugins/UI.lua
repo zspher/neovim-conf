@@ -73,6 +73,13 @@ return {
                             color = function() return LazyVim.ui.fg "Debug" end,
                         },
                         {
+                            function() return "Rec @" .. vim.fn.reg_recording() end,
+                            cond = function()
+                                return vim.fn.reg_recording() ~= ""
+                            end,
+                            color = function() return LazyVim.ui.fg "Statement" end,
+                        },
+                        {
                             require("lazy.status").updates,
                             cond = require("lazy.status").has_updates,
                             color = function() return LazyVim.ui.fg "Special" end,
