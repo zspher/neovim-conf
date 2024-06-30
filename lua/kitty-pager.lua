@@ -1,7 +1,7 @@
 -- from: https://gist.github.com/galaxia4Eva/9e91c4f275554b4bd844b6feece16b3d
 -- relevant issue: https://github.com/kovidgoyal/kitty/issues/719
 return function(INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN)
-    print("kitty sent:", INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN)
+    -- vim.print("kitty sent:", INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN)
     vim.opt.encoding = "utf-8"
     vim.opt.clipboard = { "unnamed", "unnamedplus" }
     vim.cmd.colorscheme "catppuccin"
@@ -17,7 +17,9 @@ return function(INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN)
     vim.opt.laststatus = 0
     vim.o.cmdheight = 0
     vim.opt.showcmd = false
-    vim.opt.scrollback = INPUT_LINE_NUMBER + CURSOR_LINE
+    vim.opt.scrollback = INPUT_LINE_NUMBER + CURSOR_COLUMN + CURSOR_LINE == 0
+            and 10000
+        or INPUT_LINE_NUMBER + CURSOR_LINE
     local term_buf = vim.api.nvim_create_buf(true, false)
     local term_io = vim.api.nvim_open_term(term_buf, {})
     vim.api.nvim_buf_set_keymap(term_buf, "n", "q", "<Cmd>q<CR>", {})
