@@ -66,9 +66,21 @@ return {
     },
     {
         "nvim-neo-tree/neo-tree.nvim",
+        keys = {
+            {
+                "<leader>fe",
+                function()
+                    require("neo-tree.command").execute {
+                        toggle = true,
+                        dir = LazyVim.root(),
+                        reveal = true,
+                    }
+                end,
+                desc = "Explorer NeoTree (Root Dir)",
+            },
+        },
         opts = {
             event_handlers = {
-
                 {
                     event = "neo_tree_buffer_enter",
                     handler = function()
