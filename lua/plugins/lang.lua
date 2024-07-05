@@ -9,6 +9,7 @@ return {
     { import = "plugins.lang.python" },
     { import = "plugins.lang.sql" },
     { import = "lazyvim.plugins.extras.lang.git" },
+    { import = "plugins.lang.web" },
     {
         "nvim-treesitter/nvim-treesitter",
         opts = function()
@@ -18,6 +19,6 @@ return {
     },
     {
         "nvim-treesitter/nvim-treesitter",
-        opts = { ensure_installed = { "comment", "css", "csv" } },
+        opts = { ensure_installed = { "comment", "csv" } },
     },
 }

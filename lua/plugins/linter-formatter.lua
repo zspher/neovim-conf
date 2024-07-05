@@ -16,17 +16,6 @@ return {
                 nls.builtins.code_actions.gitsigns,
 
                 nls.builtins.formatting.stylua,
-                nls.builtins.formatting.prettierd.with {
-                    disabled_filetypes = {
-                        "javascript",
-                        "javascriptreact",
-                        "json",
-                        "jsonc",
-                        "typescript",
-                        "typescriptreact",
-                    },
-                },
-                nls.builtins.formatting.biome,
             })
         end,
     },

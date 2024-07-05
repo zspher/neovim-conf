@@ -6,9 +6,6 @@ return {
         servers = {
             lemminx = {},
             mesonlsp = {},
-            jsonls = {},
-            cssls = {},
-            html = {},
         },
     },
 }
