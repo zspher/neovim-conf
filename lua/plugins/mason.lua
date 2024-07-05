@@ -9,7 +9,10 @@ return {
         "williamboman/mason.nvim",
         optional = true,
         opts = function(_, opts)
-            if is_nixos() then opts.ensure_installed = {} end
+            if is_nixos() then
+                -- TODO: remove when package is available in nixos
+                opts.ensure_installed = { "vtsls", "bash-debug-adapter" }
+            end
             return {
                 ensure_installed = opts.ensure_installed,
                 PATH = "append",
