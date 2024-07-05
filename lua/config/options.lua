@@ -15,10 +15,11 @@ vim.opt.expandtab = true -- tabs to spaces
 vim.opt.conceallevel = 2
 
 vim.opt.list = true
-vim.opt.listchars:append {
-    tab = "│→",
+vim.opt.listchars = {
+    tab = "│·→",
     extends = "⟩",
     precedes = "⟨",
+    lead = "·",
     trail = "·",
     nbsp = "␣",
 }
