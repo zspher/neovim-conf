@@ -178,6 +178,8 @@ return {
             },
             user_default_options = {
                 names = false,
+                always_update = true,
+                tailwind = "lsp",
             },
             buftypes = { "!nofile" },
         },
