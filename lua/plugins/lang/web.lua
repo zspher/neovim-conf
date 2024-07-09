@@ -6,23 +6,36 @@ return {
         opts = { ensure_installed = { "css" } },
     },
     {
-        "nvimtools/none-ls.nvim",
-        opts = function(_, opts)
-            local nls = require "null-ls"
-            opts.sources = vim.list_extend(opts.sources or {}, {
-                nls.builtins.formatting.prettierd.with {
-                    disabled_filetypes = {
-                        "javascript",
-                        "javascriptreact",
-                        "json",
-                        "jsonc",
-                        "typescript",
-                        "typescriptreact",
-                    },
-                },
-                nls.builtins.formatting.biome,
-            })
-        end,
+        "stevearc/conform.nvim",
+        opts = {
+            formatters_by_ft = {
+                javascript = { "biome" },
+                javascriptreact = { "biome" },
+                typescript = { "biome" },
+                typescriptreact = { "biome" },
+
+                json = { "prettierd" },
+                jsonc = { "prettierd" },
+                yaml = { "prettierd" },
+                css = { "prettierd" },
+                html = { "prettierd" },
+                markdown = { "prettierd" },
+            },
+        },
+    },
+    {
+        "mfussenegger/nvim-lint",
+        opts = {
+            linters_by_ft = {
+                javascript = { "biomejs" },
+                javascriptreact = { "biomejs" },
+                typescript = { "biomejs" },
+                typescriptreact = { "biomejs" },
+
+                json = { "biomejs" },
+                jsonc = { "biomejs" },
+            },
+        },
     },
     {
         "neovim/nvim-lspconfig",
