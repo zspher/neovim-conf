@@ -1,6 +1,7 @@
 ---@type LazySpec[]
 return {
     { import = "lazyvim.plugins.extras.lang.typescript" },
+    { import = "lazyvim.plugins.extras.lang.tailwind" },
     {
         "nvim-treesitter/nvim-treesitter",
         opts = { ensure_installed = { "css" } },
@@ -45,7 +46,6 @@ return {
                 jsonls = {},
                 cssls = {},
                 html = {},
-                tailwindcss = {},
                 emmet_language_server = {},
             },
         },
