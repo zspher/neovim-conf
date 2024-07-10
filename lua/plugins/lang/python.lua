@@ -14,11 +14,6 @@ return {
         },
     },
     {
-        "mfussenegger/nvim-dap-python",
-        optional = true,
-        config = function() require("dap-python").setup "python" end,
-    },
-    {
 
         "neovim/nvim-lspconfig",
         ---@class PluginLspOpts
