@@ -67,6 +67,7 @@ return {
             }
 
             opts.winbar = wb
+            opts.inactive_winbar = wb
         end,
     },
     {
