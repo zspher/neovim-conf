@@ -14,19 +14,17 @@ return {
             flavour = "mocha",
             transparent_background = true,
             integrations = {
+                alpha = false,
                 nvimtree = false,
+                neogit = false,
 
-                aerial = true,
                 harpoon = true,
-                leap = true,
                 lsp_trouble = true,
                 mason = true,
                 neotest = true,
                 neotree = true,
                 noice = true,
                 notify = true,
-                symbols_outline = true,
-                telescope = { enabled = true },
                 which_key = true,
             },
             custom_highlights = function(colors)
