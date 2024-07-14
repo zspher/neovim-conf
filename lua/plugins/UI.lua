@@ -12,6 +12,7 @@ return {
             local icons = LazyVim.config.icons
             opts.sections.lualine_c = {
                 LazyVim.lualine.root_dir(),
+                "filetype",
                 {
                     "diagnostics",
                     symbols = {
@@ -24,7 +25,7 @@ return {
             }
             opts.options = {
                 section_separators = "",
-                component_separators = { left = "›", right = "|" },
+                component_separators = { left = "", right = "|" },
 
                 disabled_filetypes = {
                     winbar = vim.list_extend(
