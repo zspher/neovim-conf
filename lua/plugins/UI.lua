@@ -81,16 +81,6 @@ return {
                     "catppuccin.groups.integrations.bufferline"
                 ).get(),
                 indicator = { style = "none" },
-                always_show_bufferline = true,
-                offsets = {
-                    {
-                        filetype = "neo-tree",
-                        text = "Neo-tree",
-                        highlight = "Directory",
-                        text_align = "left",
-                        separator = true,
-                    },
-                },
             },
         },
     },
