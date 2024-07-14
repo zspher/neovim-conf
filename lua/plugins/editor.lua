@@ -139,6 +139,9 @@ return {
         "nvim-telescope/telescope.nvim",
         opts = {
             pickers = {
+                grep_string = {
+                    glob_pattern = { "!.git/" },
+                    additional_args = { "--hidden" },
                 },
                 live_grep = {
                     glob_pattern = { "!.git/" },
