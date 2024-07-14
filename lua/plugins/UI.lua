@@ -41,7 +41,7 @@ return {
                     groups = {},
                     title = false,
                     filter = { range = true },
-                    format = "{kind_icon}{symbol.name:Normal}",
+                    format = "{kind_icon}{symbol.name:Normal} ›",
                     hl_group = "lualine_c_normal",
                 }
             local wb = {
@@ -62,6 +62,9 @@ return {
                         symbols and symbols.get,
                         cond = symbols and symbols.has,
                         separator = { left = "›" },
+                        fmt = function(str) -- return string except for last "›"
+                            return str:gsub("(.*)›([^›]*)$", "%1")
+                        end,
                     },
                 },
             }
