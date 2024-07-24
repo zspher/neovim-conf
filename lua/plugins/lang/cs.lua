@@ -1,6 +1,3 @@
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-local on_attach = function() end
 local function get_roslyn_dll()
     local exe = vim.fn.exepath "Microsoft.CodeAnalysis.LanguageServer"
     -- Find the parent directory of the executable
@@ -17,18 +14,11 @@ return {
         opts = { ensure_installed = { "c_sharp" } },
     },
     {
-        "benjiwolff/roslyn.nvim",
-        branch = "allow-custom-roslyn-dll-path",
+        "seblj/roslyn.nvim",
         ft = "cs",
-        config = function()
-            require("roslyn").setup {
-                dotnet_cmd = "dotnet", -- this is the default
-                roslyn_version = "4.10.0-2.24124.2", -- this is the default
-                on_attach = on_attach,
-                capabilities = capabilities,
-                roslyn_lsp_dll_path = get_roslyn_dll(),
-            }
-        end,
+        opts = {
+            exe = get_roslyn_dll(),
+        },
     },
     {
         "nvim-neotest/neotest",
