@@ -1,12 +1,3 @@
-local function get_roslyn_dll()
-    local exe = vim.fn.exepath "Microsoft.CodeAnalysis.LanguageServer"
-    -- Find the parent directory of the executable
-    local parent_dir = vim.fn.fnamemodify(exe, ":h:h")
-
-    local dir = parent_dir
-        .. "/lib/roslyn-ls/Microsoft.CodeAnalysis.LanguageServer.dll"
-    return dir
-end
 ---@type LazySpec[]
 return {
     {
@@ -17,7 +8,7 @@ return {
         "seblj/roslyn.nvim",
         ft = "cs",
         opts = {
-            exe = get_roslyn_dll(),
+            exe = "Microsoft.CodeAnalysis.LanguageServer",
         },
     },
     {
