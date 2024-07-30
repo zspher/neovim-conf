@@ -15,8 +15,9 @@ return {
             transparent_background = true,
             integrations = {
                 alpha = false,
-                nvimtree = false,
                 neogit = false,
+                nvimtree = false,
+                telescope = { enabled = false },
 
                 harpoon = true,
                 lsp_trouble = true,

@@ -38,3 +38,5 @@ vim.filetype.add {
         [".*/hypr/.+%.conf"] = "hyprlang",
     },
 }
+
+vim.g.lazyvim_picker = "fzf"

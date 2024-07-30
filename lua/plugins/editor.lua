@@ -17,7 +17,6 @@ return {
         branch = "harpoon2",
         dependencies = {
             "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope.nvim",
         },
         opts = {
             settings = {
@@ -140,21 +139,6 @@ return {
                     visible = true,
                     hide_dotfiles = false,
                     never_show = { ".git" },
-                },
-            },
-        },
-    },
-    {
-        "nvim-telescope/telescope.nvim",
-        opts = {
-            pickers = {
-                grep_string = {
-                    glob_pattern = { "!.git/" },
-                    additional_args = { "--hidden" },
-                },
-                live_grep = {
-                    glob_pattern = { "!.git/" },
-                    additional_args = { "--hidden" },
                 },
             },
         },
