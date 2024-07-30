@@ -87,6 +87,15 @@ return {
                         vim.opt_local.relativenumber = true
                         vim.opt_local.number = true
                         vim.opt_local.cc = ""
+
+                        local ns_id =
+                            vim.api.nvim_create_namespace "neo-tree.nvim"
+                        vim.api.nvim_set_hl(
+                            ns_id,
+                            "LineNr",
+                            vim.api.nvim_get_hl(0, { name = "CursorLineNr" }) --[[@as vim.api.keyset.highlight]]
+                        )
+                        vim.api.nvim_win_set_hl_ns(0, ns_id)
                     end,
                 },
                 {
