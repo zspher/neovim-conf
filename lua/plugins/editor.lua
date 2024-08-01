@@ -143,4 +143,12 @@ return {
             },
         },
     },
+    {
+        "ibhagwan/fzf-lua",
+        opts = {
+            previewers = {
+                man = { cmd = "man %s | col -bx" },
+            },
+        },
+    },
 }
