@@ -149,6 +149,9 @@ return {
             previewers = {
                 man = { cmd = "man %s | col -bx" },
             },
+            winopts = {
+                preview = { wrap = "wrap" },
+            },
         },
     },
 }
