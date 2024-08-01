@@ -33,6 +33,8 @@ vim.g.mapleader = " "
 vim.filetype.add {
     extension = {
         axaml = "xml",
+        obt = "qss",
+        ovt = "qss",
     },
     pattern = {
         [".*/hypr/.+%.conf"] = "hyprlang",

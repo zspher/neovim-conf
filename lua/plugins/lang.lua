@@ -15,6 +15,7 @@ return {
         opts = function()
             -- register file type with language
             vim.treesitter.language.register("bash", "zsh")
+            vim.treesitter.language.register("qmljs", "qss")
         end,
     },
     {
