@@ -82,6 +82,7 @@ return {
                     "catppuccin.groups.integrations.bufferline"
                 ).get(),
                 indicator = { style = "none" },
+                always_show_bufferline = true,
             },
         },
     },
