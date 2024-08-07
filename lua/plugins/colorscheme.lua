@@ -19,6 +19,7 @@ return {
                 nvimtree = false,
                 telescope = { enabled = false },
 
+                fzf = true,
                 harpoon = true,
                 lsp_trouble = true,
                 mason = true,
@@ -33,21 +34,6 @@ return {
                     LineNrAbove = { fg = c.subtext0 },
                     LineNrBelow = { fg = c.subtext0 },
                     CursorLineNr = { fg = c.peach, style = { "bold" } },
-
-                    -- fzf colos
-                    FzfLuaBorder = { link = "FloatBorder" },
-                    FzfLuaTitle = { link = "FloatBorder" },
-                    FzfLuaHeaderBind = { fg = c.yellow },
-                    FzfLuaBufNr = { fg = c.yellow },
-                    FzfLuaTabMarker = { fg = c.yellow },
-                    FzfLuaHeaderText = { fg = c.peach },
-                    FzfLuaBufFlagCur = { fg = c.peach },
-                    FzfLuaLiveSym = { fg = c.peach },
-                    FzfLuaPathColNr = { fg = c.blue },
-                    FzfLuaBufFlagAlt = { fg = c.blue },
-                    FzfLuaTabTitle = { fg = c.sky },
-                    FzfLuaPathLineNr = { fg = c.green },
-                    FzfLuaBufName = { fg = c.mauve },
                 }
             end,
         },
