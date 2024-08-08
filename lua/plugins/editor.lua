@@ -146,7 +146,11 @@ return {
     {
         "ibhagwan/fzf-lua",
         opts = {
-            previewers = {},
+            previewers = {
+                codeaction_native = {
+                    pager = [[delta --width=$COLUMNS --hunk-header-style="omit" --file-style="omit"]],
+                },
+            },
             winopts = {
                 preview = { wrap = "wrap" },
             },
