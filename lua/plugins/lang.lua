@@ -1,15 +1,16 @@
 ---@type LazySpec[]
 return {
+    { import = "lazyvim.plugins.extras.lang.git" },
     { import = "plugins.lang.bash" },
+    { import = "plugins.lang.c-cpp" },
     { import = "plugins.lang.cs" },
     { import = "plugins.lang.nix" },
-    { import = "plugins.lang.tex" },
-    { import = "plugins.lang.c-cpp" },
-    { import = "plugins.lang.rust" },
     { import = "plugins.lang.python" },
+    { import = "plugins.lang.rust" },
     { import = "plugins.lang.sql" },
-    { import = "lazyvim.plugins.extras.lang.git" },
+    { import = "plugins.lang.tex" },
     { import = "plugins.lang.web" },
+    { import = "plugins.lang.zig" },
     {
         "nvim-treesitter/nvim-treesitter",
         opts = function()
