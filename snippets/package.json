@@ -1,0 +1,19 @@
+{
+  "name": "user-snippets",
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "sh"
+        ],
+        "path": "./sh.json"
+      },
+      {
+        "language": [
+          "nix"
+        ],
+        "path": "./nix.json"
+      }
+    ]
+  }
+}
