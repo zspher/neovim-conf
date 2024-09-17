@@ -10,6 +10,8 @@ return {
     {
         "catppuccin/nvim",
         name = "catppuccin",
+        ---@module 'catppuccin'
+        ---@type CatppuccinOptions
         opts = {
             flavour = "mocha",
             transparent_background = true,
