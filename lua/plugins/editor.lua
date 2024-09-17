@@ -1,3 +1,4 @@
+local oil_detail = false
 ---@type LazySpec[]
 return {
     { "wakatime/vim-wakatime", event = "LazyFile" },
@@ -140,6 +141,61 @@ return {
                     hide_dotfiles = false,
                     never_show = { ".git" },
                 },
+            },
+        },
+    },
+    {
+        "stevearc/oil.nvim",
+        cmd = "Oil",
+        opts = {
+            skip_confirm_for_simple_edits = true,
+            delete_to_trash = true,
+            keymaps = {
+                ["q"] = "actions.close",
+                ["<C-h>"] = false,
+                ["<A-h>"] = "actions.select_split",
+                ["gd"] = {
+                    desc = "Toggle file detail view",
+                    callback = function()
+                        oil_detail = not oil_detail
+                        if oil_detail then
+                            require("oil").set_columns {
+                                { "size", highlight = "Comment" },
+                                { "mtime", highlight = "Conceal" },
+                                "icon",
+                            }
+                        else
+                            require("oil").set_columns { "icon" }
+                        end
+                    end,
+                },
+            },
+            view_options = {
+                show_hidden = true,
+            },
+        },
+        keys = {
+            {
+                "<leader>e",
+                function()
+                    if vim.bo.ft == "oil" then
+                        require("oil").close()
+                    else
+                        require("oil").open(nil)
+                    end
+                end,
+                desc = "Explorer (Current Dir)",
+            },
+            {
+                "<leader>E",
+                function()
+                    if vim.bo.ft == "oil" then
+                        require("oil").close()
+                    else
+                        require("oil").open(require("lazyvim.util").root())
+                    end
+                end,
+                desc = "Explorer (Root Dir)",
             },
         },
     },
