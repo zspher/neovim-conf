@@ -84,6 +84,13 @@ return {
                         oil_detail = not oil_detail
                         if oil_detail then
                             require("oil").set_columns {
+                                {
+                                    "permissions",
+                                    highlight = function(val)
+                                        if val:match "x" then return "Error" end
+                                        return "Conceal"
+                                    end,
+                                },
                                 { "size", highlight = "Comment" },
                                 { "mtime", highlight = "Conceal" },
                                 "icon",
