@@ -65,6 +65,7 @@ return {
         end,
     },
     { "nvim-neo-tree/neo-tree.nvim", enabled = false },
+    { "refractalize/oil-git-status.nvim", config = true, dependencies = {} },
     {
         "stevearc/oil.nvim",
         cmd = "Oil",
@@ -95,6 +96,9 @@ return {
             },
             view_options = {
                 show_hidden = true,
+            },
+            win_options = {
+                signcolumn = "yes",
             },
         },
         keys = {
