@@ -2,24 +2,6 @@
 return {
     { import = "lazyvim.plugins.extras.lang.clangd" },
     {
-        "neovim/nvim-lspconfig",
-        opts = {
-            servers = {
-                clangd = {
-                    root_dir = require("lspconfig.util").root_pattern(
-                        ".clangd",
-                        ".clang-tidy",
-                        ".clang-format",
-                        "compile_commands.json",
-                        "compile_flags.txt",
-                        "configure.ac",
-                        ".git"
-                    ),
-                },
-            },
-        },
-    },
-    {
         "nvim-treesitter/nvim-treesitter",
         opts = {
             ensure_installed = { "doxygen" },

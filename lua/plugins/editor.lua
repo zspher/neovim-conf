@@ -65,7 +65,14 @@ return {
         end,
     },
     { "nvim-neo-tree/neo-tree.nvim", enabled = false },
-    { "refractalize/oil-git-status.nvim", config = true, dependencies = {} },
+    {
+        "refractalize/oil-git-status.nvim",
+        config = true,
+        event = "VeryLazy",
+        dependencies = {
+            "stevearc/oil.nvim",
+        },
+    },
     {
         "stevearc/oil.nvim",
         cmd = "Oil",
