@@ -78,9 +78,6 @@ return {
         "akinsho/bufferline.nvim",
         opts = {
             options = {
-                highlights = require(
-                    "catppuccin.groups.integrations.bufferline"
-                ).get(),
                 indicator = { style = "none" },
                 always_show_bufferline = true,
             },
