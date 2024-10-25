@@ -35,11 +35,23 @@ return {
                         },
                     },
                 },
+                -- for code actions and goto file (e.g. ./package/nixft)
                 nil_ls = {
+                    on_attach = function(client, _)
+                        client.server_capabilities.semanticTokensProvider = nil
+                        client.server_capabilities.diagnosticProvider = nil
+                        client.server_capabilities.documentSymbolProvider = nil
+                        client.server_capabilities.documentFormattingProvider =
+                            nil
+                        client.server_capabilities.renameProvider = nil
+                        client.server_capabilities.referenceProvider = nil
+                        client.server_capabilities.completionProvider = nil
+                        client.server_capabilities.hoverProvider = nil
+                    end,
                     settings = {
                         ["nil"] = {
-                            testSetting = 42,
-                            formatting = { command = { "nixfmt" } },
+                            formatting = { command = { "" } },
+                            nix = { flake = { nixpkgsInputName = "" } },
                         },
                     },
                 },
