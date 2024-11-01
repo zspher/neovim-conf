@@ -10,11 +10,6 @@ return {
         "stevearc/conform.nvim",
         opts = {
             formatters_by_ft = {
-                javascript = { "biome" },
-                javascriptreact = { "biome" },
-                typescript = { "biome" },
-                typescriptreact = { "biome" },
-
                 json = { "prettierd" },
                 jsonc = { "prettierd" },
                 yaml = { "prettierd" },
@@ -27,15 +22,7 @@ return {
     {
         "mfussenegger/nvim-lint",
         opts = {
-            linters_by_ft = {
-                javascript = { "biomejs" },
-                javascriptreact = { "biomejs" },
-                typescript = { "biomejs" },
-                typescriptreact = { "biomejs" },
-
-                json = { "biomejs" },
-                jsonc = { "biomejs" },
-            },
+            linters_by_ft = {},
         },
     },
     {
@@ -47,6 +34,9 @@ return {
                 cssls = {},
                 html = {},
                 emmet_language_server = {},
+                biome = {
+                    single_file_support = true,
+                },
             },
         },
     },
