@@ -52,7 +52,7 @@ return {
             local dap = require "dap"
             dap.configurations.cs = {
                 {
-                    type = "coreclr",
+                    type = "netcoredbg",
                     name = "NetCoreDbg: Launch",
                     request = "launch",
                     cwd = "${fileDirname}",
