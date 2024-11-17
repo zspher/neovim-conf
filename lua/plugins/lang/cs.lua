@@ -22,6 +22,20 @@ return {
         },
     },
     {
+        "stevearc/conform.nvim",
+        opts = {
+            formatters_by_ft = {
+                cs = { "csharpier" },
+            },
+            formatters = {
+                csharpier = {
+                    command = "dotnet",
+                    args = { "tool", "run", "dotnet-csharpier", "--write-stdout" },
+                },
+            },
+        },
+    },
+    {
         "mfussenegger/nvim-dap",
         optional = true,
         opts = function()
