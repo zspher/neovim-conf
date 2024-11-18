@@ -2,6 +2,7 @@ if not vim.g.kitty_pager then return {} end
 
 local enabled = {
     "catppuccin",
+    "snacks.nvim",
 }
 
 local Config = require "lazy.core.config"
