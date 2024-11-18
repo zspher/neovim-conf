@@ -151,6 +151,9 @@ return {
             winopts = {
                 preview = { wrap = "wrap" },
             },
+            grep = {
+                rg_glob = true,
+            },
         },
     },
     {
