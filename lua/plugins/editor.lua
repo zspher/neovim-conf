@@ -91,13 +91,7 @@ return {
                         oil_detail = not oil_detail
                         if oil_detail then
                             require("oil").set_columns {
-                                {
-                                    "permissions",
-                                    highlight = function(val)
-                                        if val:match "x" then return "Error" end
-                                        return "Conceal"
-                                    end,
-                                },
+                                "permissions",
                                 { "size", highlight = "Comment" },
                                 { "mtime", highlight = "Conceal" },
                                 "icon",
@@ -110,6 +104,18 @@ return {
             },
             view_options = {
                 show_hidden = true,
+                highlight_filename = function(entry, _, _, _)
+                    local state = vim.uv.fs_stat(entry.name)
+                    if state and state.type == "file" then
+                        local perms =
+                            string.format("%o", bit.band(state.mode, 511))
+                        local l = { "1", "3", "5", "7" }
+                        for _, v in ipairs(l) do
+                            if perms:match(v) then return "Error" end
+                        end
+                    end
+                    return nil
+                end,
             },
             win_options = {
                 signcolumn = "yes",
