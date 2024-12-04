@@ -30,7 +30,12 @@ return {
             formatters = {
                 csharpier = {
                     command = "dotnet",
-                    args = { "tool", "run", "dotnet-csharpier", "--write-stdout" },
+                    args = {
+                        "tool",
+                        "run",
+                        "dotnet-csharpier",
+                        "--write-stdout",
+                    },
                 },
             },
         },
