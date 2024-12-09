@@ -57,13 +57,28 @@ return {
             },
         },
     },
+    -- {
+    --     "hrsh7th/nvim-cmp",
+    --     opts = {
+    --         window = {
+    --             documentation = {
+    --                 winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+    --             },
+    --         },
+    --     },
+    -- },
+    { import = "lazyvim.plugins.extras.coding.blink" },
     {
-        "hrsh7th/nvim-cmp",
+        "saghen/blink.cmp",
         opts = {
-            window = {
-                documentation = {
-                    winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-                },
+            keymap = {
+                preset = "default",
+                ["<CR>"] = { "accept", "fallback" },
+                ["<C-j>"] = { "snippet_forward", "fallback" },
+                ["<C-k>"] = { "snippet_backward", "fallback" },
+            },
+            completion = {
+                accept = { create_undo_point = false },
             },
         },
     },
