@@ -120,6 +120,11 @@ return {
                     wo = { winblend = 0 },
                 },
             },
+            indent = {
+                scope = {
+                    hl = "SnacksIndent1",
+                },
+            },
         },
     },
 }
