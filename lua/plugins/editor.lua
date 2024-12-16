@@ -153,6 +153,7 @@ return {
     },
     {
         "ibhagwan/fzf-lua",
+        optional = true,
         opts = {
             previewers = {
                 codeaction_native = {
