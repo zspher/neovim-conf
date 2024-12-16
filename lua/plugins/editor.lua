@@ -4,6 +4,11 @@ return {
     { "wakatime/vim-wakatime", event = "LazyFile" },
     { import = "lazyvim.plugins.extras.editor.refactoring" },
     {
+        "folke/which-key.nvim",
+        optional = true,
+        opts = { preset = "modern" },
+    },
+    {
         "ThePrimeagen/refactoring.nvim",
         keys = {
             {
