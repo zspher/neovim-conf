@@ -114,12 +114,7 @@ return {
         ---@type snacks.Config
         opts = {
             ---@type table<string, snacks.win.Config>
-            styles = {
-                notification = {
-                    relative = "editor",
-                    wo = { winblend = 0 },
-                },
-            },
+            styles = {},
             indent = {
                 scope = {
                     hl = "SnacksIndent1",
