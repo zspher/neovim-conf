@@ -108,4 +108,18 @@ return {
             buftypes = { "!nofile" },
         },
     },
+    {
+        "folke/snacks.nvim",
+        ---@module 'snacks'
+        ---@type snacks.Config
+        opts = {
+            ---@type table<string, snacks.win.Config>
+            styles = {
+                notification = {
+                    relative = "editor",
+                    wo = { winblend = 0 },
+                },
+            },
+        },
+    },
 }
