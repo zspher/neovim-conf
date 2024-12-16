@@ -57,17 +57,6 @@ return {
             },
         },
     },
-    -- {
-    --     "hrsh7th/nvim-cmp",
-    --     opts = {
-    --         window = {
-    --             documentation = {
-    --                 winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-    --             },
-    --         },
-    --     },
-    -- },
-    { import = "lazyvim.plugins.extras.coding.blink" },
     {
         "saghen/blink.cmp",
         opts = {

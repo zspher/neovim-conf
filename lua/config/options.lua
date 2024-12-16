@@ -41,4 +41,3 @@ vim.filetype.add {
     },
 }
 
-vim.g.lazyvim_picker = "fzf"
