@@ -6,7 +6,6 @@ end
 ---@type LazySpec[]
 return {
     { import = "lazyvim.plugins.extras.ui.treesitter-context" },
-    { import = "lazyvim.plugins.extras.ui.dashboard-nvim" },
     {
         "nvim-lualine/lualine.nvim",
         opts = function(_, opts)
