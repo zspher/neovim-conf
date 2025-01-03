@@ -11,6 +11,7 @@ return {
     { import = "plugins.lang.tex" },
     { import = "plugins.lang.web" },
     { import = "plugins.lang.zig" },
+    { import = "lazyvim.plugins.extras.lang.yaml" },
     {
         "nvim-treesitter/nvim-treesitter",
         opts = function()
