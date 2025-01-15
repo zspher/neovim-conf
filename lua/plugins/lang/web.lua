@@ -14,7 +14,6 @@ return {
                 jsonc = { "prettierd" },
                 yaml = { "prettierd" },
                 css = { "prettierd" },
-                html = { "prettierd" },
             },
         },
     },
@@ -31,6 +30,7 @@ return {
             servers = {
                 jsonls = {},
                 cssls = {},
+                superhtml = {},
                 html = {},
                 emmet_language_server = {},
                 biome = {
