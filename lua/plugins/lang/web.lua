@@ -15,7 +15,6 @@ return {
                 yaml = { "prettierd" },
                 css = { "prettierd" },
                 html = { "prettierd" },
-                markdown = { "prettierd" },
             },
         },
     },
