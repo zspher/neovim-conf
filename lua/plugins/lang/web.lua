@@ -31,7 +31,12 @@ return {
                 jsonls = {},
                 cssls = {},
                 superhtml = {},
-                html = {},
+                html = {
+                    on_attach = function(client, _)
+                        local sc = client.server_capabilities
+                        sc.completionProvider = nil
+                    end,
+                },
                 emmet_language_server = {},
                 biome = {
                     single_file_support = true,
