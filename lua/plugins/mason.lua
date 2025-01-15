@@ -11,10 +11,8 @@ return {
         opts = function(_, opts)
             if is_nixos() then
                 -- TODO: remove when package is available in nixos
-                -- debugpy has problems with home-manager & nix shell
                 -- so just install via mason
-                opts.ensure_installed =
-                    { "vtsls", "bash-debug-adapter", "debugpy" }
+                opts.ensure_installed = { "markuplint" }
             end
             return {
                 ensure_installed = opts.ensure_installed,
