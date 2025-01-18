@@ -20,7 +20,9 @@ return {
     {
         "mfussenegger/nvim-lint",
         opts = {
-            linters_by_ft = {},
+            linters_by_ft = {
+                html = { "markuplint" },
+            },
         },
     },
     {
@@ -32,10 +34,9 @@ return {
                 cssls = {},
                 superhtml = {},
                 html = {
-                    on_attach = function(client, _)
-                        local sc = client.server_capabilities
-                        sc.completionProvider = nil
-                    end,
+                    settings = {
+                        html = { format = { indentInnerHtml = true } },
+                    },
                 },
                 emmet_language_server = {},
                 biome = {
