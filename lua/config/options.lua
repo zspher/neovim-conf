@@ -35,6 +35,8 @@ vim.filetype.add {
         axaml = "xml",
         obt = "qss",
         ovt = "qss",
+
+        mdx = "markdown.mdx",
     },
     pattern = {
         [".*/hypr/.+%.conf"] = "hyprlang",
