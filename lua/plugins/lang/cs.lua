@@ -7,8 +7,12 @@ return {
     {
         "seblj/roslyn.nvim",
         ft = "cs",
+        -- @module 'roslyn'
+        -- @type RoslynNvimConfig
         opts = {
             exe = "Microsoft.CodeAnalysis.LanguageServer",
+            ---@diagnostic disable-next-line: missing-fields
+            config = {},
         },
     },
     {
