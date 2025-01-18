@@ -1,5 +1,6 @@
 ---@type LazySpec[]
 return {
+
     {
         "nvim-treesitter/nvim-treesitter",
         opts = { ensure_installed = { "c_sharp" } },
@@ -30,17 +31,6 @@ return {
         opts = {
             formatters_by_ft = {
                 cs = { "csharpier" },
-            },
-            formatters = {
-                csharpier = {
-                    command = "dotnet",
-                    args = {
-                        "tool",
-                        "run",
-                        "dotnet-csharpier",
-                        "--write-stdout",
-                    },
-                },
             },
         },
     },
