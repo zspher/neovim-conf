@@ -35,22 +35,14 @@ return {
         keys = {
             {
                 "<C-j>",
-                function()
-                    return require("luasnip").choice_active()
-                            and "<Plug>luasnip-next-choice"
-                        or "<C-j>"
-                end,
+                function() require("luasnip").jump(1) end,
                 expr = true,
                 silent = true,
-                mode = { "i", "s" },
+                mode = { "s" },
             },
             {
                 "<C-k>",
-                function()
-                    return require("luasnip").choice_active()
-                            and "<Plug>luasnip-prev-choice"
-                        or "<C-k>"
-                end,
+                function() require("luasnip").jump(-1) end,
                 expr = true,
                 silent = true,
                 mode = { "i", "s" },
@@ -63,12 +55,8 @@ return {
         opts = {
             keymap = {
                 preset = "default",
-                ["<CR>"] = { "accept", "fallback" },
                 ["<C-j>"] = { "snippet_forward", "fallback" },
                 ["<C-k>"] = { "snippet_backward", "fallback" },
-            },
-            completion = {
-                accept = { create_undo_point = false },
             },
         },
     },
