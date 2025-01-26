@@ -156,6 +156,12 @@ return {
         optional = true,
         opts = {
             previewers = {
+                builtin = {
+                    extensions = {
+                        ["avif"] = { "ueberzugpp" },
+                        ["pdf"] = { "ueberzugpp" },
+                    },
+                },
                 codeaction_native = {
                     pager = [[delta --width=$COLUMNS --hunk-header-style="omit" --file-style="omit"]],
                 },
