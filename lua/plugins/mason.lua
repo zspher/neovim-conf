@@ -1,6 +1,4 @@
-local function is_nixos()
-    return vim.fn.isdirectory "/nix/var/nix/profiles/system" == 1
-end
+local u = require "utils"
 
 ---@type LazySpec[]
 return {
@@ -9,7 +7,7 @@ return {
         "williamboman/mason.nvim",
         optional = true,
         opts = function(_, opts)
-            if is_nixos() then
+            if u.is_nixos() then
                 -- TODO: remove when package is available in nixos
                 -- so just install via mason
                 opts.ensure_installed = { "markuplint", "debugpy" }
@@ -24,26 +22,26 @@ return {
         "williamboman/mason-lspconfig.nvim",
         optional = true,
         opts = {
-            automatic_installation = not is_nixos(),
+            automatic_installation = not u.is_nixos(),
         },
-        enabled = not is_nixos(),
+        enabled = not u.is_nixos(),
     },
     {
         "jay-babu/mason-null-ls.nvim",
         optional = true,
         opts = {
-            automatic_installation = not is_nixos(),
+            automatic_installation = not u.is_nixos(),
             handlers = {},
         },
-        enabled = not is_nixos(),
+        enabled = not u.is_nixos(),
     },
     {
         "jay-babu/mason-nvim-dap.nvim",
         optional = true,
         opts = {
-            automatic_installation = not is_nixos(),
+            automatic_installation = not u.is_nixos(),
             handlers = {},
         },
-        enabled = not is_nixos(),
+        enabled = not u.is_nixos(),
     },
 }
