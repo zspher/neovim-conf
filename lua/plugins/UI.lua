@@ -121,4 +121,49 @@ return {
             },
         },
     },
+    {
+        "3rd/image.nvim",
+        optional = true,
+        ---@module 'image'
+        ---@type Options
+        ---@diagnostic disable-next-line: missing-fields
+        opts = {
+            integrations = {
+                markdown = {
+                    resolve_image_path = function(
+                        document_path,
+                        image_path,
+                        fallback
+                    )
+                        local root = LazyVim.root.get()
+
+                        if
+                            vim.uv.fs_stat(
+                                document_path:match "(.*/)" .. "/" .. image_path
+                            )
+                        then
+                            return fallback(document_path, image_path)
+                        end
+
+                        if
+                            vim.uv.fs_stat(root .. "/assets")
+                            and vim.uv.fs_stat(root .. "/.obsidian")
+                        then
+                            vim.print(
+                                "d: " .. document_path .. " i: " .. image_path
+                            )
+                            return root .. "/assets/" .. image_path
+                        end
+
+                        return fallback(document_path, image_path)
+                        -- document_path is the path to the file that contains the image
+                        -- image_path is the potentially relative path to the image. for
+                        -- markdown it's `![](this text)`
+
+                        -- you can call the fallback function to get the default behavior
+                    end,
+                },
+            },
+        },
+    },
 }

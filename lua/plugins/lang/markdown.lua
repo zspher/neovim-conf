@@ -1,6 +1,7 @@
 ---@type LazySpec[]
 return {
     { import = "lazyvim.plugins.extras.lang.markdown" },
+    { "iamcco/markdown-preview.nvim", enabled = false },
     {
         "stevearc/conform.nvim",
         optional = true,
@@ -20,5 +21,12 @@ return {
                 ["markdown"] = {},
             },
         },
+    },
+    {
+        "3rd/diagram.nvim",
+        dependencies = {
+            { "3rd/image.nvim" },
+        },
+        opts = {},
     },
 }
