@@ -1,14 +1,6 @@
 ---@type LazySpec[]
 return {
-    {
-        "neovim/nvim-lspconfig",
-        ---@class PluginLspOpts
-        opts = {
-            servers = {
-                marksman = {},
-            },
-        },
-    },
+    { import = "lazyvim.plugins.extras.lang.markdown" },
     {
         "stevearc/conform.nvim",
         optional = true,
@@ -25,7 +17,7 @@ return {
             linters_by_ft = {
                 -- i like the formatter but damn is this linter pedantic
                 -- ["markdown"] = { "markdownlint-cli2" },
-                -- ["markdown.mdx"] = { "markdownlint-cli2" },
+                ["markdown"] = {},
             },
         },
     },
