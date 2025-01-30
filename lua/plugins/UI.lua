@@ -22,6 +22,17 @@ return {
                         hint = icons.diagnostics.Hint,
                     },
                 },
+                {
+                    function()
+                        local img = require "image"
+                        local img_info = img.get_images()[1]
+                        return "h: "
+                            .. img_info.image_height
+                            .. " w: "
+                            .. img_info.image_width
+                    end,
+                    cond = function() return vim.bo.ft == "image_nvim" end,
+                },
             }
             opts.options = {
                 section_separators = "",
