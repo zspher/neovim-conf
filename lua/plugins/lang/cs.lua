@@ -8,8 +8,11 @@ return {
     {
         "seblj/roslyn.nvim",
         ft = "cs",
-        -- @module 'roslyn'
-        -- @type RoslynNvimConfig
+        -- TODO: remove when https://github.com/NixOS/nixpkgs/pull/379787 drops
+        commit = "490fd2d0f76249032ef6ce503e43ccdaeed9616e",
+
+        ---@module 'roslyn'
+        ---@type RoslynNvimConfig
         opts = {
             exe = "Microsoft.CodeAnalysis.LanguageServer",
             ---@diagnostic disable-next-line: missing-fields
