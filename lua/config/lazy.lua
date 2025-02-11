@@ -20,11 +20,7 @@ require("lazy").setup {
         hererocks = not u.is_nixos(),
     },
     spec = {
-        {
-            "LazyVim/LazyVim",
-            commit = "*", -- TODO: remove when fix lands
-            import = "lazyvim.plugins",
-        },
+        { "LazyVim/LazyVim", import = "lazyvim.plugins" },
         { import = "plugins" },
         { import = "plugins.mason" },
     },
