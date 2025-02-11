@@ -24,14 +24,14 @@ return {
                 },
                 {
                     function()
-                        local img = require "image"
-                        local img_info = img.get_images()[1]
-                        return "h: "
-                            .. img_info.image_height
-                            .. " w: "
-                            .. img_info.image_width
+                        local data = vim.fn.systemlist(
+                            "magick identify " .. vim.api.nvim_buf_get_name(0)
+                        )[1]
+                        local width, height = data:match "%s(%d+)x(%d+)%s"
+
+                        return "h: " .. height .. " w: " .. width
                     end,
-                    cond = function() return vim.bo.ft == "image_nvim" end,
+                    cond = function() return vim.bo.ft == "image" end,
                 },
             }
             opts.options = {
