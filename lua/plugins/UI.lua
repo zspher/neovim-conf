@@ -130,11 +130,11 @@ return {
                     hl = "SnacksIndent1",
                 },
             },
+            image = {
+                markdown = { enabled = true },
+                max_width = 20,
+                max_height = 10,
+            },
         },
-    },
-    {
-        "folke/snacks.nvim",
-        ---@type snacks.Config
-        opts = { image = { enabled = true } },
     },
 }
