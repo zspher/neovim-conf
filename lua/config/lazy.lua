@@ -15,10 +15,6 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 local u = require "utils"
 
 require("lazy").setup {
-    rocks = { -- disabled for image.nvim w/ home-manager installed lua
-        enabled = not u.is_nixos(),
-        hererocks = not u.is_nixos(),
-    },
     spec = {
         { "LazyVim/LazyVim", import = "lazyvim.plugins" },
         { import = "plugins" },
