@@ -53,17 +53,24 @@ return {
         "saghen/blink.cmp",
         optional = true,
         opts = {
-            -- -- for debugging
-            -- completion = {
-            --     menu = {
-            --         draw = {
-            --             columns = {
-            --                 { "label", "label_description", gap = 1 },
-            --                 { "kind_icon", "kind" },
-            --             },
-            --         },
-            --     },
-            -- },
+            -- for debugging
+            completion = {
+                menu = {
+                    draw = {
+                        columns = {
+                            { "label", "label_description", gap = 1 },
+                            { "kind_icon", "source_name" },
+                        },
+                        components = {
+                            source_name = {
+                                text = function(ctx)
+                                    return "[" .. ctx.source_name .. "]"
+                                end,
+                            },
+                        },
+                    },
+                },
+            },
             keymap = {
                 preset = "default",
                 ["<C-j>"] = { "snippet_forward", "fallback" },
