@@ -13,6 +13,7 @@ return {
     { import = "plugins.lang.zig" },
     { import = "lazyvim.plugins.extras.lang.yaml" },
     { import = "plugins.lang.markdown" },
+    { import = "plugins.lang.typst" },
     {
         "nvim-treesitter/nvim-treesitter",
         opts = function()
