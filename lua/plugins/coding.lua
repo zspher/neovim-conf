@@ -78,4 +78,15 @@ return {
             },
         },
     },
+    {
+        "folke/ts-comments.nvim",
+        opts = {
+            lang = {
+                typst = {
+                    "// %s", -- default commentstring when no treesitter node matches
+                    "/* %s */",
+                },
+            },
+        },
+    },
 }
