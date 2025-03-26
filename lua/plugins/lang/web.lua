@@ -14,6 +14,7 @@ return {
                 jsonc = { "prettierd" },
                 yaml = { "prettierd" },
                 css = { "prettierd" },
+                scss = { "prettierd" },
             },
         },
     },
