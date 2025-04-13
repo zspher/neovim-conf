@@ -189,15 +189,4 @@ return {
             },
         },
     },
-    {
-        "mbbill/undotree",
-        cmd = "UndotreeToggle",
-        keys = {
-            {
-                "<leader>fu",
-                "<cmd>UndotreeToggle<CR>",
-                desc = "Find undotree",
-            },
-        },
-    },
 }
