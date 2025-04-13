@@ -15,7 +15,7 @@
       "        \"x86_64-linux\"",
       "      ];",
       "      perSystem =",
-      "        f: nixpkgs.lib.genAttrs systems (system: f { pkgs = nixpkgs.legacyPackages.${system}; });",
+      "        f: nixpkgs.lib.genAttrs systems (system: f { pkgs = nixpkgs.legacyPackages.${system\\}; });",
       "    in",
       "    {",
       "      devShells = perSystem (",
