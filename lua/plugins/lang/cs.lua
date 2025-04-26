@@ -6,15 +6,10 @@ return {
         opts = { ensure_installed = { "c_sharp" } },
     },
     {
-        "seblj/roslyn.nvim",
-        ft = "cs",
-        ---@module 'roslyn'
-        ---@type RoslynNvimConfig
-        opts = {
-            exe = "Microsoft.CodeAnalysis.LanguageServer",
-            ---@diagnostic disable-next-line: missing-fields
-            config = {},
-        },
+
+        "neovim/nvim-lspconfig",
+        ---@class PluginLspOpts
+        opts = function() vim.lsp.enable "roslyn_ls" end,
     },
     {
         "nvim-neotest/neotest",
