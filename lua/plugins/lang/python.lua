@@ -17,14 +17,13 @@ return {
 
         "neovim/nvim-lspconfig",
         ---@class PluginLspOpts
-        opts = {
-            servers = {
-                pyright = {
-                    settings = {
-                        python = { analysis = { typeCheckingMode = "strict" } },
-                    },
+        opts = function()
+            vim.lsp.enable "pyright"
+            vim.lsp.config("pyright", {
+                settings = {
+                    python = { analysis = { typeCheckingMode = "strict" } },
                 },
-            },
-        },
+            })
+        end,
     },
 }

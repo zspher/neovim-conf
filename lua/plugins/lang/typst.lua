@@ -3,12 +3,7 @@ return {
     {
         "neovim/nvim-lspconfig",
         optional = true,
-        ---@class PluginLspOpts
-        opts = {
-            servers = {
-                tinymist = {},
-            },
-        },
+        opts = function() vim.lsp.enable "tinymist" end,
     },
     {
         "nvim-treesitter/nvim-treesitter",

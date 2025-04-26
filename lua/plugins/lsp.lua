@@ -2,13 +2,10 @@
 return {
     "neovim/nvim-lspconfig",
     ---@class PluginLspOpts
-    opts = {
-        codelens = {
+    opts = function(opts, _)
+        opts.codelens = {
             enabled = true,
-        },
-        servers = {
-            lemminx = {},
-            mesonlsp = {},
-        },
-    },
+        }
+        vim.lsp.enable { "lemminx", "mesonlsp" }
+    end,
 }

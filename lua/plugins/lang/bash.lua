@@ -9,11 +9,7 @@ return {
     {
         "neovim/nvim-lspconfig",
         ---@class PluginLspOpts
-        opts = {
-            servers = {
-                bashls = {},
-            },
-        },
+        opts = function() vim.lsp.enable "bashls" end,
     },
     {
         "stevearc/conform.nvim",

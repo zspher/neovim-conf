@@ -2,12 +2,7 @@
 return {
     {
         "neovim/nvim-lspconfig",
-        ---@class PluginLspOpts
-        opts = {
-            servers = {
-                zls = {},
-            },
-        },
+        opts = function() vim.lsp.enable "zls" end,
     },
     {
         "nvim-treesitter/nvim-treesitter",
