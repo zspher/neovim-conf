@@ -6,17 +6,7 @@ return {
     {
         "williamboman/mason.nvim",
         optional = true,
-        opts = function(_, opts)
-            if u.is_nixos() then
-                -- TODO: remove when package is available in nixos
-                -- so just install via mason
-                opts.ensure_installed = { "markuplint", "debugpy" }
-            end
-            return {
-                ensure_installed = opts.ensure_installed,
-                PATH = "append",
-            }
-        end,
+        enabled = not u.is_nixos(),
     },
     {
         "williamboman/mason-lspconfig.nvim",
