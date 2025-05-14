@@ -26,18 +26,12 @@ return {
     { import = "lazyvim.plugins.extras.coding.luasnip" },
     {
         "L3MON4D3/LuaSnip",
-        opts = {
-            enable_autosnippets = true,
-            cut_selection_keys = "<C-j>",
-        },
-        config = function(_, opts)
+        opts = function(_, opts)
             require("luasnip.loaders.from_vscode").lazy_load {
                 paths = "./snippets",
             }
-
-            -- I don't know why this is required but `cut_selection_keys` is not
-            -- applied without this
-            require("luasnip").config.setup(opts)
+            opts.enable_autosnippets = true
+            opts.cut_selection_keys = "<C-j>"
         end,
         keys = {
             {
