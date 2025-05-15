@@ -6,6 +6,6 @@ return {
         opts.codelens = {
             enabled = true,
         }
-        vim.lsp.enable { "lemminx", "mesonlsp" }
+        vim.lsp.enable { "lemminx", "mesonlsp", "harper_ls" }
     end,
 }
