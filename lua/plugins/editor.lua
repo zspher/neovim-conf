@@ -1,7 +1,7 @@
 local oil_detail = false
 ---@type LazySpec[]
 return {
-    { "wakatime/vim-wakatime", event = "LazyFile" },
+    { "wakatime/vim-wakatime", event = "LazyFile", opts = {} },
     { import = "lazyvim.plugins.extras.editor.refactoring" },
     {
         "folke/which-key.nvim",
