@@ -14,12 +14,13 @@ return {
     {
         "nvim-neotest/neotest",
         optional = true,
-        dependencies = { -- TODO: remove when vstest integ is merged in main
-            "Nsidorenco/neotest-dotnet",
-            branch = "test-runner",
+        dependencies = {
+            "Issafalcon/neotest-dotnet",
         },
         opts = {
-            adapters = { ["neotest-dotnet"] = {} },
+            adapters = {
+                ["neotest-dotnet"] = {},
+            },
         },
     },
     {
