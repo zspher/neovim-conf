@@ -32,7 +32,11 @@ return {
         opts = {
             servers = {
                 jsonls = {},
-                cssls = {},
+                cssls = {
+                    settings = {
+                        css = { lint = { unknownAtRules = "ignore" } },
+                    },
+                },
                 superhtml = {},
                 html = {
                     settings = {
