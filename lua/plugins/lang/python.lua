@@ -26,4 +26,9 @@ return {
             })
         end,
     },
+    {
+        "mfussenegger/nvim-dap-python",
+        -- to get rid of the mason debugpy not found message
+        config = function() end,
+    },
 }
