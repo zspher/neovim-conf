@@ -32,6 +32,7 @@ return {
         opts = {
             servers = {
                 jsonls = {},
+                cssmodules_ls = {},
                 cssls = {
                     settings = {
                         css = { lint = { unknownAtRules = "ignore" } },
