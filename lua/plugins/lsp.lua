@@ -1,15 +1,18 @@
 ---@type LazySpec[]
 return {
     "neovim/nvim-lspconfig",
-    ---@class PluginLspOpts
     -- FIX: https://github.com/LazyVim/LazyVim/issues/6151
     event = { "BufReadPre", "BufNewFile", "BufWritePre" },
-    opts = function(opts, _)
-        opts.codelens = {
+    ---@class PluginLspOpts
+    opts = {
+        codelens = {
             enabled = true,
-        }
-        vim.lsp.enable { "lemminx", "mesonlsp" }
-    end,
+        },
+        servers = {
+            lemminx = {},
+            mesonlsp = {},
+        },
+    },
     -- TODO: remove `config` when folke fixes this in main
     config = function(_, opts)
         -- setup autoformat

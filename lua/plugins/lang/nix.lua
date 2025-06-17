@@ -10,50 +10,52 @@ return {
     {
         "neovim/nvim-lspconfig",
         ---@class PluginLspOpts
-        opts = function()
-            vim.lsp.enable { "nixd", "nil_ls" }
-            vim.lsp.config("nixd", {
-                settings = {
-                    ["nixd"] = {
-                        nixpkgs = { expr = "import <nixpkgs> { }" },
-                        ["options"] = {
-                            ["nixos"] = {
-                                expr = flake
-                                    .. ".nixosConfigurations.ls-2100.options",
-                            },
-                            ["home-manager"] = {
-                                expr = flake
-                                    .. '.homeConfigurations."faust@ls-2100".options',
-                            },
-                            ["flake-parts"] = {
-                                expr = flake .. ".debug.options",
-                            },
-                            ["flake-parts2"] = {
-                                expr = flake .. ".currentSystem.options",
+        opts = {
+            servers = {
+                nixd = {
+                    settings = {
+                        ["nixd"] = {
+                            nixpkgs = { expr = "import <nixpkgs> { }" },
+                            ["options"] = {
+                                ["nixos"] = {
+                                    expr = flake
+                                        .. ".nixosConfigurations.ls-2100.options",
+                                },
+                                ["home-manager"] = {
+                                    expr = flake
+                                        .. '.homeConfigurations."faust@ls-2100".options',
+                                },
+                                ["flake-parts"] = {
+                                    expr = flake .. ".debug.options",
+                                },
+                                ["flake-parts2"] = {
+                                    expr = flake .. ".currentSystem.options",
+                                },
                             },
                         },
                     },
                 },
-            })
-            vim.lsp.config("nil_ls", {
-                on_attach = function(client, _)
-                    local capabilities = client.server_capabilities
-                    capabilities.semanticTokensProvider = nil
-                    capabilities.diagnosticProvider = nil
-                    capabilities.documentSymbolProvider = nil
-                    capabilities.documentFormattingProvider = nil
-                    capabilities.renameProvider = nil
-                    capabilities.referenceProvider = nil
-                    capabilities.completionProvider = nil
-                    capabilities.hoverProvider = nil
-                end,
-                settings = {
-                    ["nil"] = {
-                        formatting = { command = { "" } },
-                        nix = { flake = { nixpkgsInputName = "" } },
+                -- for code actions and goto file (e.g. ./package/nixft)
+                nil_ls = {
+                    on_attach = function(client, _)
+                        client.server_capabilities.semanticTokensProvider = nil
+                        client.server_capabilities.diagnosticProvider = nil
+                        client.server_capabilities.documentSymbolProvider = nil
+                        client.server_capabilities.documentFormattingProvider =
+                            nil
+                        client.server_capabilities.renameProvider = nil
+                        client.server_capabilities.referenceProvider = nil
+                        client.server_capabilities.completionProvider = nil
+                        client.server_capabilities.hoverProvider = nil
+                    end,
+                    settings = {
+                        ["nil"] = {
+                            formatting = { command = { "" } },
+                            nix = { flake = { nixpkgsInputName = "" } },
+                        },
                     },
                 },
-            })
-        end,
+            },
+        },
     },
 }
