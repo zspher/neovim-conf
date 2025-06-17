@@ -9,7 +9,11 @@ return {
 
         "neovim/nvim-lspconfig",
         ---@class PluginLspOpts
-        opts = function() vim.lsp.enable "roslyn_ls" end,
+        opts = {
+            servers = {
+                ["roslyn_ls"] = {},
+            },
+        },
     },
     {
         "nvim-neotest/neotest",
