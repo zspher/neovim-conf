@@ -1,10 +1,37 @@
 ---@type LazySpec[]
 return {
-    { import = "lazyvim.plugins.extras.lang.clangd" },
+    {
+        "neovim/nvim-lspconfig",
+        ---@class PluginLspOpts
+        opts = {
+            servers = {
+                clangd = {
+                    cmd = {
+                        "clangd",
+                        "--background-index",
+                        "--clang-tidy",
+                        "--header-insertion=iwyu",
+                        "--completion-style=detailed",
+                        "--fallback-style=llvm",
+                    },
+                    init_options = {
+                        clangdFileStatus = true,
+                    },
+                    keys = {
+                        {
+                            "<leader>ch",
+                            "<cmd>LspClangdSwitchSourceHeader<cr>",
+                            desc = "Switch Source/Header (C/C++)",
+                        },
+                    },
+                },
+            },
+        },
+    },
     {
         "nvim-treesitter/nvim-treesitter",
         opts = {
-            ensure_installed = { "doxygen" },
+            ensure_installed = { "doxygen", "cpp" },
         },
     },
     {
