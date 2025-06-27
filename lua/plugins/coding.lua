@@ -36,16 +36,22 @@ return {
         keys = {
             {
                 "<C-j>",
-                function() require("luasnip").jump(1) end,
-                expr = true,
-                silent = true,
-                mode = { "s" },
+                function() vim.snippet.jump(1) end,
+                mode = { "s", "i" },
             },
             {
                 "<C-k>",
-                function() require("luasnip").jump(-1) end,
-                expr = true,
-                silent = true,
+                function() vim.snippet.jump(-1) end,
+                mode = { "i", "s" },
+            },
+            {
+                "<C-n>",
+                function() require("luasnip").change_choice(1) end,
+                mode = { "i", "s" },
+            },
+            {
+                "<C-p>",
+                function() require("luasnip").change_choice(-1) end,
                 mode = { "i", "s" },
             },
         },
@@ -80,7 +86,15 @@ return {
             keymap = {
                 preset = "default",
                 ["<C-j>"] = { "snippet_forward", "fallback" },
-                ["<C-k>"] = { "snippet_backward", "fallback" },
+                ["<C-k>"] = {
+                    "show_signature",
+                    "hide_signature",
+                    "snippet_backward",
+                    "fallback",
+                },
+
+                ["<C-p>"] = { "select_prev", "fallback_to_mappings" },
+                ["<C-n>"] = { "select_next", "fallback_to_mappings" },
             },
         },
     },
