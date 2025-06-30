@@ -30,8 +30,17 @@ return {
             require("luasnip.loaders.from_vscode").lazy_load {
                 paths = "./snippets",
             }
+            local types = require "luasnip.util.types"
             opts.enable_autosnippets = true
             opts.cut_selection_keys = "<C-j>"
+            opts.ext_opts = {
+                [types.choiceNode] = {
+                    active = {
+                        hl_group = "SnippetTabStop",
+                        virt_text = { { "{𝖢}", "Title" } },
+                    },
+                },
+            }
         end,
         keys = {
             {
