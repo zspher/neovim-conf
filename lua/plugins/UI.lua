@@ -102,7 +102,7 @@ return {
         main = "rainbow-delimiters.setup",
     },
     {
-        "nvchad/nvim-colorizer.lua",
+        "catgoose/nvim-colorizer.lua",
         event = "LazyFile",
         opts = {
             filetypes = {
