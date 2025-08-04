@@ -13,6 +13,10 @@ return {
         ---@module 'catppuccin'
         ---@type CatppuccinOptions
         opts = {
+            float = {
+                transparent = true,
+                solid = false,
+            },
             flavour = "mocha",
             transparent_background = true,
             integrations = {
