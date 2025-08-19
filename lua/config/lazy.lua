@@ -16,9 +16,8 @@ local u = require "utils"
 
 require("lazy").setup {
     spec = {
-        { "LazyVim/LazyVim", import = "lazyvim.plugins" },
         { import = "plugins" },
-        { import = "plugins.mason" },
+        { import = "plugins.lang" },
     },
     defaults = {
         -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
@@ -29,7 +28,6 @@ require("lazy").setup {
         version = false, -- always use the latest git commit
         -- version = "*", -- try installing the latest stable version for plugins that support semver
     },
-    install = { colorscheme = { "catppuccin" } },
     checker = { enabled = true, notify = false }, -- automatically check for plugin updates
     performance = {
         rtp = {
