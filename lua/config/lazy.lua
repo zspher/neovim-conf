@@ -14,6 +14,10 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 local u = require "utils"
 
+require "config.options"
+require "config.keymaps"
+require "config.autocmds"
+
 require("lazy").setup {
     spec = {
         { import = "plugins" },
@@ -43,3 +47,5 @@ require("lazy").setup {
         },
     },
 }
+
+vim.cmd.colorscheme "catppuccin"
