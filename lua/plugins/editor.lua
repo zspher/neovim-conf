@@ -1,4 +1,3 @@
-local oil_detail = false
 ---@module 'snacks'
 
 ---@type LazySpec[]
@@ -83,7 +82,9 @@ return {
     {
         "folke/snacks.nvim",
         lazy = false,
-        opts = {},
+        opts = {
+            picker = {},
+        },
         -- stylua: ignore start
         keys = {
             -- NOTE: git
@@ -110,7 +111,7 @@ return {
             -- find
             { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
             { "<leader>fB", function() Snacks.picker.buffers({ hidden = true, nofile = true }) end, desc = "Buffers (all)" },
-            { "<leader>ff",function() Snacks.picker.files() end, desc = "Find Files" },
+            { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
             { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Files (git-files)" },
             { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
             { "<leader>fR", function() Snacks.picker.recent({ filter = { cwd = true }}) end, desc = "Recent (cwd)" },
@@ -410,7 +411,7 @@ return {
                 "[q",
                 function()
                     if require("trouble").is_open() then
-                        ---@diagnostic disable-next-line: missing-fields, missing-parameter
+                        ---@diagnostic disable-next-line: missing-parameter, missing-fields
                         require("trouble").prev {
                             skip_groups = true,
                             jump = true,
