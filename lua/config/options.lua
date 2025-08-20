@@ -8,6 +8,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.cc = "80"
 vim.opt.showmode = false -- Dont show mode since we have a statusline
 vim.opt.wrap = false
+vim.opt.laststatus = 3 -- global statusline
 
 vim.schedule(
     function() vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" end
