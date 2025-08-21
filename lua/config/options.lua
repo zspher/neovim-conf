@@ -49,19 +49,6 @@ vim.opt.timeoutlen = 300
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
-vim.filetype.add {
-    extension = {
-        axaml = "xml",
-        obt = "qss",
-        ovt = "qss",
-
-        mdx = "markdown.mdx",
-    },
-    pattern = {
-        [".*/hypr/.+%.conf"] = "hyprlang",
-    },
-}
-
 vim.g.mapleader = " "
 vim.g.snacks_animate = false
 vim.g.lazyvim_check_order = false

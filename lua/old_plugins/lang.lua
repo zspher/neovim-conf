@@ -14,16 +14,4 @@ return {
     { import = "lazyvim.plugins.extras.lang.yaml" },
     { import = "plugins.lang.markdown" },
     { import = "plugins.lang.typst" },
-    {
-        "nvim-treesitter/nvim-treesitter",
-        opts = function()
-            -- register file type with language
-            vim.treesitter.language.register("bash", "zsh")
-            vim.treesitter.language.register("qmljs", "qss")
-        end,
-    },
-    {
-        "nvim-treesitter/nvim-treesitter",
-        opts = { ensure_installed = { "comment", "csv" } },
-    },
 }
