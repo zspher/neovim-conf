@@ -1,12 +1,9 @@
 ---@module 'snacks'
 -- stylua: ignore start
 
-vim.keymap.set("n", "<S-h>", "<S-h>", { desc = "Top line of window" })
-vim.keymap.set("n", "<S-l>", "<S-l>", { desc = "Bottom line of window" })
+-- better up/down
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
-
--- better up/down
 vim.keymap.set( { "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 vim.keymap.set( { "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 vim.keymap.set( { "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
@@ -33,8 +30,6 @@ vim.keymap.set( "v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=
 vim.keymap.set( "v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
 
 -- buffers
-vim.keymap.set( "n", "<S-h>", "<cmd>execute 'bprevious' . v:count1<cr>", { desc = "Prev Buffer" })
-vim.keymap.set( "n", "<S-l>", "<cmd>execute 'bnext' . v:count1<cr>", { desc = "Next Buffer" })
 vim.keymap.set( "n", "[b", "<cmd>execute 'bprevious' . v:count1<cr>", { desc = "Prev Buffer" })
 vim.keymap.set( "n", "]b", "<cmd>execute 'bnext' . v:count1<cr>", { desc = "Next Buffer" })
 vim.keymap.set( "n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
