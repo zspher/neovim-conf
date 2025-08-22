@@ -1,20 +1,17 @@
----@type LazySpec[]
 local flake = '(builtins.getFlake "' .. vim.env.HOME .. '/dotfiles")'
+
+---@type LazySpec[]
 return {
-    {
-        "nvim-treesitter/nvim-treesitter",
-        opts = {
-            ensure_installed = { "nix" },
-        },
-    },
+    -- lsp
     {
         "neovim/nvim-lspconfig",
-        ---@class PluginLspOpts
         opts = {
+            ---@type table<string, vim.lsp.Config>
             servers = {
                 nixd = {
                     settings = {
                         ["nixd"] = {
+                            formatting = { command = { "nixfmt" } },
                             nixpkgs = { expr = "import <nixpkgs> { }" },
                             ["options"] = {
                                 ["nixos"] = {
@@ -44,7 +41,6 @@ return {
                         client.server_capabilities.documentFormattingProvider =
                             nil
                         client.server_capabilities.renameProvider = nil
-                        client.server_capabilities.referenceProvider = nil
                         client.server_capabilities.completionProvider = nil
                         client.server_capabilities.hoverProvider = nil
                     end,
@@ -58,4 +54,21 @@ return {
             },
         },
     },
+    -- formatter
+
+    -- linter
+
+    -- syntax highlight
+    {
+        "nvim-treesitter/nvim-treesitter",
+        opts = {
+            ensure_installed = { "nix" },
+        },
+    },
+
+    -- test suite
+
+    -- dap
+
+    -- extra
 }
