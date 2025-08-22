@@ -44,6 +44,10 @@ vim.keymap.set(
     "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
     { desc = "Redraw / Clear hlsearch / Diff Update" }
 )
+vim.keymap.set({ "i", "n", "s" }, "<esc>", function()
+  vim.cmd("noh")
+  return "<esc>"
+end, { expr = true, desc = "Escape and Clear hlsearch" })
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 vim.keymap.set( "n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result" })
