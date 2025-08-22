@@ -80,15 +80,16 @@ return {
                 })
             end
 
+            vim.keymap.del("n", "grr")
+            vim.keymap.del({ "n", "x" }, "gra")
+            vim.keymap.del("n", "grn")
+            vim.keymap.del("n", "gri")
+            vim.keymap.del("n", "grt")
+
             local function register_keys(client)
                 local picker = require "snacks.picker"
 
                 local km = vim.keymap
-                km.del("n", "grr")
-                km.del({ "n", "x" }, "gra")
-                km.del("n", "grn")
-                km.del("n", "gri")
-                km.del("n", "grt")
                 -- stylua: ignore start
                 km.set("n", "gd", picker.lsp_definitions, { desc = "Goto Definition" })
                 km.set("n", "gr", picker.lsp_references, { desc = "References"})
