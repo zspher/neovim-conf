@@ -9,6 +9,17 @@ vim.opt.cc = "80"
 vim.opt.showmode = false -- Dont show mode since we have a statusline
 vim.opt.wrap = false
 vim.opt.laststatus = 3 -- global statusline
+vim.opt.cursorline = true
+vim.opt.sessionoptions = {
+    "buffers",
+    "curdir",
+    "tabpages",
+    "winsize",
+    "help",
+    "globals",
+    "skiprtp",
+    "folds",
+}
 
 vim.schedule(
     function() vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" end
