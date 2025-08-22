@@ -31,6 +31,7 @@ return {
                     LineNrAbove = { fg = c.subtext0 },
                     LineNrBelow = { fg = c.subtext0 },
                     CursorLineNr = { fg = c.peach, style = { "bold" } },
+                    LineNr = { fg = c.peach, style = { "bold" } },
                     SnacksIndent1 = { fg = c.blue },
                 }
             end,
