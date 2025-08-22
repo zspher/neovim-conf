@@ -80,25 +80,53 @@ return {
                 })
             end
 
+            local function register_keys(client)
+                local picker = require "snacks.picker"
+
+                local km = vim.keymap
+                km.del("n", "grr")
+                km.del({ "n", "x" }, "gra")
+                km.del("n", "grn")
+                km.del("n", "gri")
+                km.del("n", "grt")
+                -- stylua: ignore start
+                km.set("n", "gd", picker.lsp_definitions, { desc = "Goto Definition" })
+                km.set("n", "gr", picker.lsp_references, { desc = "References"})
+                km.set("n", "gI", picker.lsp_implementations, { desc = "Goto Implementation" })
+                km.set("n", "gy", picker.lsp_type_definitions, { desc = "Goto T[y]pe Definition" })
+                km.set("n", "<leader>ss", picker.lsp_symbols, { desc = "LSP Symbols" })
+                km.set("n", "<leader>sS", picker.lsp_workspace_symbols, { desc = "LSP Workspace Symbols" })
+                km.set("n", "<leader>cR", Snacks.rename.rename_file, { desc = "Rename File" })
+                km.set({"n", "x"},"<leader>ca", vim.lsp.buf.code_action, {desc = "Code Action"})
+                km.set("n", "<leader>cr", vim.lsp.buf.rename, {desc = "Rename"})
+                -- stylua: ignore end
+
+                local options = require("lazy.core.plugin").values(
+                    require("lazy.core.config").spec.plugins["nvim-lspconfig"],
+                    "opts",
+                    false
+                )
+
+                if client == nil then return end
+                local maps = options.servers[client.name]
+                        and options.servers[client.name].keys
+                    or {}
+
+                local keymaps = require("lazy.core.handler.keys").resolve(maps)
+                for _, key in pairs(keymaps) do
+                    vim.keymap.set(
+                        key.mode or "n",
+                        key.lhs,
+                        key.rhs,
+                        { buffer = true }
+                    )
+                end
+            end
+
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(args)
-                    local bufnr = args.buf
                     local client = vim.lsp.get_client_by_id(args.data.client_id)
-
-                    local picker = require "snacks.picker"
-
-                    -- stylua: ignore start
-                    vim.keymap.set("n", "gd", picker.lsp_definitions, { desc = "Goto Definition" })
-                    vim.keymap.set("n", "gr", picker.lsp_references)
-                    vim.keymap.set("n", "gI", picker.lsp_implementations, { desc = "Goto Implementation" })
-                    vim.keymap.set("n", "gy", picker.lsp_type_definitions , { desc = "Goto T[y]pe Definition" })
-                    vim.keymap.set("n", "<leader>ss", picker.lsp_symbols , { desc = "LSP Symbols" })
-                    vim.keymap.set("n", "<leader>sS", picker.lsp_workspace_symbols , { desc = "LSP Workspace Symbols" })
-                    vim.keymap.set("n", "<leader>cR", Snacks.rename.rename_file , { desc = "Rename File" })
-
-                    vim.keymap.set({"n", "x"},"<leader>ca", vim.lsp.buf.code_action, {desc = "Code Action"})
-                    vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, {desc = "Rename"})
-                    -- stylua: ignore end
+                    if client then return register_keys(client) end
                 end,
             })
 
