@@ -1,32 +1,14 @@
 ---@type LazySpec[]
 return {
-
+    -- lsp
     {
-        "nvim-treesitter/nvim-treesitter",
-        opts = { ensure_installed = { "c_sharp" } },
+        "seblyng/roslyn.nvim",
+        ---@module 'roslyn.config'
+        ---@type RoslynNvimConfig
+        ft = { "cs" },
+        opts = {},
     },
-    {
-
-        "neovim/nvim-lspconfig",
-        ---@class PluginLspOpts
-        opts = {
-            servers = {
-                ["roslyn_ls"] = {},
-            },
-        },
-    },
-    {
-        "nvim-neotest/neotest",
-        optional = true,
-        dependencies = {
-            "Issafalcon/neotest-dotnet",
-        },
-        opts = {
-            adapters = {
-                ["neotest-dotnet"] = {},
-            },
-        },
-    },
+    -- formatter
     {
         "stevearc/conform.nvim",
         opts = {
@@ -35,6 +17,29 @@ return {
             },
         },
     },
+    -- linter
+
+    -- syntax highlight
+    {
+        "nvim-treesitter/nvim-treesitter",
+        opts = { ensure_installed = { "c_sharp" } },
+    },
+
+    -- test suite
+    {
+        "nvim-neotest/neotest",
+        optional = true,
+        dependencies = {
+            "nsidorenco/neotest-vstest",
+        },
+        opts = {
+            adapters = {
+                ["neotest-vstest"] = {},
+            },
+        },
+    },
+
+    -- dap
     {
         "mfussenegger/nvim-dap",
         optional = true,
@@ -45,7 +50,7 @@ return {
                         vim.fn.getcwd(),
                         "**/bin/Debug/**/*.dll",
                         true,
-                        1
+                        true
                     )
                     local opts = {
                         format_item = function(path)
@@ -75,4 +80,6 @@ return {
             }
         end,
     },
+
+    -- extra
 }
