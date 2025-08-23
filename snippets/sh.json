@@ -2,5 +2,9 @@
   "shebang": {
     "prefix": "#!",
     "body": ["#! /usr/bin/env ${1|bash,zsh,sh|}", "$0"]
+  },
+  "test_snippet": {
+    "prefix": "tester",
+    "body": ["# NOTE: the test snippet has been loaded"]
   }
 }
