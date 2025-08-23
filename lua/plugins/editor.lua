@@ -247,48 +247,61 @@ return {
             harpoon:setup(opts)
             harpoon:extend(extensions.builtins.navigate_with_number())
         end,
-        keys = function()
-            local harpoon = require "harpoon"
-            return {
-                { "<leader>h", "", desc = "+harpoon", mode = { "n" } },
-                {
-                    "<leader>ha",
-                    function() harpoon:list():add() end,
-                    desc = "Add file",
-                },
-                {
-                    "<leader>he",
-                    function()
-                        harpoon.ui:toggle_quick_menu(harpoon:list(), {
+        keys = {
+            { "<leader>h", "", desc = "+harpoon", mode = { "n" } },
+            {
+                "<leader>ha",
+                function() require("harpoon"):list():add() end,
+                desc = "Add file",
+            },
+            {
+                "<leader>he",
+                function()
+                    require("harpoon").ui:toggle_quick_menu(
+                        require("harpoon"):list(),
+                        {
                             border = "rounded",
                             title_pos = "center",
                             title = " Harpoon ",
                             ui_max_width = 100,
-                        })
-                    end,
-                    desc = "Toggle quick menu",
-                },
-                {
-                    "<C-p>",
-                    function() harpoon:list():prev { ui_nav_wrap = true } end,
-                    desc = "Goto previous mark",
-                },
-                {
-                    "<C-n>",
-                    function() harpoon:list():next { ui_nav_wrap = true } end,
-                    desc = "Goto next mark",
-                },
-            }
-        end,
+                        }
+                    )
+                end,
+                desc = "Toggle quick menu",
+            },
+            {
+                "<C-p>",
+                function()
+                    require("harpoon"):list():prev { ui_nav_wrap = true }
+                end,
+                desc = "Goto previous mark",
+            },
+            {
+                "<C-n>",
+                function()
+                    require("harpoon"):list():next { ui_nav_wrap = true }
+                end,
+                desc = "Goto next mark",
+            },
+        },
     },
 
     -- git stuff
     {
         "refractalize/oil-git-status.nvim",
         config = true,
-        event = "VeryLazy",
-        dependencies = {
-            "stevearc/oil.nvim",
+        keys = {
+            {
+                "<leader>e",
+                function()
+                    if vim.bo.ft == "oil" then
+                        require("oil").close()
+                    else
+                        require("oil").open(nil)
+                    end
+                end,
+                desc = "Explorer (Current Dir)",
+            },
         },
     },
     {
@@ -447,7 +460,6 @@ return {
     {
         "folke/todo-comments.nvim",
         cmd = { "TodoTrouble", "TodoTelescope" },
-        event = { "BufReadPost", "BufNewFile", "BufWritePre" },
         opts = {},
         keys = {
           -- stylua: ignore start
