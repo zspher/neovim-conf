@@ -13,7 +13,6 @@ vim.api.nvim_create_autocmd("FileType", {
         "PlenaryTestPopup",
         "checkhealth",
         "dap-float",
-        "dap-view",
         "dap_disassembly",
         "dbout",
         "gitsigns-blame",
