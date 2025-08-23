@@ -197,6 +197,7 @@ return {
                             "help",
                             "dapui",
                             "dap-repl",
+                            "dap-view",
                         },
                     },
 
