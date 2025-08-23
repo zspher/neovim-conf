@@ -19,6 +19,7 @@ return {
             },
             ---@type table<string, vim.lsp.Config>
             servers = {},
+            setup = {},
             codelens = {
                 enabled = false,
             },
@@ -148,11 +149,12 @@ return {
                     capabilities = vim.deepcopy(capabilities),
                 }, servers[server] or {})
 
-                -- if opts.setup[server] then
-                --     if opts.setup[server](server, server_opts) then return true end
-                -- elseif opts.setup["*"] then
-                --     if opts.setup["*"](server, server_opts) then return true end
-                -- end
+                if opts.setup[server] then
+                    opts.setup[server](server, server_opts)
+                elseif opts.setup["*"] then
+                    opts.setup["*"](server, server_opts)
+                end
+
                 vim.lsp.config(server, server_opts)
                 vim.lsp.enable(server)
             end
