@@ -313,4 +313,9 @@ return {
             end
         end,
     },
+    {
+        "Jorenar/nvim-dap-disasm",
+        dependencies = "igorlfs/nvim-dap-view",
+        opts = {},
+    },
 }

@@ -198,6 +198,7 @@ return {
                             "dapui",
                             "dap-repl",
                             "dap-view",
+                            "dap_disassembly",
                         },
                     },
 
