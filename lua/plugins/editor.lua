@@ -1,3 +1,4 @@
+local oil_detail = false
 ---@module 'snacks'
 
 ---@type LazySpec[]
