@@ -1,3 +1,4 @@
+---@type LazySpec[]
 return {
     {
         "folke/which-key.nvim",
@@ -16,7 +17,7 @@ return {
         "nvim-treesitter/nvim-treesitter",
         version = false, -- last release is way too old and doesn't work on Windows
         build = ":TSUpdate",
-        event = { "VeryLazy" },
+        event = { "BufReadPost", "BufNewFile", "BufWritePre", "VeryLazy" },
         main = "nvim-treesitter.configs",
         lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
         init = function(plugin)
@@ -31,19 +32,21 @@ return {
         cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
         keys = {
             { "<c-space>", desc = "Increment Selection" },
-            { "<bs>", desc = "Decrement Selection", mode = "x" },
+            { "<BS>", desc = "Decrement Selection", mode = "x" },
         },
         opts_extend = { "ensure_installed" },
         ---@type TSConfig
-        ---@diagnostic disable-next-line: missing-fields
         opts = {
+            auto_install = false,
+            modules = {},
+            sync_install = false,
+            ignore_install = {},
             ensure_installed = {
                 "diff",
                 "query",
                 "vim",
                 "vimdoc",
             },
-            auto_install = true,
             highlight = { enable = true },
             indent = { enable = true },
             incremental_selection = {
