@@ -243,19 +243,73 @@ return {
           { "<leader>du", function() require("dap-view").toggle({ }) end, desc = "Dap UI" },
           { "<leader>de", function() require("dap-view").add_expr() end, desc = "Watch", mode = {"n", "x"} },
         },
-        opts = {},
+        opts = {
+            windows = {
+                terminal = {
+                    width = 0.4,
+                    position = "right",
+                },
+            },
+            winbar = {
+                sections = {
+                    "watches",
+                    "scopes",
+                    "exceptions",
+                    "breakpoints",
+                    "disassembly",
+                    "threads",
+                    "repl",
+                },
+                controls = {
+                    enabled = true,
+                    buttons = {
+                        "play",
+                        "step_into",
+                        "step_over",
+                        "step_out",
+                        "step_back",
+                        "reverse_continue",
+                        "run_last",
+                        "terminate",
+                        "disconnect",
+                    },
+                    custom_buttons = {
+                        reverse_continue = {
+                            render = function()
+                                local statusline =
+                                    require "dap-view.util.statusline"
+
+                                local session = require("dap").session()
+
+                                if session == nil then
+                                    return statusline.hl("", "ControlNC")
+                                end
+
+                                local supported =
+                                    session.capabilities.supportsStepBack
+                                return statusline.hl(
+                                    "",
+                                    supported and "ControlPlay" or "ControlNC"
+                                )
+                            end,
+                            action = function()
+                                if
+                                    require("dap").session().capabilities.supportsStepBack
+                                then
+                                    require("dap").reverse_continue()
+                                end
+                            end,
+                        },
+                    },
+                },
+            },
+        },
         config = function(_, opts)
             local dap = require "dap"
             local dapview = require "dap-view"
             dapview.setup(opts)
             dap.listeners.after.event_initialized["dapui_config"] = function()
                 dapview.open()
-            end
-            dap.listeners.before.event_terminated["dapui_config"] = function()
-                dapview.close()
-            end
-            dap.listeners.before.event_exited["dapui_config"] = function()
-                dapview.close()
             end
         end,
     },
