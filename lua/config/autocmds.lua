@@ -12,6 +12,9 @@ vim.api.nvim_create_autocmd("FileType", {
     pattern = {
         "PlenaryTestPopup",
         "checkhealth",
+        "dap-float",
+        "dap-view",
+        "dap_disassembly",
         "dbout",
         "gitsigns-blame",
         "grug-far",
@@ -20,11 +23,11 @@ vim.api.nvim_create_autocmd("FileType", {
         "neotest-output",
         "neotest-output-panel",
         "neotest-summary",
+        "noice",
         "notify",
         "qf",
         "startuptime",
         "tsplayground",
-        "dap-float",
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false
