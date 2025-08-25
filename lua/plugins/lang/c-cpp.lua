@@ -6,6 +6,7 @@ return {
         ---@class PluginLspOpts
         opts = {
             servers = {
+                mesonlsp = {},
                 clangd = {
                     cmd = {
                         "clangd",
