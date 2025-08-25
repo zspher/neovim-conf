@@ -232,25 +232,19 @@ return {
                     lualine_x = {
                         Snacks.profiler.status(),
                         {
-                            function()
-                                return require("noice").api.status.command.get()
-                            end,
-                            cond = function()
-                                return package.loaded["noice"]
-                                    and require("noice").api.status.command.has()
-                            end,
+                            ---@diagnostic disable-next-line: undefined-field
+                            require("noice").api.status.command.get,
+                            ---@diagnostic disable-next-line: undefined-field
+                            cond = require("noice").api.status.command.has,
                             color = function()
                                 return { fg = Snacks.util.color "Statement" }
                             end,
                         },
                         {
-                            function()
-                                return require("noice").api.status.mode.get()
-                            end,
-                            cond = function()
-                                return package.loaded["noice"]
-                                    and require("noice").api.status.mode.has()
-                            end,
+                            ---@diagnostic disable-next-line: undefined-field
+                            require("noice").api.status.mode.get,
+                            ---@diagnostic disable-next-line: undefined-field
+                            cond = require("noice").api.status.mode.has,
                             color = function()
                                 return { fg = Snacks.util.color "Constant" }
                             end,
