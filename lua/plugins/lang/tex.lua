@@ -41,7 +41,9 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         opts = {
-            ensure_installed = { "latex", "bibtex" },
+            -- vimtex highlights clash with treesitter highlights
+            ensure_installed = { "bibtex" },
+            highlight = { disable = { "latex" } },
         },
     },
 
