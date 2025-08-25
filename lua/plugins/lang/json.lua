@@ -25,15 +25,6 @@ return {
     },
   },
   -- formatter
-  {
-    "stevearc/conform.nvim",
-    opts = {
-      formatters_by_ft = {
-        json = { "prettierd" },
-        jsonc = { "prettierd" },
-      },
-    },
-  },
 
   -- linter
 
