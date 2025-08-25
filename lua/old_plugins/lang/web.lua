@@ -10,8 +10,6 @@ return {
         "stevearc/conform.nvim",
         opts = {
             formatters_by_ft = {
-                json = { "prettierd" },
-                jsonc = { "prettierd" },
                 yaml = { "prettierd" },
                 css = { "prettierd" },
                 scss = { "prettierd" },
@@ -31,7 +29,6 @@ return {
         ---@class PluginLspOpts
         opts = {
             servers = {
-                jsonls = {},
                 cssmodules_ls = {},
                 cssls = {
                     settings = {
