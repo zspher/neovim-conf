@@ -7,26 +7,13 @@ return {
     opts = {
       ---@type table<string, vim.lsp.Config>
       servers = {
+        -- supports explainshell, shellcheck and shfmt.
         bashls = {},
       },
     },
   },
   -- formatter
-  {
-    "stevearc/conform.nvim",
-    optional = true,
-    opts = {
 
-      formatters_by_ft = {
-        bash = { "shfmt" },
-      },
-      formatters = {
-        shfmt = {
-          prepend_args = { "-i", vim.o.tabstop, "-ci" },
-        },
-      },
-    },
-  },
   -- linter
 
   -- syntax highlight
