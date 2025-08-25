@@ -92,7 +92,7 @@ return {
                         type = "codelldb",
                         request = "attach",
                         name = "Attach to process",
-                        processId = require("dap.utils").pick_process,
+                        processId = "${command:pickProcess}",
                         cwd = "${workspaceFolder}",
                     },
                 }
