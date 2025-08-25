@@ -11,18 +11,18 @@ vim.opt.wrap = false
 vim.opt.laststatus = 3 -- global statusline
 vim.opt.cursorline = true
 vim.opt.sessionoptions = {
-    "buffers",
-    "curdir",
-    "tabpages",
-    "winsize",
-    "help",
-    "globals",
-    "skiprtp",
-    "folds",
+  "buffers",
+  "curdir",
+  "tabpages",
+  "winsize",
+  "help",
+  "globals",
+  "skiprtp",
+  "folds",
 }
 
 vim.schedule(
-    function() vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" end
+  function() vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" end
 )
 
 vim.opt.showbreak = "↪ "
@@ -32,12 +32,12 @@ vim.opt.expandtab = true -- tabs to spaces
 vim.opt.conceallevel = 2
 vim.opt.list = true
 vim.opt.listchars = {
-    tab = "│·→",
-    extends = "⟩",
-    precedes = "⟨",
-    lead = "·",
-    trail = "·",
-    nbsp = "␣",
+  tab = "│·→",
+  extends = "⟩",
+  precedes = "⟨",
+  lead = "·",
+  trail = "·",
+  nbsp = "␣",
 }
 
 vim.opt.spell = true

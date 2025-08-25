@@ -1,45 +1,45 @@
 ---@type LazySpec[]
 return {
 
-    -- lsp
-    {
-        "neovim/nvim-lspconfig",
-        opts = {
-            ---@type table<string, vim.lsp.Config>
-            servers = {
-                bashls = {},
-            },
-        },
+  -- lsp
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      ---@type table<string, vim.lsp.Config>
+      servers = {
+        bashls = {},
+      },
     },
-    -- formatter
-    {
-        "stevearc/conform.nvim",
-        optional = true,
-        opts = {
+  },
+  -- formatter
+  {
+    "stevearc/conform.nvim",
+    optional = true,
+    opts = {
 
-            formatters_by_ft = {
-                bash = { "shfmt" },
-            },
-            formatters = {
-                shfmt = {
-                    prepend_args = { "-i", vim.o.tabstop, "-ci" },
-                },
-            },
+      formatters_by_ft = {
+        bash = { "shfmt" },
+      },
+      formatters = {
+        shfmt = {
+          prepend_args = { "-i", vim.o.tabstop, "-ci" },
         },
+      },
     },
-    -- linter
+  },
+  -- linter
 
-    -- syntax highlight
-    {
-        "nvim-treesitter/nvim-treesitter",
-        opts = {
-            ensure_installed = { "bash" },
-        },
+  -- syntax highlight
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = { "bash" },
     },
+  },
 
-    -- test suite
+  -- test suite
 
-    -- dap
+  -- dap
 
-    -- extra
+  -- extra
 }

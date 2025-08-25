@@ -3,89 +3,83 @@ local oil_detail = false
 
 ---@type LazySpec[]
 return {
-    {
-        "wakatime/vim-wakatime",
-        event = { "BufReadPost", "BufNewFile", "BufWritePre" },
-        opts = {},
-    },
+  {
+    "wakatime/vim-wakatime",
+    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+    opts = {},
+  },
 
-    -- key help
-    {
-        "folke/which-key.nvim",
-        event = "VeryLazy",
-        opts_extend = { "spec" },
-        opts = {
-            preset = "modern",
-            spec = {
-                {
-                    mode = { "n", "v" },
-                    { "<leader><tab>", group = "tabs" },
-                    { "<leader>c", group = "code" },
-                    { "<leader>d", group = "debug" },
-                    { "<leader>dp", group = "profiler" },
-                    { "<leader>f", group = "file/find" },
-                    { "<leader>g", group = "git" },
-                    { "<leader>gh", group = "hunks" },
-                    { "<leader>q", group = "quit/session" },
-                    { "<leader>s", group = "search" },
-                    {
-                        "<leader>u",
-                        group = "ui",
-                        icon = { icon = "󰙵 ", color = "cyan" },
-                    },
-                    {
-                        "<leader>x",
-                        group = "diagnostics/quickfix",
-                        icon = { icon = "󱖫 ", color = "green" },
-                    },
-                    { "[", group = "prev" },
-                    { "]", group = "next" },
-                    { "g", group = "goto" },
-                    { "gs", group = "surround" },
-                    { "z", group = "fold" },
-                    {
-                        "<leader>b",
-                        group = "buffer",
-                        expand = function()
-                            return require("which-key.extras").expand.buf()
-                        end,
-                    },
-                    {
-                        "<leader>w",
-                        group = "windows",
-                        proxy = "<c-w>",
-                        expand = function()
-                            return require("which-key.extras").expand.win()
-                        end,
-                    },
-                    -- better descriptions
-                    { "gx", desc = "Open with system app" },
-                },
-            },
+  -- key help
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts_extend = { "spec" },
+    opts = {
+      preset = "modern",
+      spec = {
+        {
+          mode = { "n", "v" },
+          { "<leader><tab>", group = "tabs" },
+          { "<leader>c", group = "code" },
+          { "<leader>d", group = "debug" },
+          { "<leader>dp", group = "profiler" },
+          { "<leader>f", group = "file/find" },
+          { "<leader>g", group = "git" },
+          { "<leader>gh", group = "hunks" },
+          { "<leader>q", group = "quit/session" },
+          { "<leader>s", group = "search" },
+          {
+            "<leader>u",
+            group = "ui",
+            icon = { icon = "󰙵 ", color = "cyan" },
+          },
+          {
+            "<leader>x",
+            group = "diagnostics/quickfix",
+            icon = { icon = "󱖫 ", color = "green" },
+          },
+          { "[", group = "prev" },
+          { "]", group = "next" },
+          { "g", group = "goto" },
+          { "gs", group = "surround" },
+          { "z", group = "fold" },
+          {
+            "<leader>b",
+            group = "buffer",
+            expand = function() return require("which-key.extras").expand.buf() end,
+          },
+          {
+            "<leader>w",
+            group = "windows",
+            proxy = "<c-w>",
+            expand = function() return require("which-key.extras").expand.win() end,
+          },
+          -- better descriptions
+          { "gx", desc = "Open with system app" },
         },
-        keys = {
-            {
-                "<leader>?",
-                function() require("which-key").show { global = false } end,
-                desc = "Buffer Keymaps (which-key)",
-            },
-            {
-                "<c-w><space>",
-                function()
-                    require("which-key").show { keys = "<c-w>", loop = true }
-                end,
-                desc = "Window Hydra Mode (which-key)",
-            },
-        },
+      },
     },
+    keys = {
+      {
+        "<leader>?",
+        function() require("which-key").show { global = false } end,
+        desc = "Buffer Keymaps (which-key)",
+      },
+      {
+        "<c-w><space>",
+        function() require("which-key").show { keys = "<c-w>", loop = true } end,
+        desc = "Window Hydra Mode (which-key)",
+      },
+    },
+  },
 
-    -- picker and co
-    {
-        "folke/snacks.nvim",
-        lazy = false,
-        opts = {
-            picker = {},
-        },
+  -- picker and co
+  {
+    "folke/snacks.nvim",
+    lazy = false,
+    opts = {
+      picker = {},
+    },
         -- stylua: ignore start
         keys = {
             -- NOTE: git
@@ -149,191 +143,183 @@ return {
             -- ui
             { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
         },
-        -- stylua: ignore end
-    },
+    -- stylua: ignore end
+  },
 
-    -- explorer
-    {
-        "stevearc/oil.nvim",
-        cmd = "Oil",
-        ---@module 'oil'
-        ---@type oil.SetupOpts
-        opts = {
-            skip_confirm_for_simple_edits = true,
-            delete_to_trash = true,
-            keymaps = {
-                ["q"] = "actions.close",
-                ["<C-h>"] = false,
-                ["<A-h>"] = "actions.select_split",
-                ["gd"] = {
-                    desc = "Toggle file detail view",
-                    callback = function()
-                        oil_detail = not oil_detail
-                        if oil_detail then
-                            require("oil").set_columns {
-                                "permissions",
-                                { "size", highlight = "Comment" },
-                                { "mtime", highlight = "Conceal" },
-                                "icon",
-                            }
-                        else
-                            require("oil").set_columns { "icon" }
-                        end
-                    end,
-                },
-            },
-            view_options = {
-                show_hidden = true,
-                highlight_filename = function(entry, _, _, _)
-                    local state = vim.uv.fs_stat(entry.name)
-                    if state and state.type == "file" then
-                        local perms =
-                            string.format("%o", bit.band(state.mode, 511))
-                        local l = { "1", "3", "5", "7" }
-                        for _, v in ipairs(l) do
-                            if perms:match(v) then return "Error" end
-                        end
-                    end
-                    return nil
-                end,
-            },
-            win_options = {
-                signcolumn = "yes",
-            },
+  -- explorer
+  {
+    "stevearc/oil.nvim",
+    cmd = "Oil",
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {
+      skip_confirm_for_simple_edits = true,
+      delete_to_trash = true,
+      keymaps = {
+        ["q"] = "actions.close",
+        ["<C-h>"] = false,
+        ["<A-h>"] = "actions.select_split",
+        ["gd"] = {
+          desc = "Toggle file detail view",
+          callback = function()
+            oil_detail = not oil_detail
+            if oil_detail then
+              require("oil").set_columns {
+                "permissions",
+                { "size", highlight = "Comment" },
+                { "mtime", highlight = "Conceal" },
+                "icon",
+              }
+            else
+              require("oil").set_columns { "icon" }
+            end
+          end,
         },
-        config = function(_, opts)
-            require("oil").setup(opts)
-
-            vim.api.nvim_create_autocmd("User", {
-                pattern = "OilActionsPost",
-                callback = function(event)
-                    if event.data.actions.type == "move" then
-                        require("snacks").rename.on_rename_file(
-                            event.data.actions.src_url,
-                            event.data.actions.dest_url
-                        )
-                    end
-                end,
-            })
+      },
+      view_options = {
+        show_hidden = true,
+        highlight_filename = function(entry, _, _, _)
+          local state = vim.uv.fs_stat(entry.name)
+          if state and state.type == "file" then
+            local perms = string.format("%o", bit.band(state.mode, 511))
+            local l = { "1", "3", "5", "7" }
+            for _, v in ipairs(l) do
+              if perms:match(v) then return "Error" end
+            end
+          end
+          return nil
         end,
-        keys = {
-            {
-                "<leader>e",
-                function()
-                    if vim.bo.ft == "oil" then
-                        require("oil").close()
-                    else
-                        require("oil").open(nil)
-                    end
-                end,
-                desc = "Explorer (Current Dir)",
-            },
-        },
+      },
+      win_options = {
+        signcolumn = "yes",
+      },
     },
-    {
-        "ThePrimeagen/harpoon",
-        branch = "harpoon2",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-        },
-        opts = {
-            settings = {
-                save_on_toggle = true,
-            },
-        },
-        config = function(_, opts)
-            local harpoon = require "harpoon"
-            local extensions = require "harpoon.extensions"
-            harpoon:setup(opts)
-            harpoon:extend(extensions.builtins.navigate_with_number())
+    config = function(_, opts)
+      require("oil").setup(opts)
+
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "OilActionsPost",
+        callback = function(event)
+          if event.data.actions.type == "move" then
+            require("snacks").rename.on_rename_file(
+              event.data.actions.src_url,
+              event.data.actions.dest_url
+            )
+          end
         end,
-        keys = {
-            { "<leader>h", "", desc = "+harpoon", mode = { "n" } },
-            {
-                "<leader>ha",
-                function() require("harpoon"):list():add() end,
-                desc = "Add file",
-            },
-            {
-                "<leader>he",
-                function()
-                    require("harpoon").ui:toggle_quick_menu(
-                        require("harpoon"):list(),
-                        {
-                            border = "rounded",
-                            title_pos = "center",
-                            title = " Harpoon ",
-                            ui_max_width = 100,
-                        }
-                    )
-                end,
-                desc = "Toggle quick menu",
-            },
-            {
-                "<C-p>",
-                function()
-                    require("harpoon"):list():prev { ui_nav_wrap = true }
-                end,
-                desc = "Goto previous mark",
-            },
-            {
-                "<C-n>",
-                function()
-                    require("harpoon"):list():next { ui_nav_wrap = true }
-                end,
-                desc = "Goto next mark",
-            },
-        },
+      })
+    end,
+    keys = {
+      {
+        "<leader>e",
+        function()
+          if vim.bo.ft == "oil" then
+            require("oil").close()
+          else
+            require("oil").open(nil)
+          end
+        end,
+        desc = "Explorer (Current Dir)",
+      },
     },
-
-    -- git stuff
-    {
-        "refractalize/oil-git-status.nvim",
-        config = true,
-        keys = {
-            {
-                "<leader>e",
-                function()
-                    if vim.bo.ft == "oil" then
-                        require("oil").close()
-                    else
-                        require("oil").open(nil)
-                    end
-                end,
-                desc = "Explorer (Current Dir)",
-            },
-        },
+  },
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
     },
-    {
-        "lewis6991/gitsigns.nvim",
-        event = { "BufReadPost", "BufNewFile", "BufWritePre" },
-        opts = {
-            signs = {
-                add = { text = "▎" },
-                change = { text = "▎" },
-                delete = { text = "" },
-                topdelete = { text = "" },
-                changedelete = { text = "▎" },
-                untracked = { text = "▎" },
-            },
-            signs_staged = {
-                add = { text = "▎" },
-                change = { text = "▎" },
-                delete = { text = "" },
-                topdelete = { text = "" },
-                changedelete = { text = "▎" },
-            },
-            on_attach = function(buffer)
-                local gs = package.loaded.gitsigns
+    opts = {
+      settings = {
+        save_on_toggle = true,
+      },
+    },
+    config = function(_, opts)
+      local harpoon = require "harpoon"
+      local extensions = require "harpoon.extensions"
+      harpoon:setup(opts)
+      harpoon:extend(extensions.builtins.navigate_with_number())
+    end,
+    keys = {
+      { "<leader>h", "", desc = "+harpoon", mode = { "n" } },
+      {
+        "<leader>ha",
+        function() require("harpoon"):list():add() end,
+        desc = "Add file",
+      },
+      {
+        "<leader>he",
+        function()
+          require("harpoon").ui:toggle_quick_menu(require("harpoon"):list(), {
+            border = "rounded",
+            title_pos = "center",
+            title = " Harpoon ",
+            ui_max_width = 100,
+          })
+        end,
+        desc = "Toggle quick menu",
+      },
+      {
+        "<C-p>",
+        function() require("harpoon"):list():prev { ui_nav_wrap = true } end,
+        desc = "Goto previous mark",
+      },
+      {
+        "<C-n>",
+        function() require("harpoon"):list():next { ui_nav_wrap = true } end,
+        desc = "Goto next mark",
+      },
+    },
+  },
 
-                local function map(mode, l, r, desc)
-                    vim.keymap.set(
-                        mode,
-                        l,
-                        r,
-                        { buffer = buffer, desc = desc, silent = true }
-                    )
-                end
+  -- git stuff
+  {
+    "refractalize/oil-git-status.nvim",
+    config = true,
+    keys = {
+      {
+        "<leader>e",
+        function()
+          if vim.bo.ft == "oil" then
+            require("oil").close()
+          else
+            require("oil").open(nil)
+          end
+        end,
+        desc = "Explorer (Current Dir)",
+      },
+    },
+  },
+  {
+    "lewis6991/gitsigns.nvim",
+    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+    opts = {
+      signs = {
+        add = { text = "▎" },
+        change = { text = "▎" },
+        delete = { text = "" },
+        topdelete = { text = "" },
+        changedelete = { text = "▎" },
+        untracked = { text = "▎" },
+      },
+      signs_staged = {
+        add = { text = "▎" },
+        change = { text = "▎" },
+        delete = { text = "" },
+        topdelete = { text = "" },
+        changedelete = { text = "▎" },
+      },
+      on_attach = function(buffer)
+        local gs = package.loaded.gitsigns
+
+        local function map(mode, l, r, desc)
+          vim.keymap.set(
+            mode,
+            l,
+            r,
+            { buffer = buffer, desc = desc, silent = true }
+          )
+        end
 
         -- stylua: ignore start
         map("n", "]h", function()
@@ -363,111 +349,109 @@ return {
         map("n", "<leader>ghd", gs.diffthis, "Diff This")
         map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
-            end,
-        },
+      end,
     },
-    {
-        "gitsigns.nvim",
-        opts = function()
-            Snacks.toggle({
-                name = "Git Signs",
-                get = function()
-                    return require("gitsigns.config").config.signcolumn
-                end,
-                set = function(state) require("gitsigns").toggle_signs(state) end,
-            }):map "<leader>uG"
+  },
+  {
+    "gitsigns.nvim",
+    opts = function()
+      Snacks.toggle({
+        name = "Git Signs",
+        get = function() return require("gitsigns.config").config.signcolumn end,
+        set = function(state) require("gitsigns").toggle_signs(state) end,
+      }):map "<leader>uG"
+    end,
+  },
+
+  -- better diagnostics
+  {
+    "folke/trouble.nvim",
+    cmd = { "Trouble" },
+    opts = {
+      modes = {
+        lsp = {
+          win = { position = "right" },
+        },
+      },
+    },
+    keys = {
+      {
+        "<leader>xx",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Diagnostics (Trouble)",
+      },
+      {
+        "<leader>xX",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Buffer Diagnostics (Trouble)",
+      },
+      {
+        "<leader>cs",
+        "<cmd>Trouble symbols toggle<cr>",
+        desc = "Symbols (Trouble)",
+      },
+      {
+        "<leader>cS",
+        "<cmd>Trouble lsp toggle<cr>",
+        desc = "LSP references/definitions/... (Trouble)",
+      },
+      {
+        "<leader>xL",
+        "<cmd>Trouble loclist toggle<cr>",
+        desc = "Location List (Trouble)",
+      },
+      {
+        "<leader>xQ",
+        "<cmd>Trouble qflist toggle<cr>",
+        desc = "Quickfix List (Trouble)",
+      },
+      {
+        "[q",
+        function()
+          if require("trouble").is_open() then
+            ---@diagnostic disable-next-line: missing-parameter, missing-fields
+            require("trouble").prev {
+              skip_groups = true,
+              jump = true,
+            }
+          else
+            local ok, err = pcall(vim.cmd.cprev)
+            if not ok then vim.notify(err, vim.log.levels.ERROR) end
+          end
         end,
+        desc = "Previous Trouble/Quickfix Item",
+      },
+      {
+        "]q",
+        function()
+          if require("trouble").is_open() then
+            ---@diagnostic disable-next-line: missing-fields, missing-parameter
+            require("trouble").next {
+              skip_groups = true,
+              jump = true,
+            }
+          else
+            local ok, err = pcall(vim.cmd.cnext)
+            if not ok then vim.notify(err, vim.log.levels.ERROR) end
+          end
+        end,
+        desc = "Next Trouble/Quickfix Item",
+      },
     },
+  },
 
-    -- better diagnostics
-    {
-        "folke/trouble.nvim",
-        cmd = { "Trouble" },
-        opts = {
-            modes = {
-                lsp = {
-                    win = { position = "right" },
-                },
-            },
-        },
-        keys = {
-            {
-                "<leader>xx",
-                "<cmd>Trouble diagnostics toggle<cr>",
-                desc = "Diagnostics (Trouble)",
-            },
-            {
-                "<leader>xX",
-                "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-                desc = "Buffer Diagnostics (Trouble)",
-            },
-            {
-                "<leader>cs",
-                "<cmd>Trouble symbols toggle<cr>",
-                desc = "Symbols (Trouble)",
-            },
-            {
-                "<leader>cS",
-                "<cmd>Trouble lsp toggle<cr>",
-                desc = "LSP references/definitions/... (Trouble)",
-            },
-            {
-                "<leader>xL",
-                "<cmd>Trouble loclist toggle<cr>",
-                desc = "Location List (Trouble)",
-            },
-            {
-                "<leader>xQ",
-                "<cmd>Trouble qflist toggle<cr>",
-                desc = "Quickfix List (Trouble)",
-            },
-            {
-                "[q",
-                function()
-                    if require("trouble").is_open() then
-                        ---@diagnostic disable-next-line: missing-parameter, missing-fields
-                        require("trouble").prev {
-                            skip_groups = true,
-                            jump = true,
-                        }
-                    else
-                        local ok, err = pcall(vim.cmd.cprev)
-                        if not ok then vim.notify(err, vim.log.levels.ERROR) end
-                    end
-                end,
-                desc = "Previous Trouble/Quickfix Item",
-            },
-            {
-                "]q",
-                function()
-                    if require("trouble").is_open() then
-                        ---@diagnostic disable-next-line: missing-fields, missing-parameter
-                        require("trouble").next {
-                            skip_groups = true,
-                            jump = true,
-                        }
-                    else
-                        local ok, err = pcall(vim.cmd.cnext)
-                        if not ok then vim.notify(err, vim.log.levels.ERROR) end
-                    end
-                end,
-                desc = "Next Trouble/Quickfix Item",
-            },
-        },
-    },
-
-    -- better comments
-    {
-        "folke/todo-comments.nvim",
-        cmd = { "TodoTrouble", "TodoTelescope" },
-        opts = {},
-        keys = {
+  -- better comments
+  {
+    "folke/todo-comments.nvim",
+    cmd = { "TodoTrouble", "TodoTelescope" },
+    opts = {},
+    keys = {
           -- stylua: ignore start
           { "]t", function() require("todo-comments").jump_next() end, desc = "Next Todo Comment" },
           { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous Todo Comment" },
           { "<leader>xT", "<cmd>Trouble todo toggle<cr>", desc = "Todo (Trouble)" },
           { "<leader>xt", "<cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME}}<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
-            -- stylua: ignore end
-        },
+      -- stylua: ignore end
     },
+  },
 }
