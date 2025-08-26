@@ -273,6 +273,24 @@ return {
         function() require("harpoon"):list():next { ui_nav_wrap = true } end,
         desc = "Goto next mark",
       },
+      {
+        "<leader>bh",
+        function()
+          local harpoon_list = require("harpoon"):list().items
+          local cwd = vim.uv.cwd()
+          local buflist = {}
+          for _, v in ipairs(harpoon_list) do
+            local file = cwd .. "/" .. v.value
+            local buf = vim.fn.bufnr(file, false)
+            if buf ~= -1 then buflist[#buflist + 1] = buf end
+          end
+
+          Snacks.bufdelete.delete {
+            filter = function(buf) return not vim.tbl_contains(buflist, buf) end,
+          }
+        end,
+        desc = "Delete Buffers other than in harpoon list",
+      },
     },
   },
 
