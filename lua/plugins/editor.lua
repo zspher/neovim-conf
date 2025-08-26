@@ -232,6 +232,10 @@ return {
     opts = {
       settings = {
         save_on_toggle = true,
+        key = function() return vim.uv.cwd() end,
+      },
+      default = {
+        get_root_dir = function() return vim.uv.cwd() end,
       },
     },
     config = function(_, opts)
