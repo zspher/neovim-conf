@@ -59,7 +59,9 @@ return {
     optional = true,
     opts = {
       sources = {
-        default = { "dadbod" },
+        per_filetype = {
+          sql = { inherit_defaults = true, "dadbod" },
+        },
         providers = {
           dadbod = {
             name = "Dadbod",

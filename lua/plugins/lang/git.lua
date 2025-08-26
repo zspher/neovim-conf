@@ -32,10 +32,11 @@ return {
     dependencies = {
       "Kaiser-Yang/blink-cmp-git",
     },
-
     opts = {
       sources = {
-        default = { "git" },
+        per_filetype = {
+          gitcommit = { "git", inherit_defaults = true },
+        },
         providers = {
           git = {
             name = "Git",
