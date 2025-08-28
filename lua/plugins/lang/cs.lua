@@ -3,10 +3,12 @@ return {
   -- lsp
   {
     "seblyng/roslyn.nvim",
+    ft = { "cs" },
     ---@module 'roslyn.config'
     ---@type RoslynNvimConfig
-    ft = { "cs" },
-    opts = {},
+    opts = {
+      silent = true,
+    },
   },
   -- formatter
   {
