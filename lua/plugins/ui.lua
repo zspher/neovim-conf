@@ -301,6 +301,18 @@ return {
           },
           view = "mini",
         },
+        {
+          filter = {
+            event = "notify",
+            any = {
+              { find = "[iI]nitialize" },
+              { find = "[sS]tart" },
+            },
+            warning = false,
+            error = false,
+          },
+          view = "mini",
+        },
       },
       presets = {
         bottom_search = true,
