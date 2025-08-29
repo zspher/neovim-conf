@@ -152,29 +152,17 @@ return {
           format = "{kind_icon}{symbol.name:Normal} ",
           hl_group = "lualine_c_normal",
         }
-      local wb = {
-        lualine_c = {
-          {
-            "filename",
-            path = 3,
-            symbols = {
-              modified = "",
-              readonly = "",
-              unnamed = "",
-              newfile = "",
-            },
-            color = "lualine_c_normal",
-            cond = function() return not (vim.bo.bt == "nofile") end,
-          },
-          {
-            symbols and symbols.get,
-            cond = symbols and symbols.has,
-            separator = { left = "" },
-            fmt = function(str) -- return string except for last "›"
-              return str:gsub("(.*)([^]*)$", "%1")
-            end,
-          },
+      local filename = {
+        "filename",
+        path = 3,
+        symbols = {
+          modified = "",
+          readonly = "",
+          unnamed = "",
+          newfile = "",
         },
+        color = "lualine_c_normal",
+        cond = function() return not (vim.bo.bt == "nofile") end,
       }
       local opts = {
         options = {
@@ -270,8 +258,24 @@ return {
           },
         },
         extensions = { "trouble", "lazy" },
-        winbar = wb,
-        inactive_winbar = wb,
+        winbar = {
+          lualine_c = {
+            filename,
+            {
+              symbols and symbols.get,
+              cond = symbols and symbols.has,
+              separator = { left = "" },
+              fmt = function(str) -- return string except for last "›"
+                return str:gsub("(.*)([^]*)$", "%1")
+              end,
+            },
+          },
+        },
+        inactive_winbar = {
+          lualine_c = {
+            filename,
+          },
+        },
       }
       return opts
     end,
