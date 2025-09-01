@@ -7,6 +7,7 @@ vim.opt.mouse = "a"
 vim.opt.signcolumn = "yes"
 vim.opt.cc = "80"
 vim.opt.showmode = false -- Dont show mode since we have a statusline
+vim.opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 vim.opt.wrap = false
 vim.opt.laststatus = 3 -- global statusline
 vim.opt.cursorline = true
