@@ -94,6 +94,11 @@ return {
     },
     opts = {
       snippets_engine = "luasnip",
+      languages = {
+        cs = {
+          template = { annotation_convention = "xmldoc" },
+        },
+      },
     },
   },
 
