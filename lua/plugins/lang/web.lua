@@ -17,12 +17,14 @@ return {
         tailwindcss = {},
 
         -- html
-        superhtml = {},
         html = {
-          settings = {
-            html = { format = { indentInnerHtml = true } },
+          capabilities = {
+            workspace = {
+              didChangeWorkspaceFolders = { dynamicRegistration = true },
+            },
           },
         },
+        superhtml = {},
         emmet_language_server = {},
 
         -- general
@@ -38,6 +40,20 @@ return {
               )(fname)
             )
           end,
+          filetypes = {
+            "astro",
+            "css",
+            "graphql",
+            "javascript",
+            "javascriptreact",
+            "json",
+            "jsonc",
+            "svelte",
+            "typescript",
+            "typescript.tsx",
+            "typescriptreact",
+            "vue",
+          },
         },
       },
     },
