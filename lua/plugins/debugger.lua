@@ -292,6 +292,7 @@ return {
         terminal = {
           width = 0.4,
           position = "right",
+          start_hidden = false,
         },
       },
       winbar = {

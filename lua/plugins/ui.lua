@@ -179,6 +179,7 @@ return {
               "alpha",
               "dap-repl",
               "dap-view",
+              "dap-view-term",
               "dap_disassembly",
               "dapui",
               "dashboard",
