@@ -29,17 +29,6 @@ return {
 
         -- general
         biome = {
-          single_file_support = true,
-          root_dir = function(bufnr, on_dir)
-            local fname = vim.api.nvim_buf_get_name(bufnr)
-            on_dir(
-              require("lspconfig.util").root_pattern(
-                "biome.jsonc",
-                "biome.json",
-                ".git"
-              )(fname)
-            )
-          end,
           filetypes = {
             "astro",
             "css",
