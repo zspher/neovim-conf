@@ -384,6 +384,18 @@ return {
       -- but this is not ideal when Lazy is installing plugins,
       -- so clear the messages in this case.
       if vim.o.filetype == "lazy" then vim.cmd [[messages clear]] end
+
+      -- FIX: https://github.com/seblyng/roslyn.nvim/issues/236
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "cs" },
+        callback = function()
+          vim.api.nvim_clear_autocmds {
+            group = "noice_lsp_progress",
+            event = "LspProgress",
+          }
+        end,
+      })
+
       require("noice").setup(opts)
     end,
   },
