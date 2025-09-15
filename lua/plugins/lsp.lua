@@ -86,16 +86,16 @@ return {
         local picker = require "snacks.picker"
 
         local km = vim.keymap
-                -- stylua: ignore start
-                km.set("n", "gd", picker.lsp_definitions, { desc = "Goto Definition" })
-                km.set("n", "gr", picker.lsp_references, { desc = "References"})
-                km.set("n", "gI", picker.lsp_implementations, { desc = "Goto Implementation" })
-                km.set("n", "gy", picker.lsp_type_definitions, { desc = "Goto T[y]pe Definition" })
-                km.set("n", "<leader>ss", picker.lsp_symbols, { desc = "LSP Symbols" })
-                km.set("n", "<leader>sS", picker.lsp_workspace_symbols, { desc = "LSP Workspace Symbols" })
-                km.set("n", "<leader>cR", Snacks.rename.rename_file, { desc = "Rename File" })
-                km.set({"n", "x"},"<leader>ca", vim.lsp.buf.code_action, {desc = "Code Action"})
-                km.set("n", "<leader>cr", vim.lsp.buf.rename, {desc = "Rename"})
+        -- stylua: ignore start
+        km.set("n", "gd", picker.lsp_definitions, { desc = "Goto Definition" })
+        km.set("n", "gr", picker.lsp_references, { desc = "References"})
+        km.set("n", "gI", picker.lsp_implementations, { desc = "Goto Implementation" })
+        km.set("n", "gy", picker.lsp_type_definitions, { desc = "Goto T[y]pe Definition" })
+        km.set("n", "<leader>ss", picker.lsp_symbols, { desc = "LSP Symbols" })
+        km.set("n", "<leader>sS", picker.lsp_workspace_symbols, { desc = "LSP Workspace Symbols" })
+        km.set("n", "<leader>cR", Snacks.rename.rename_file, { desc = "Rename File" })
+        km.set({"n", "x"},"<leader>ca", vim.lsp.buf.code_action, {desc = "Code Action"})
+        km.set("n", "<leader>cr", vim.lsp.buf.rename, {desc = "Rename"})
         -- stylua: ignore end
 
         local options = require("lazy.core.plugin").values(
@@ -122,7 +122,6 @@ return {
         end,
       })
 
-      local servers = opts.servers
       local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
       local has_blink, blink = pcall(require, "blink.cmp")
       local capabilities = vim.tbl_deep_extend(
@@ -137,19 +136,18 @@ return {
       local function configure(server)
         local server_opts = vim.tbl_deep_extend("force", {
           capabilities = vim.deepcopy(capabilities),
-        }, servers[server] or {})
+        }, opts.servers[server] or {})
 
-        if opts.setup[server] then
-          opts.setup[server](server, server_opts)
-        elseif opts.setup["*"] then
-          opts.setup["*"](server, server_opts)
+        local setup = opts.setup[server] or opts.setup["*"]
+        if setup and setup(server, server_opts) then
+          return true -- lsp will be setup by the setup function
         end
 
         vim.lsp.config(server, server_opts)
         vim.lsp.enable(server)
       end
 
-      for server, server_opts in pairs(servers) do
+      for server, server_opts in pairs(opts.servers) do
         if server_opts then
           server_opts = server_opts == true and {} or server_opts
           if server_opts.enabled ~= false then configure(server) end
