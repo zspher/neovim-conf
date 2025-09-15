@@ -11,6 +11,10 @@ vim.opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 vim.opt.wrap = false
 vim.opt.laststatus = 3 -- global statusline
 vim.opt.cursorline = true
+vim.opt.foldlevel = 99
+vim.opt.foldmethod = "expr"
+vim.opt.foldtext = ""
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.sessionoptions = {
   "buffers",
   "curdir",
