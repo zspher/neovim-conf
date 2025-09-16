@@ -197,7 +197,7 @@ return {
   },
   {
     "saghen/blink.cmp",
-    event = "InsertEnter",
+    event = { "InsertEnter", "CmdlineEnter" },
     version = "*",
     opts_extend = {
       "sources.completion.enabled_providers",
@@ -253,7 +253,7 @@ return {
           auto_show_delay_ms = 200,
         },
         ghost_text = {
-          enabled = vim.g.ai_cmp,
+          enabled = true,
         },
       },
 
