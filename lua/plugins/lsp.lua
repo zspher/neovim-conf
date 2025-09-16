@@ -122,21 +122,12 @@ return {
         end,
       })
 
-      local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-      local has_blink, blink = pcall(require, "blink.cmp")
-      local capabilities = vim.tbl_deep_extend(
-        "force",
-        {},
-        vim.lsp.protocol.make_client_capabilities(),
-        has_cmp and cmp_nvim_lsp.default_capabilities() or {},
-        has_blink and blink.get_lsp_capabilities() or {},
-        opts.capabilities or {}
-      )
+      if opts.capabilities then
+        vim.lsp.config("*", { capabilities = opts.capabilities })
+      end
 
       local function configure(server)
-        local server_opts = vim.tbl_deep_extend("force", {
-          capabilities = vim.deepcopy(capabilities),
-        }, opts.servers[server] or {})
+        local server_opts = opts.servers[server] or {}
 
         local setup = opts.setup[server] or opts.setup["*"]
         if setup and setup(server, server_opts) then
