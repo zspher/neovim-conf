@@ -8,6 +8,15 @@ return {
       ---@type table<string, vim.lsp.Config>
       servers = {
         vtsls = {
+          settings = {
+            vtsls = {
+              experimental = {
+                completion = {
+                  enableServerSideFuzzyMatch = true,
+                },
+              },
+            },
+          },
           keys = {
             {
               "<leader>co",
