@@ -30,7 +30,7 @@ vim.schedule(
   function() vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" end
 )
 
-vim.opt.showbreak = "↪ "
+-- vim.opt.showbreak = "↪ "
 vim.opt.tabstop = 4 -- num of spaces displayed for <tab>
 vim.opt.shiftwidth = 4 -- for << indent
 vim.opt.expandtab = true -- tabs to spaces
