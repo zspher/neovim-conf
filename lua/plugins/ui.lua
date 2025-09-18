@@ -108,6 +108,7 @@ return {
         },
       },
       image = {
+        doc = { inline = false },
         markdown = { enabled = true },
         max_width = 20,
         max_height = 10,
