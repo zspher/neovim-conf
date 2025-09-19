@@ -39,10 +39,10 @@ return {
           if not ok or not parser then return end
           pcall(vim.treesitter.start)
 
-          local ft = vim.bo[bufnr].filetype
-          for _, value in ipairs(opts.ensure_installed) do
-            if ft == value then vim.bo[bufnr].syntax = "on" end
-          end
+          -- local ft = vim.bo[bufnr].filetype
+          -- for _, value in ipairs(opts.ensure_installed) do
+          --   if ft == value then vim.bo[bufnr].syntax = "on" end
+          -- end
         end,
       })
     end,
