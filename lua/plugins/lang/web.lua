@@ -24,7 +24,11 @@ return {
             },
           },
         },
-        superhtml = {},
+        superhtml = {
+          on_attach = function(client, _)
+            client.server_capabilities.documentFormattingProvider = nil
+          end,
+        },
         emmet_language_server = {},
 
         -- general
