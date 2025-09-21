@@ -76,6 +76,7 @@ return {
         })
       end
 
+      -- for conflicting keymap warnings
       vim.keymap.del("n", "grr")
       vim.keymap.del({ "n", "x" }, "gra")
       vim.keymap.del("n", "grn")
@@ -85,18 +86,47 @@ return {
       local function register_keys(client)
         local picker = require "snacks.picker"
 
-        local km = vim.keymap
-        -- stylua: ignore start
-        km.set("n", "gd", picker.lsp_definitions, { desc = "Goto Definition" })
-        km.set("n", "gr", picker.lsp_references, { desc = "References"})
-        km.set("n", "gI", picker.lsp_implementations, { desc = "Goto Implementation" })
-        km.set("n", "gy", picker.lsp_type_definitions, { desc = "Goto T[y]pe Definition" })
-        km.set("n", "<leader>ss", picker.lsp_symbols, { desc = "LSP Symbols" })
-        km.set("n", "<leader>sS", picker.lsp_workspace_symbols, { desc = "LSP Workspace Symbols" })
-        km.set("n", "<leader>cR", Snacks.rename.rename_file, { desc = "Rename File" })
-        km.set({"n", "x"},"<leader>ca", vim.lsp.buf.code_action, {desc = "Code Action"})
-        km.set("n", "<leader>cr", vim.lsp.buf.rename, {desc = "Rename"})
-        -- stylua: ignore end
+        ---@type LazyKeysSpec[]
+        local spec = {
+          { "gd", picker.lsp_definitions, desc = "Goto Definition" },
+          { "gr", picker.lsp_references, desc = "References" },
+          { "gI", picker.lsp_implementations, desc = "Goto Implementation" },
+          {
+            "gy",
+            picker.lsp_type_definitions,
+            desc = "Goto T[y]pe Definition",
+          },
+          { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
+          {
+            "]]",
+            function() Snacks.words.jump(vim.v.count1) end,
+            has = "documentHighlight",
+            desc = "Next Reference",
+            cond = Snacks.words.is_enabled(),
+          },
+          {
+            "[[",
+            function() Snacks.words.jump(-vim.v.count1) end,
+            has = "documentHighlight",
+            desc = "Prev Reference",
+            cond = Snacks.words.is_enabled(),
+          },
+          { "<leader>ss", picker.lsp_symbols, desc = "LSP Symbols" },
+          {
+            "<leader>sS",
+            picker.lsp_workspace_symbols,
+            desc = "LSP Workspace Symbols",
+          },
+          {
+            "<leader>ca",
+            vim.lsp.buf.code_action,
+            desc = "Code Action",
+            mode = { "n", "v" },
+          },
+          { "<leader>cR", Snacks.rename.rename_file, desc = "Rename File" },
+          { "<leader>cr", vim.lsp.buf.rename, desc = "Rename" },
+          { "<leader>cl", Snacks.picker.lsp_config, desc = "Lsp Info" },
+        }
 
         local options = require("lazy.core.plugin").values(
           require("lazy.core.config").spec.plugins["nvim-lspconfig"],
@@ -109,7 +139,9 @@ return {
             and options.servers[client.name].keys
           or {}
 
-        local keymaps = require("lazy.core.handler.keys").resolve(maps)
+        vim.list_extend(spec, maps)
+
+        local keymaps = require("lazy.core.handler.keys").resolve(spec)
         for _, key in pairs(keymaps) do
           vim.keymap.set(key.mode or "n", key.lhs, key.rhs, { buffer = true })
         end
