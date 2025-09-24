@@ -141,9 +141,12 @@ return {
 
         vim.list_extend(spec, maps)
 
-        local keymaps = require("lazy.core.handler.keys").resolve(spec)
+        local Keys = require "lazy.core.handler.keys"
+        local keymaps = Keys.resolve(spec)
         for _, key in pairs(keymaps) do
-          vim.keymap.set(key.mode or "n", key.lhs, key.rhs, { buffer = true })
+          local o = Keys.opts(key) --[[@as vim.keymap.set.Opts]]
+          o.buffer = true
+          vim.keymap.set(key.mode or "n", key.lhs, key.rhs, o)
         end
       end
 
