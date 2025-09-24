@@ -100,14 +100,12 @@ return {
           {
             "]]",
             function() Snacks.words.jump(vim.v.count1) end,
-            has = "documentHighlight",
             desc = "Next Reference",
             cond = Snacks.words.is_enabled(),
           },
           {
             "[[",
             function() Snacks.words.jump(-vim.v.count1) end,
-            has = "documentHighlight",
             desc = "Prev Reference",
             cond = Snacks.words.is_enabled(),
           },
@@ -144,9 +142,17 @@ return {
         local Keys = require "lazy.core.handler.keys"
         local keymaps = Keys.resolve(spec)
         for _, key in pairs(keymaps) do
-          local o = Keys.opts(key) --[[@as vim.keymap.set.Opts]]
-          o.buffer = true
-          vim.keymap.set(key.mode or "n", key.lhs, key.rhs, o)
+          local cond = not (
+            key.cond == false
+            or ((type(key.cond) == "function") and not key.cond())
+          )
+          ---@diagnostic disable-next-line: inject-field
+          key.cond = nil
+          if cond then
+            local o = Keys.opts(key) --[[@as vim.keymap.set.Opts]]
+            o.buffer = true
+            vim.keymap.set(key.mode or "n", key.lhs, key.rhs, o)
+          end
         end
       end
 
