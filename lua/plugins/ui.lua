@@ -77,6 +77,7 @@ return {
     dependencies = "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPre", "BufNewFile", "BufWritePre" },
     main = "rainbow-delimiters.setup",
+    submodules = false,
   },
   {
     "catgoose/nvim-colorizer.lua",
