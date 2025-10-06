@@ -27,6 +27,8 @@ return {
         superhtml = {
           on_attach = function(client, _)
             client.server_capabilities.documentFormattingProvider = nil
+            client.server_capabilities.completionProvider = nil
+            client.server_capabilities.renameProvider = nil
           end,
         },
         emmet_language_server = {},
