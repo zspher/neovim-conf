@@ -51,6 +51,9 @@ local function ai_whichkey(opts)
   end
   require("which-key").add(ret, { notify = false })
 end
+
+-- NOTE: snippets, completions & refactoring (anything that impacts the buffer)
+
 ---@module 'snacks'
 ---@type LazySpec[]
 return {

@@ -1,6 +1,8 @@
 local oil_detail = false
----@module 'snacks'
 
+-- NOTE: development stuff, git, keymap hint, explorer, floating windows
+
+---@module 'snacks'
 ---@type LazySpec[]
 return {
   {
@@ -469,12 +471,22 @@ return {
     cmd = { "TodoTrouble", "TodoTelescope" },
     opts = {},
     keys = {
-          -- stylua: ignore start
-          { "]t", function() require("todo-comments").jump_next() end, desc = "Next Todo Comment" },
-          { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous Todo Comment" },
-          { "<leader>xT", "<cmd>Trouble todo toggle<cr>", desc = "Todo (Trouble)" },
-          { "<leader>xt", "<cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME}}<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
-      -- stylua: ignore end
+      {
+        "]t",
+        function() require("todo-comments").jump_next() end,
+        desc = "Next Todo Comment",
+      },
+      {
+        "[t",
+        function() require("todo-comments").jump_prev() end,
+        desc = "Previous Todo Comment",
+      },
+      { "<leader>xT", "<cmd>Trouble todo toggle<cr>", desc = "Todo (Trouble)" },
+      {
+        "<leader>xt",
+        "<cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME}}<cr>",
+        desc = "Todo/Fix/Fixme (Trouble)",
+      },
     },
   },
 }

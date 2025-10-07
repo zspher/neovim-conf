@@ -1,3 +1,5 @@
+-- NOTE: ui stuff, bufferline, statusline, highlights
+
 ---@module 'snacks'
 ---@type LazySpec[]
 return {
