@@ -5,12 +5,6 @@ local oil_detail = false
 ---@module 'snacks'
 ---@type LazySpec[]
 return {
-  {
-    "wakatime/vim-wakatime",
-    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
-    opts = {},
-  },
-
   -- key help
   {
     "folke/which-key.nvim",
