@@ -64,6 +64,8 @@ return {
   },
   {
     "MeanderingProgrammer/render-markdown.nvim",
+    ---@module "render-markdown"
+    ---@type render.md.UserConfig
     opts = {
       code = {
         sign = false,
@@ -71,11 +73,43 @@ return {
         right_pad = 1,
       },
       heading = {
-        sign = false,
-        icons = {},
+        enabled = false,
+      },
+      bullet = {
+        icons = { "•", "◦" },
+        right_pad = 1,
       },
       checkbox = {
-        enabled = false,
+        custom = {
+          todo = {
+            raw = "[o]",
+            rendered = " ",
+            highlight = "RenderMarkdownSuccess",
+            scope_highlight = "RenderMarkdownSuccess",
+          },
+          cancelled = {
+            raw = "[-]",
+            rendered = "- ",
+            highlight = "Comment",
+            scope_highlight = "RenderMarkdownCancelledTask",
+          },
+          important = {
+            raw = "[!]",
+            rendered = " ",
+            highlight = "RenderMarkdownError",
+            scope_highlight = "RenderMarkdownError",
+          },
+          next = {
+            raw = "[>]",
+            rendered = " ",
+            highlight = "Comment",
+            scope_highlight = "Comment",
+          },
+        },
+      },
+      dash = {
+        ---@diagnostic disable-next-line: undefined-field
+        width = tonumber(vim.opt.cc:get()[1]),
       },
     },
     ft = { "markdown", "norg", "rmd", "org", "codecompanion" },

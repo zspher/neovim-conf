@@ -32,7 +32,12 @@ return {
           LineNrBelow = { fg = c.subtext0 },
           CursorLineNr = { fg = c.peach, style = { "bold" } },
           LineNr = { fg = c.peach, style = { "bold" } },
-          SnacksIndent1 = { fg = c.blue },
+
+          RenderMarkdownCancelledTask = {
+            fg = c.subtext0,
+            style = { "strikethrough" },
+          },
+          RenderMarkdownChecked = { fg = c.mauve },
         }
       end,
     },
