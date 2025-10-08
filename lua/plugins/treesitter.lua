@@ -8,7 +8,7 @@ return {
     event = { "BufReadPost", "BufNewFile", "BufWritePre", "VeryLazy" },
     lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
     cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
-    opts_extend = { "ensure_installed" },
+    opts_extend = { "ensure_installed", "disable" },
     opts = {
       ensure_installed = {
         "diff",
@@ -16,6 +16,7 @@ return {
         "vim",
         "vimdoc",
       },
+      disable = {},
     },
     config = function(_, opts)
       local TS = require "nvim-treesitter"
@@ -37,12 +38,11 @@ return {
           local bufnr = args.buf
           local ok, parser = pcall(vim.treesitter.get_parser, bufnr)
           if not ok or not parser then return end
+          for _, lang in ipairs(opts.disable) do
+            local ft = vim.treesitter.language.get_lang(vim.bo[bufnr].filetype)
+            if vim.treesitter.language.get_lang(lang) == ft then return end
+          end
           pcall(vim.treesitter.start)
-
-          -- local ft = vim.bo[bufnr].filetype
-          -- for _, value in ipairs(opts.ensure_installed) do
-          --   if ft == value then vim.bo[bufnr].syntax = "on" end
-          -- end
         end,
       })
     end,
