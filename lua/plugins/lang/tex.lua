@@ -72,7 +72,8 @@ return {
 
   -- extra
   {
-    "iurimateus/luasnip-latex-snippets.nvim",
+    "zspher/luasnip-latex-snippets.nvim",
+    branch = "dev",
     ft = { "tex", "markdown" },
     opts = {
       allow_on_markdown = true,
