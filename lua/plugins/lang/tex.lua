@@ -28,6 +28,25 @@ return {
       vim.g.vimtex_quickfix_method = vim.fn.executable "pplatex" == 1
           and "pplatex"
         or "latexlog"
+
+      -- add vimtex conceal to markdown
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = {
+          "markdown",
+        },
+        callback = function()
+          vim.schedule(function()
+            if vim.b.current_syntax ~= nil then vim.b.current_syntax = nil end
+            vim.cmd [[
+              syn include @tex syntax/tex.vim
+              syn region markdownMath start="\\\@<!\$" end="\$" skip="\\\$" contains=@tex,@NoSpell keepend
+              syn region markdownMath start="\\\@<!\$\$" end="\$\$" skip="\\\$" contains=@tex,@NoSpell keepend
+            ]]
+
+            vim.b.current_syntax = "markdown"
+          end)
+        end,
+      })
     end,
     keys = {
       { "<localLeader>l", "", desc = "+vimtex", ft = "tex" },
@@ -42,8 +61,8 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       -- vimtex highlights clash with treesitter highlights
+      disable = { "tex" },
       ensure_installed = { "bibtex" },
-      highlight = { disable = { "latex" } },
     },
   },
 
@@ -54,8 +73,10 @@ return {
   -- extra
   {
     "iurimateus/luasnip-latex-snippets.nvim",
-    ft = { "tex" },
-    opts = {},
+    ft = { "tex", "markdown" },
+    opts = {
+      allow_on_markdown = true,
+    },
     dependencies = {
       "L3MON4D3/LuaSnip",
       "lervag/vimtex",

@@ -79,6 +79,10 @@ return {
         icons = { "•", "◦" },
         right_pad = 1,
       },
+      latex = {
+        enabled = false,
+      },
+      win_options = { conceallevel = { rendered = 2 } },
       checkbox = {
         custom = {
           todo = {
