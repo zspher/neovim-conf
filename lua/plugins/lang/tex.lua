@@ -50,6 +50,12 @@ return {
     end,
     keys = {
       { "<localLeader>l", "", desc = "+vimtex", ft = "tex" },
+      {
+        "<leader>cm",
+        "<Cmd>VimtexDocPackage<CR>",
+        ft = "tex",
+        desc = "Open Manual",
+      },
     },
   },
   -- formatter
