@@ -5,6 +5,8 @@ return {
     "stevearc/conform.nvim",
     event = { "BufWritePre" },
     cmd = { "ConformInfo" },
+    ---@module "conform"
+    ---@type conform.setupOpts
     opts = {
       formatters_by_ft = {},
 
@@ -44,6 +46,17 @@ return {
         get = function() return not vim.g.disable_autoformat end,
         set = function()
           vim.g.disable_autoformat = not vim.g.disable_autoformat
+        end,
+      }):map "<leader>uF"
+
+      Snacks.toggle({
+        name = "buffer autoformat",
+        get = function()
+          return not vim.b[vim.api.nvim_get_current_buf()].disable_autoformat
+        end,
+        set = function()
+          local buf = vim.api.nvim_get_current_buf()
+          vim.b[buf].disable_autoformat = not vim.b[buf].disable_autoformat
         end,
       }):map "<leader>uf"
     end,
