@@ -8,53 +8,59 @@ return {
       ---@type table<string, vim.lsp.Config>
       servers = {
         texlab = {
+          settings = {
+            ["texlab"] = {
+              build = {
+                executable = "tectonic",
+                args = {
+                  "-X",
+                  "compile",
+                  "%f",
+                  "--synctex",
+                  "--keep-logs",
+                  "--keep-intermediates",
+                },
+                forwardSearchAfter = true,
+              },
+              forwardSearch = {
+                executable = "zathura",
+                args = {
+                  "--synctex-forward",
+                  "%l:1:%f",
+                  "%p",
+                },
+              },
+            },
+          },
           keys = {
+            { "<leader>cb", "<Cmd>LspTexlabBuild<CR>", desc = "Texlab build" },
             {
-              "<Leader>K",
-              "<plug>(vimtex-doc-package)",
-              desc = "Vimtex Docs",
-              silent = true,
+              "<leader>cv",
+              "<Cmd>LspTexlabForward<CR>",
+              desc = "Texlab forward search",
+            },
+            {
+              "<leader>cx",
+              "<Cmd>LspTexlabCancelBuild<CR>",
+              desc = "Texlab cancel build",
+            },
+            {
+              "<leader>cC",
+              "<Cmd>LspTexlabCleanAuxiliary<CR>",
+              desc = "Texlab clean all",
+            },
+            {
+              "<leader>cc",
+              "<Cmd>LspTexlabCleanArtifacts<CR>",
+              desc = "Texlab clean artifacts",
+            },
+            {
+              "<leader>ce",
+              "<Cmd>LspTexlabChangeEnvironment<CR>",
+              desc = "Texlab change environmant",
             },
           },
         },
-      },
-    },
-  },
-  {
-    "lervag/vimtex",
-    lazy = false, -- lazy-loading will disable inverse search
-    config = function()
-      vim.g.vimtex_mappings_disable = { ["n"] = { "K" } } -- disable `K` as it conflicts with LSP hover
-      vim.g.vimtex_quickfix_method = vim.fn.executable "pplatex" == 1
-          and "pplatex"
-        or "latexlog"
-
-      -- add vimtex conceal to markdown
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = {
-          "markdown",
-        },
-        callback = function()
-          vim.schedule(function()
-            if vim.b.current_syntax ~= nil then vim.b.current_syntax = nil end
-            vim.cmd [[
-              syn include @tex syntax/tex.vim
-              syn region markdownMath start="\\\@<!\$" end="\$" skip="\\\$" contains=@tex,@NoSpell keepend
-              syn region markdownMath start="\\\@<!\$\$" end="\$\$" skip="\\\$" contains=@tex,@NoSpell keepend
-            ]]
-
-            vim.b.current_syntax = "markdown"
-          end)
-        end,
-      })
-    end,
-    keys = {
-      { "<localLeader>l", "", desc = "+vimtex", ft = "tex" },
-      {
-        "<leader>cm",
-        "<Cmd>VimtexDocPackage<CR>",
-        ft = "tex",
-        desc = "Open Manual",
       },
     },
   },
@@ -66,9 +72,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
-      -- vimtex highlights clash with treesitter highlights
-      disable = { "tex" },
-      ensure_installed = { "bibtex" },
+      ensure_installed = { "bibtex", "latex" },
     },
   },
 
@@ -78,15 +82,14 @@ return {
 
   -- extra
   {
-    "zspher/luasnip-latex-snippets.nvim",
-    branch = "dev",
+    "iurimateus/luasnip-latex-snippets.nvim",
     ft = { "tex", "markdown" },
     opts = {
       allow_on_markdown = true,
+      use_treesitter = true,
     },
     dependencies = {
       "L3MON4D3/LuaSnip",
-      "lervag/vimtex",
     },
   },
 }
