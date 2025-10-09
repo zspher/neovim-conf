@@ -163,12 +163,12 @@ return {
     keys = {
       {
         "<C-j>",
-        function() vim.snippet.jump(1) end,
+        function() require("luasnip").jump(1) end,
         mode = { "s", "i" },
       },
       {
         "<C-k>",
-        function() vim.snippet.jump(-1) end,
+        function() require("luasnip").jump(-1) end,
         mode = { "i", "s" },
       },
       {
