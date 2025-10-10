@@ -1,3 +1,13 @@
+local function findMain()
+  local main_file = "main.tex"
+  local path = vim.uv.cwd() .. "/" .. main_file
+  if vim.uv.fs_stat(path) ~= nil then
+    return path
+  else
+    return "%f"
+  end
+end
+
 ---@type LazySpec[]
 return {
 
@@ -15,13 +25,15 @@ return {
                 args = {
                   "-X",
                   "compile",
-                  "%f",
+                  findMain(),
                   "--synctex",
                   "--keep-logs",
                   "--keep-intermediates",
                 },
                 forwardSearchAfter = true,
+                onSave = true,
               },
+              chktex = { onOpenAndSave = true },
               forwardSearch = {
                 executable = "zathura",
                 args = {
