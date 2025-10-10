@@ -15,7 +15,10 @@ return {
               require("schemastore").yaml().schemas()
             )
           end,
-          settings = { yaml = { schemaStore = { enable = false, url = "" } } },
+          settings = {
+            yaml = { schemaStore = { enable = false, url = "" } },
+            schemas = {},
+          },
         },
       },
     },
