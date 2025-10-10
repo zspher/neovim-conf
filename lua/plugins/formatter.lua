@@ -38,7 +38,7 @@ return {
     },
   },
   {
-    "stevearc/conform.nvim",
+    "folke/snacks.nvim",
     optional = true,
     opts = function()
       Snacks.toggle({
