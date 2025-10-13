@@ -376,6 +376,8 @@ return {
   {
     "folke/trouble.nvim",
     cmd = { "Trouble" },
+    ---@module "trouble"
+    ---@type trouble.Config
     opts = {
       modes = {
         diagnostics = {
@@ -455,6 +457,27 @@ return {
           end
         end,
         desc = "Next Trouble/Quickfix Item",
+      },
+    },
+  },
+  {
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "VeryLazy",
+    priority = 1000,
+    opts = {
+      preset = "classic",
+      transparent_bg = true,
+      signs = {
+        arrow = "",
+      },
+      options = {
+        show_source = {
+          if_many = true,
+        },
+        multilines = {
+          enabled = true,
+          always_show = true,
+        },
       },
     },
   },
