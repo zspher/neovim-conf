@@ -195,6 +195,7 @@ return {
               "qf",
               "snacks_dashboard",
               "trouble",
+              "noice",
             },
           },
 
