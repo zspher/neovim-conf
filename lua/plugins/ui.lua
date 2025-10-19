@@ -113,8 +113,7 @@ return {
       image = {
         math = { enabled = false },
         doc = {
-          max_width = 20,
-          max_height = 10,
+          inline = false,
         },
         markdown = { enabled = true },
         max_width = 20,
