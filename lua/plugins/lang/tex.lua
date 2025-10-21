@@ -45,31 +45,35 @@ return {
             },
           },
           keys = {
-            { "<leader>cb", "<Cmd>LspTexlabBuild<CR>", desc = "Texlab build" },
+            {
+              "<leader>cb",
+              "<Cmd>LspTexlabBuild<CR>",
+              desc = "Build Pdf Document",
+            },
             {
               "<leader>cv",
               "<Cmd>LspTexlabForward<CR>",
-              desc = "Texlab forward search",
+              desc = "Forward Search",
             },
             {
               "<leader>cx",
               "<Cmd>LspTexlabCancelBuild<CR>",
-              desc = "Texlab cancel build",
+              desc = "Cancel Build",
             },
             {
               "<leader>cC",
               "<Cmd>LspTexlabCleanAuxiliary<CR>",
-              desc = "Texlab clean all",
+              desc = "Clean All",
             },
             {
               "<leader>cc",
               "<Cmd>LspTexlabCleanArtifacts<CR>",
-              desc = "Texlab clean artifacts",
+              desc = "Clean Artifacts",
             },
             {
               "<leader>ce",
               "<Cmd>LspTexlabChangeEnvironment<CR>",
-              desc = "Texlab change environmant",
+              desc = "Change Environmant",
             },
           },
         },
