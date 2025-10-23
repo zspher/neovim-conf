@@ -117,6 +117,16 @@ return {
             desc = "LSP Workspace Symbols",
           },
           {
+            "gai",
+            function() Snacks.picker.lsp_incoming_calls() end,
+            desc = "C[a]lls Incoming",
+          },
+          {
+            "gao",
+            function() Snacks.picker.lsp_outgoing_calls() end,
+            desc = "C[a]lls Outgoing",
+          },
+          {
             "<leader>ca",
             vim.lsp.buf.code_action,
             desc = "Code Action",
