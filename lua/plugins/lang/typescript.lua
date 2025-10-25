@@ -75,14 +75,14 @@ return {
         if not dap.configurations[language] then
           dap.configurations[language] = {
             {
-              type = "pwa-node",
+              type = "node",
               request = "launch",
               name = "Launch file",
               program = "${file}",
               cwd = "${workspaceFolder}",
             },
             {
-              type = "pwa-node",
+              type = "node",
               request = "attach",
               name = "Attach",
               processId = "${command:pickProcess}",

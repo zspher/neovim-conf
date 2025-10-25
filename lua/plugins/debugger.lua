@@ -234,17 +234,34 @@ return {
         type = "executable",
         command = "codelldb",
       }
-      dap.adapters["pwa-node"] = {
-        type = "server",
-        host = "localhost",
-        port = "${port}",
-        executable = {
-          command = "js-debug",
-          args = {
-            "${port}",
+
+      -- js-debug
+      for _, adapterType in ipairs { "node", "chrome", "msedge" } do
+        local pwaType = "pwa-" .. adapterType
+
+        dap.adapters[pwaType] = {
+          type = "server",
+          host = "localhost",
+          port = "${port}",
+          executable = {
+            command = "js-debug",
+            args = { "${port}" },
           },
-        },
-      }
+        }
+
+        -- Define adapters without the "pwa-" prefix for VSCode compatibility
+        dap.adapters[adapterType] = function(cb, config)
+          local nativeAdapter = dap.adapters[pwaType]
+
+          config.type = pwaType
+
+          if type(nativeAdapter) == "function" then
+            nativeAdapter(cb, config)
+          else
+            cb(nativeAdapter)
+          end
+        end
+      end
 
       vim.api.nvim_set_hl(
         0,
