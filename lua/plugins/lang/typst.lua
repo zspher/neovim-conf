@@ -6,17 +6,44 @@ return {
     opts = {
       ---@type table<string, vim.lsp.Config>
       servers = {
-        tinymist = {},
+        tinymist = {
+          single_file_support = true, -- Fixes LSP attachment in non-Git directories
+          settings = {
+            formatterMode = "typstyle",
+            exportPdf = "onSave",
+            semanticTokens = "disable",
+          },
+          keys = {
+            {
+              "<leader>cp",
+              function()
+                local lsp = vim.lsp.get_clients { bufnr = 0, name = "tinymist" }
+                lsp[1]:exec_cmd({
+                  title = "pin",
+                  command = "tinymist.pinMain",
+                  arguments = { vim.api.nvim_buf_get_name(0) },
+                }, { bufnr = vim.api.nvim_get_current_buf() })
+              end,
+              desc = "Pin main file",
+            },
+            {
+              "<leader>cb",
+              "<Cmd>LspTinymistExportPdf<CR>",
+              desc = "Build Pdf Document",
+            },
+          },
+        },
       },
     },
   },
+
   -- formatter
   {
     "stevearc/conform.nvim",
     optional = true,
     opts = {
       formatters_by_ft = {
-        typst = { "typstyle" },
+        typst = { "typstyle", lsp_format = "prefer" },
       },
     },
   },
