@@ -88,6 +88,14 @@ return {
               processId = "${command:pickProcess}",
               cwd = "${workspaceFolder}",
             },
+            {
+              type = "chrome",
+              request = "launch",
+              name = "Start brave on port",
+              runtimeExecutable = vim.fn.exepath "brave",
+              webRoot = "${workspaceFolder}",
+              url = function() return vim.fn.input("args", "http://localhost:") end,
+            },
           }
         end
       end
