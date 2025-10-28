@@ -8,6 +8,7 @@ return function(INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN)
   vim.opt.spell = false
   vim.opt.list = false
   vim.opt.statuscolumn = ""
+  vim.opt.signcolumn = "no"
   vim.opt.compatible = false
   vim.opt.number = false
   vim.opt.relativenumber = false
