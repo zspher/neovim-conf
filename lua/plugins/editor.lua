@@ -65,7 +65,16 @@ return {
   {
     "folke/snacks.nvim",
     opts = {
-      picker = {},
+      picker = {
+        previewers = {
+          diff = {
+            builtin = false,
+          },
+          git = {
+            builtin = false,
+          },
+        },
+      },
     },
     -- stylua: ignore start
     keys = {
