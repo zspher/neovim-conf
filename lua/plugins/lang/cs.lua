@@ -80,6 +80,13 @@ return {
         },
       }
     end,
+    keys = {
+      {
+        "gd",
+        vim.lsp.buf.definition,
+        desc = "Goto Definition",
+      },
+    },
   },
   -- formatter
   {

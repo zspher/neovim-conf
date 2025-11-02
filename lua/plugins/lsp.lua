@@ -89,7 +89,13 @@ return {
 
         ---@type LazyKeysSpec[]
         local spec = {
-          { "gd", picker.lsp_definitions, desc = "Goto Definition" },
+          {
+            "gd",
+            picker.lsp_definitions,
+            desc = "Goto Definition",
+            -- FIX: snacks.picker errors when using rzls.nvim
+            cond = function() return vim.bo.ft ~= "razor" end,
+          },
           { "gr", picker.lsp_references, desc = "References" },
           { "gI", picker.lsp_implementations, desc = "Goto Implementation" },
           {
