@@ -38,6 +38,8 @@ return {
             style = { "strikethrough" },
           },
           RenderMarkdownChecked = { fg = c.mauve },
+
+          ["@lsp.type.variable"] = { link = "@variable" },
         }
       end,
     },
