@@ -47,12 +47,6 @@ return {
               expr = true,
               mode = "t",
             },
-            hide_slash = {
-              "<C-/>",
-              "hide",
-              desc = "Hide Terminal",
-              mode = { "t", "n" },
-            },
           },
         },
       },
