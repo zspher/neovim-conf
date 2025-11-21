@@ -17,6 +17,7 @@ return {
           path = "rzls",
         },
       },
+      "folke/noice.nvim",
     },
     config = function(_, opts)
       local rzls_path =
@@ -44,6 +45,21 @@ return {
           "Microsoft.VisualStudioCode.RazorExtension.dll"
         ),
       }
+
+      -- FIX: https://github.com/seblyng/roslyn.nvim/issues/236
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "cs" },
+        callback = function()
+          vim.schedule(
+            function()
+              vim.api.nvim_clear_autocmds {
+                group = "noice_lsp_progress",
+                event = "LspProgress",
+              }
+            end
+          )
+        end,
+      })
 
       vim.lsp.config("roslyn", {
         filetypes = { "cs" },
