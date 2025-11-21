@@ -88,7 +88,7 @@ return {
       filetypes = {
         "*",
         qss = { css = true },
-        css = { css = true },
+        css = { css = true, css_fn = true },
       },
       user_default_options = {
         names = false,
