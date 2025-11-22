@@ -93,9 +93,6 @@ return {
             "gd",
             picker.lsp_definitions,
             desc = "Goto Definition",
-            -- FIX: snacks.picker errors when using rzls.nvim
-            -- see https://github.com/folke/snacks.nvim/issues/2527
-            cond = function() return vim.bo.ft ~= "razor" end,
           },
           { "gr", picker.lsp_references, desc = "References" },
           { "gI", picker.lsp_implementations, desc = "Goto Implementation" },
