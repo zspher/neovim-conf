@@ -9,6 +9,12 @@ vim.keymap.set( { "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "D
 vim.keymap.set( { "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 vim.keymap.set( { "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
+-- disable arrow keys
+vim.keymap.set({"n", "x"}, "<Up>", '<Nop>')
+vim.keymap.set({"n", "x"}, "<Down>", '<Nop>')
+vim.keymap.set({"n", "x"}, "<Left>", '<Nop>')
+vim.keymap.set({"n", "x"}, "<Right>", '<Nop>')
+
 -- Move to window using the <ctrl> hjkl keys
 vim.keymap.set( "n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
 vim.keymap.set( "n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
