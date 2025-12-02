@@ -76,44 +76,15 @@ local function edit_breakpoint()
         bp.hitCondition,
         bp.logMessage
       )
+      require("utils.dap").store_breakpoints()
     end)
   end
 
   customize_bp(find_bp())
-  require("persistent-breakpoints.api").breakpoints_changed_in_current_buffer()
 end
 
 ---@type LazySpec[]
 return {
-  {
-    "Weissle/persistent-breakpoints.nvim",
-    dependencies = {
-      "mfussenegger/nvim-dap",
-    },
-    opts = {
-      load_breakpoints_event = "BufRead",
-      always_reload = true,
-    },
-    keys = {
-      {
-        "<leader>dB",
-        edit_breakpoint,
-        desc = "Breakpoint Condition",
-      },
-      {
-        "<F9>",
-        function() require("persistent-breakpoints.api").toggle_breakpoint() end,
-        desc = "Debugger: Toggle Breakpoint",
-      },
-      {
-        "<F33>", -- Control+F9
-        function()
-          require("persistent-breakpoints.api").clear_all_breakpoints()
-        end,
-        desc = "Debugger: Clear All Breakpoints",
-      },
-    },
-  },
   {
     "mfussenegger/nvim-dap",
     dependencies = {
@@ -123,9 +94,13 @@ return {
         "theHamsta/nvim-dap-virtual-text",
         opts = {},
       },
-      "Weissle/persistent-breakpoints.nvim",
     },
     keys = {
+      {
+        "<leader>dB",
+        edit_breakpoint,
+        desc = "Set Condition Breakpoint",
+      },
       {
         "<leader>dC",
         function() require("dap").run_to_cursor() end,
@@ -164,19 +139,29 @@ return {
       },
       {
         "<leader>da",
-        function()
-          require("persistent-breakpoints.api").load_breakpoints()
-          require("dap").continue { before = get_args }
-        end,
+        function() require("dap").continue { before = get_args } end,
         desc = "Run with Args",
       },
       {
         "<F5>",
-        function()
-          require("persistent-breakpoints.api").load_breakpoints()
-          require("dap").continue()
-        end,
+        function() require("dap").continue() end,
         desc = "Debugger: Start",
+      },
+      {
+        "<F9>",
+        function()
+          require("dap").toggle_breakpoint()
+          require("utils.dap").store_breakpoints()
+        end,
+        desc = "Debugger: Toggle Breakpoint",
+      },
+      {
+        "<F33>", -- Control+F9
+        function()
+          require("dap").clear_breakpoints()
+          require("utils.dap").store_breakpoints()
+        end,
+        desc = "Debugger: Clear All Breakpoints",
       },
       {
         "<F17>",
@@ -285,6 +270,8 @@ return {
           numhl = sign[3],
         })
       end
+
+      require("utils.dap").load_breakpoints()
     end,
   },
 
@@ -305,6 +292,7 @@ return {
       },
     },
     opts = {
+      auto_toggle = true,
       windows = {
         terminal = {
           width = 0.4,
@@ -356,7 +344,9 @@ return {
     config = function(_, opts)
       local dap = require "dap"
       local dapview = require "dap-view"
+
       dapview.setup(opts)
+      require("utils.dap").load_watches()
       dap.listeners.after.event_initialized["dapui_config"] = function()
         dapview.open()
       end
