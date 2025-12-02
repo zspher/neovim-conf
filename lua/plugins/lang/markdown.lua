@@ -40,7 +40,7 @@ return {
     opts = {
       linters_by_ft = {
         -- i like the formatter but damn is this linter pedantic
-        ["markdown"] = { "markdownlint-cli2" },
+        -- ["markdown"] = { "markdownlint-cli2" },
       },
     },
   },
