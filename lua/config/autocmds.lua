@@ -7,6 +7,11 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "dap-view", "dap-repl" },
+  callback = function() vim.opt_local.spell = false end,
+})
+
 -- close some filetypes with <q>
 vim.api.nvim_create_autocmd("FileType", {
   pattern = {
