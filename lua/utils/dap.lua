@@ -71,4 +71,9 @@ vim.api.nvim_create_autocmd({ "BufRead", "DirChanged" }, {
   callback = function() M.load_breakpoints() end,
 })
 
+M.clear_data = function()
+  vim.g.DAP_BREAKPOINTS = {}
+  vim.g.DAP_WATCHES = {}
+end
+
 return M
