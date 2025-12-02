@@ -97,12 +97,7 @@ return {
     },
     keys = {
       {
-        "<leader>dB",
-        edit_breakpoint,
-        desc = "Set Condition Breakpoint",
-      },
-      {
-        "<leader>dC",
+        "<leader>dc",
         function() require("dap").run_to_cursor() end,
         desc = "Run to Cursor",
       },
@@ -143,6 +138,11 @@ return {
         desc = "Debugger: Start",
       },
       {
+        "<F21>", -- Shift+F9
+        edit_breakpoint,
+        desc = "Set Condition Breakpoint",
+      },
+      {
         "<F9>",
         function()
           require("dap").toggle_breakpoint()
@@ -159,15 +159,15 @@ return {
         desc = "Debugger: Clear All Breakpoints",
       },
       {
-        "<F17>",
+        "<F17>", -- Shift+F5
         function() require("dap").terminate() end,
         desc = "Debugger: Stop",
-      }, -- Shift+F5
+      },
       {
-        "<F29>",
+        "<F29>", -- Control+F5
         function() require("dap").restart_frame() end,
         desc = "Debugger: Restart",
-      }, -- Control+F5
+      },
       {
         "<F6>",
         function() require("dap").pause() end,
@@ -189,10 +189,10 @@ return {
         desc = "Debugger: Step Into",
       },
       {
-        "<F23>",
+        "<F23>", -- Shift+F11
         function() require("dap").step_out() end,
         desc = "Debugger: Step Out",
-      }, -- Shift+F11
+      },
     },
 
     config = function()
