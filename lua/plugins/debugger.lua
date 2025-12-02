@@ -128,11 +128,6 @@ return {
         desc = "Toggle REPL",
       },
       {
-        "<leader>ds",
-        function() require("dap").session() end,
-        desc = "Session",
-      },
-      {
         "<leader>dw",
         function() require("dap.ui.widgets").hover() end,
         desc = "Widgets",
@@ -290,6 +285,21 @@ return {
         desc = "Watch",
         mode = { "n", "x" },
       },
+      {
+        "<leader>ds",
+        function() require("dap-view").show_view "sessions" end,
+        desc = "Show Session",
+      },
+      {
+        "<leader>dW",
+        function() require("dap-view").show_view "watches" end,
+        desc = "Show Watch",
+      },
+      {
+        "<leader>dB",
+        function() require("dap-view").show_view "breakpoints" end,
+        desc = "Show Breakpoints",
+      },
     },
     opts = {
       auto_toggle = true,
@@ -301,6 +311,15 @@ return {
         },
       },
       winbar = {
+        sections = {
+          "watches",
+          "scopes",
+          "exceptions",
+          "sessions",
+          "breakpoints",
+          "threads",
+          "repl",
+        },
         controls = {
           enabled = true,
           buttons = {
