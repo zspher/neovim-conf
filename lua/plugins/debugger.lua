@@ -76,7 +76,6 @@ local function edit_breakpoint()
         bp.hitCondition,
         bp.logMessage
       )
-      require("utils.dap").store_breakpoints()
     end)
   end
 
@@ -144,18 +143,12 @@ return {
       },
       {
         "<F9>",
-        function()
-          require("dap").toggle_breakpoint()
-          require("utils.dap").store_breakpoints()
-        end,
+        function() require("dap").toggle_breakpoint() end,
         desc = "Debugger: Toggle Breakpoint",
       },
       {
         "<F33>", -- Control+F9
-        function()
-          require("dap").clear_breakpoints()
-          require("utils.dap").store_breakpoints()
-        end,
+        function() require("dap").clear_breakpoints() end,
         desc = "Debugger: Clear All Breakpoints",
       },
       {
@@ -265,7 +258,7 @@ return {
           numhl = sign[3],
         })
       end
-
+      require("utils.dap").setup()
       require("utils.dap").load_breakpoints()
     end,
   },
