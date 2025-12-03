@@ -82,6 +82,34 @@ local function edit_breakpoint()
   customize_bp(find_bp())
 end
 
+function RunHandshake(self, request_payload)
+  local dap_utils = require "dap.utils"
+  local signResult =
+    io.popen("vsdbgsignature " .. request_payload.arguments.value)
+  if signResult == nil then
+    dap_utils.notify("error while signing handshake", vim.log.levels.ERROR)
+    return
+  end
+  local signature = signResult:read "*a"
+  signature = string.gsub(signature, "\n", "")
+  local response = {
+    type = "response",
+    seq = 0,
+    command = "handshake",
+    request_seq = request_payload.seq,
+    success = true,
+    body = {
+      signature = signature,
+    },
+  }
+  local function send_payload(client, payload)
+    local rpc = require "dap.rpc"
+    local msg = rpc.msg_with_content_length(vim.json.encode(payload))
+    client.write(msg)
+  end
+  send_payload(self.client, response)
+end
+
 ---@type LazySpec[]
 return {
   {
@@ -207,7 +235,20 @@ return {
         type = "executable",
         command = "codelldb",
       }
-
+      dap.adapters.coreclr = {
+        id = "coreclr",
+        type = "executable",
+        command = "vsdbg-ui",
+        args = {
+          "--interpreter=vscode",
+        },
+        options = {
+          externalTerminal = true,
+        },
+        reverse_request_handlers = {
+          handshake = RunHandshake,
+        },
+      }
       -- js-debug
       for _, adapterType in ipairs { "node", "chrome", "msedge" } do
         local pwaType = "pwa-" .. adapterType

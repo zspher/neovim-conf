@@ -167,6 +167,35 @@ return {
           cwd = "${fileDirname}",
           program = get_dll,
         },
+        {
+          type = "coreclr",
+          name = "coreclr: Launch",
+          request = "launch",
+          program = get_dll,
+          args = {},
+          cwd = "${fileDirname}",
+          console = "integratedTerminal",
+        },
+        {
+          type = "coreclr",
+          name = "coreclr: Launch (web)",
+          request = "launch",
+          program = get_dll,
+          args = {},
+          cwd = "${fileDirname}",
+          console = "integratedTerminal",
+          stopAtEntry = false,
+          serverReadyAction = {
+            action = "openExternally",
+            pattern = "\\bNow listening on:\\s+(https?://\\S+)",
+          },
+          env = {
+            ASPNETCORE_ENVIRONMENT = "Development",
+          },
+          sourceFileMap = {
+            ["/Views"] = "${workspaceFolder}/Views",
+          },
+        },
       }
     end,
   },
