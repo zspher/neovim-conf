@@ -64,6 +64,7 @@ M.load_watches = function()
 end
 
 M.setup = function()
+  require("utils.dap").load_breakpoints()
   vim.api.nvim_create_autocmd("VimLeavePre", {
     callback = function()
       M.store_watches()
