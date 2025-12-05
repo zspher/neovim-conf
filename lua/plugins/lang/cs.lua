@@ -4,6 +4,8 @@ return {
   {
     "seblyng/roslyn.nvim",
     ft = { "cs", "razor" },
+    -- TODO: remove once vscode-csharp stable switches to cohost by default
+    commit = "88f837a658df7304ae47fdf251c9560ffbc6bf2b",
     ---@module 'roslyn.config'
     ---@type RoslynNvimConfig
     opts = {
@@ -96,13 +98,6 @@ return {
         },
       }
     end,
-    keys = {
-      {
-        "gd",
-        vim.lsp.buf.definition,
-        desc = "Goto Definition",
-      },
-    },
   },
   -- formatter
   {
