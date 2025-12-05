@@ -7,7 +7,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "dap-view", "dap-repl" },
+  pattern = { "dap-view", "dap-repl", "razor" },
   callback = function() vim.opt_local.spell = false end,
 })
 
