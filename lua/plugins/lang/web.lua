@@ -50,6 +50,11 @@ return {
             "typescriptreact",
             "vue",
           },
+          init_options = {
+            preferences = {
+              ["output.inlineBreak"] = "2",
+            },
+          },
         },
 
         -- general
