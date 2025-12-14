@@ -23,7 +23,7 @@ return {
       TS.setup(opts)
 
       local installed = {}
-      for _, lang in ipairs(require("nvim-treesitter").get_installed "parsers") do
+      for _, lang in ipairs(TS.get_installed "parsers") do
         installed[lang] = lang
       end
 
