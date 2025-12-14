@@ -28,8 +28,8 @@ return {
         },
       },
       formatters_by_ft = {
-        ["markdown"] = { "markdownlint-cli2" },
-        ["markdown.mdx"] = { "markdownlint-cli2" },
+        ["markdown"] = { "prettierd", "markdownlint-cli2" },
+        ["markdown.mdx"] = { "prettierd", "markdownlint-cli2" },
       },
     },
   },
