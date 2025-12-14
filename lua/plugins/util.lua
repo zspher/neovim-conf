@@ -149,6 +149,14 @@ return {
         function() require("persistence").stop() end,
         desc = "Don't Save Current Session",
       },
+      {
+        "<leader>qD",
+        function()
+          require("persistence").stop()
+          vim.fn.delete(require("persistence").current())
+        end,
+        desc = "Delete Current Session",
+      },
     },
     config = function(_, opts)
       require("persistence").setup(opts)
