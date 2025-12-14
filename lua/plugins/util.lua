@@ -126,7 +126,7 @@ return {
   -- You can restore sessions when returning through the dashboard.
   {
     "folke/persistence.nvim",
-    event = "VeryLazy",
+    event = "VimEnter",
     opts = {},
     keys = {
       {
@@ -160,7 +160,13 @@ return {
     },
     config = function(_, opts)
       require("persistence").setup(opts)
-      vim.schedule(function() require("persistence").load() end)
+      vim.api.nvim_create_autocmd("UIEnter", {
+        callback = function()
+          if vim.fn.argc(-1) == 0 then
+            vim.schedule(function() require("persistence").load() end)
+          end
+        end,
+      })
     end,
   },
 
