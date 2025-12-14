@@ -9,6 +9,7 @@ end
 
 ---@module 'snacks'
 
+---@type LazySpec[]
 return {
   -- Snacks utils
   {
@@ -125,16 +126,34 @@ return {
   -- You can restore sessions when returning through the dashboard.
   {
     "folke/persistence.nvim",
-    event = "BufReadPre",
+    event = "VeryLazy",
     opts = {},
     keys = {
-           -- stylua: ignore start
-            { "<leader>qs", function() require("persistence").load() end, desc = "Restore Session" },
-            { "<leader>qS", function() require("persistence").select() end,desc = "Select Session" },
-            { "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Restore Last Session" },
-            { "<leader>qd", function() require("persistence").stop() end, desc = "Don't Save Current Session" },
-      -- stylua: ignore end
+      {
+        "<leader>qs",
+        function() require("persistence").load() end,
+        desc = "Restore Session",
+      },
+      {
+        "<leader>qS",
+        function() require("persistence").select() end,
+        desc = "Select Session",
+      },
+      {
+        "<leader>ql",
+        function() require("persistence").load { last = true } end,
+        desc = "Restore Last Session",
+      },
+      {
+        "<leader>qd",
+        function() require("persistence").stop() end,
+        desc = "Don't Save Current Session",
+      },
     },
+    config = function(_, opts)
+      require("persistence").setup(opts)
+      vim.schedule(function() require("persistence").load() end)
+    end,
   },
 
   -- library used by other plugins
