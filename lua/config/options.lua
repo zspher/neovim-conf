@@ -17,6 +17,7 @@ vim.opt.foldtext = ""
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.sessionoptions = {
   "buffers",
+  "options",
   "curdir",
   "tabpages",
   "winsize",
