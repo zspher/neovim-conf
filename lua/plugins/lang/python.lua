@@ -8,11 +8,12 @@ return {
       ---@type table<string, vim.lsp.Config>
       servers = {
         -- might want to look at https://github.com/astral-sh/ty
-        pyright = {
-          settings = {
-            python = { analysis = { typeCheckingMode = "strict" } },
-          },
-        },
+        -- pyright = {
+        --   settings = {
+        --     python = { analysis = { typeCheckingMode = "strict" } },
+        --   },
+        -- },
+        ty = {},
         ruff = {
           cmd_env = { RUFF_TRACE = "messages" },
           init_options = {
