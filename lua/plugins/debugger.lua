@@ -399,7 +399,6 @@ return {
       local dapview = require "dap-view"
 
       dapview.setup(opts)
-      require("utils.dap").load_watches()
       dap.listeners.after.event_initialized["dapui_config"] = function()
         dapview.open()
       end

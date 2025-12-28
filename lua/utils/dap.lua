@@ -53,23 +53,10 @@ M.load_breakpoints = function()
   end
 end
 
-M.store_watches = function()
-  local dapview_state = require("dap-view.state").watched_expressions
-  vim.g.DAP_WATCHES = { [get_path()] = dapview_state }
-end
-
-M.load_watches = function()
-  local watches = vim.g.DAP_WATCHES[get_path()] or {}
-  require("dap-view.state").watched_expressions = watches
-end
-
 M.setup = function()
   require("utils.dap").load_breakpoints()
   vim.api.nvim_create_autocmd("VimLeavePre", {
-    callback = function()
-      M.store_watches()
-      M.store_breakpoints()
-    end,
+    callback = function() M.store_breakpoints() end,
   })
 
   vim.api.nvim_create_autocmd({ "BufRead", "DirChanged" }, {
@@ -77,9 +64,6 @@ M.setup = function()
   })
 end
 
-M.clear_data = function()
-  vim.g.DAP_BREAKPOINTS = {}
-  vim.g.DAP_WATCHES = {}
-end
+M.clear_data = function() vim.g.DAP_BREAKPOINTS = {} end
 
 return M
