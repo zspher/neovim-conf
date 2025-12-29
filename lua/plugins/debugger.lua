@@ -299,14 +299,13 @@ return {
           numhl = sign[3],
         })
       end
-      require("utils.dap").setup()
-      require("utils.dap").load_breakpoints()
     end,
   },
 
   -- fancy UI for the debugger
   {
     "igorlfs/nvim-dap-view",
+    lazy = false,
     keys = {
       {
         "<leader>du",
@@ -399,9 +398,21 @@ return {
       local dapview = require "dap-view"
 
       dapview.setup(opts)
+
+      dap.listeners.before.event_initialized["dapui_config"] = function()
+        require("utils.dap").load_breakpoints()
+      end
+
       dap.listeners.after.event_initialized["dapui_config"] = function()
         dapview.open()
+        require("dap-view.vim-sessions").load_session_hook()
       end
+      dap.listeners.after.event_exited["dapui_config"] = function()
+        require("dap-view.vim-sessions").save_state()
+      end
+      vim.api.nvim_create_autocmd("VimLeavePre", {
+        callback = function() require("utils.dap").store_breakpoints() end,
+      })
     end,
   },
 }

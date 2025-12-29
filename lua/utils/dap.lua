@@ -18,13 +18,13 @@ M.store_breakpoints = function()
 
   if #filename == 0 then return end
 
-  vim.g.DAP_BREAKPOINTS = { [get_path()] = { [filename] = buf_breakpoints } }
+  vim.g.DAP_BREAKPOINTS = { [filename] = buf_breakpoints }
 end
 
 --- Load existing breakpoints for all open buffers in the session
 M.load_breakpoints = function()
   local current_bps = breakpoints.get()
-  local saved_bps = vim.g.DAP_BREAKPOINTS[get_path()] or {}
+  local saved_bps = vim.g.DAP_BREAKPOINTS or {}
   local bufs_to_restore = {}
 
   -- Find the new loaded buffer.
@@ -51,17 +51,6 @@ M.load_breakpoints = function()
       breakpoints.set(opts, buf_id, line)
     end
   end
-end
-
-M.setup = function()
-  require("utils.dap").load_breakpoints()
-  vim.api.nvim_create_autocmd("VimLeavePre", {
-    callback = function() M.store_breakpoints() end,
-  })
-
-  vim.api.nvim_create_autocmd({ "BufRead", "DirChanged" }, {
-    callback = function() M.load_breakpoints() end,
-  })
 end
 
 M.clear_data = function() vim.g.DAP_BREAKPOINTS = {} end
