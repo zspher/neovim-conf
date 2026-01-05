@@ -17,6 +17,28 @@ return {
           cshtml = "razor",
         },
       }
+      local razor = vim.fs.joinpath(
+        vim.fn.fnamemodify(vim.fn.resolve(vim.fn.exepath "roslyn-ls"), ":h:h"),
+        ".razorExtension"
+      )
+      local cmd = {
+        "roslyn-ls",
+        "--stdio",
+        "--logLevel=Information",
+        "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
+        "--razorSourceGenerator="
+          .. vim.fs.joinpath(razor, "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
+        "--razorDesignTimePath=" .. vim.fs.joinpath(
+          razor,
+          "Targets",
+          "Microsoft.NET.Sdk.Razor.DesignTime.targets"
+        ),
+        "--extension",
+        vim.fs.joinpath(razor, "Microsoft.VisualStudioCode.RazorExtension.dll"),
+      }
+      vim.lsp.config("roslyn", {
+        cmd = cmd,
+      })
     end,
   },
   -- formatter
