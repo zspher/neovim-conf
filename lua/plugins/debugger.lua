@@ -338,9 +338,8 @@ return {
       auto_toggle = true,
       windows = {
         terminal = {
-          width = 0.4,
+          size = 0.4,
           position = "right",
-          start_hidden = false,
         },
       },
       winbar = {
