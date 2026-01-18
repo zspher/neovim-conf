@@ -15,10 +15,19 @@ return {
               nixpkgs = { expr = "import <nixpkgs> { }" },
               ["options"] = {
                 ["nixos"] = {
-                  expr = flake .. ".nixosConfigurations.ls-2100.options",
+                  expr = string.format(
+                    '%s.nixosConfigurations."%s".options',
+                    flake,
+                    vim.fn.hostname()
+                  ),
                 },
                 ["home-manager"] = {
-                  expr = flake .. '.homeConfigurations."faust@ls-2100".options',
+                  expr = string.format(
+                    '%s.homeConfigurations."%s@%s".options',
+                    flake,
+                    vim.env.USER,
+                    vim.fn.hostname()
+                  ),
                 },
                 ["flake-parts"] = {
                   expr = flake .. ".debug.options",
