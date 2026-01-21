@@ -502,12 +502,6 @@ return {
               section = "session",
             },
             {
-              icon = " ",
-              key = "x",
-              desc = "Lazy Extras",
-              action = ":LazyExtras",
-            },
-            {
               icon = "󰒲 ",
               key = "l",
               desc = "Lazy",
