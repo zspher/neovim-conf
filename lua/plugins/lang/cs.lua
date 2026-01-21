@@ -103,13 +103,6 @@ return {
       local dap = require "dap"
       dap.configurations.cs = {
         {
-          type = "netcoredbg",
-          name = "NetCoreDbg: Launch",
-          request = "launch",
-          cwd = "${fileDirname}",
-          program = get_dll,
-        },
-        {
           type = "coreclr",
           name = "coreclr: Launch",
           request = "launch",

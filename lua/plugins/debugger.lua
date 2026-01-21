@@ -242,9 +242,6 @@ return {
         args = {
           "--interpreter=vscode",
         },
-        options = {
-          externalTerminal = true,
-        },
         reverse_request_handlers = {
           handshake = RunHandshake,
         },
@@ -335,7 +332,7 @@ return {
       },
     },
     opts = {
-      auto_toggle = true,
+      auto_toggle = "open_term",
       windows = {
         terminal = {
           size = 0.4,
@@ -398,20 +395,9 @@ return {
 
       dapview.setup(opts)
 
-      dap.listeners.before.event_initialized["dapui_config"] = function()
-        require("utils.dap").load_breakpoints()
-      end
-
       dap.listeners.after.event_initialized["dapui_config"] = function()
         dapview.open()
-        require("dap-view.vim-sessions").load_session_hook()
       end
-      dap.listeners.after.event_exited["dapui_config"] = function()
-        require("dap-view.vim-sessions").save_state()
-      end
-      vim.api.nvim_create_autocmd("VimLeavePre", {
-        callback = function() require("utils.dap").store_breakpoints() end,
-      })
     end,
   },
 }
