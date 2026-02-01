@@ -9,10 +9,11 @@ return {
       servers = {
         yamlls = {
           before_init = function(_, config)
-            vim.list_extend(
-              ---@diagnostic disable-next-line: undefined-field
+            ---@diagnostic disable-next-line:  inject-field
+            config.settings.yaml.schemas = vim.tbl_deep_extend(
+              "force",
               config.settings.yaml.schemas or {},
-              require("schemastore").yaml().schemas()
+              require("schemastore").yaml.schemas()
             )
           end,
           settings = {
