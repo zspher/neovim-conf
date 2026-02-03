@@ -64,6 +64,7 @@ return {
             end
           end)
         end
+        return {}
       end
 
       if opts.adapters then
