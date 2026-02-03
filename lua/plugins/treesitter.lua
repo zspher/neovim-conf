@@ -15,6 +15,7 @@ return {
         "query",
         "vim",
         "vimdoc",
+        "regex",
       },
       disable = {},
     },
