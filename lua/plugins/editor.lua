@@ -61,19 +61,24 @@ return {
             group = "harpoon",
             icon = { cat = "filetype", name = "harpoon" },
             expand = function()
-              local wk_extra = require "which-key.extras"
               local ret = {} ---@type wk.Spec[]
 
-              for _, buf in ipairs(harpoon_to_buflist()) do
-                local name = wk_extra.bufname(buf)
+              -- harpoon lists start at 1 and which-key expand starts at 0
+              ret[#ret + 1] = { cond = false }
+              for i, item in ipairs(require("harpoon"):list().items) do
                 ret[#ret + 1] = {
                   "",
-                  function() vim.api.nvim_set_current_buf(buf) end,
-                  desc = name,
-                  icon = { cat = "file", name = name },
+                  function() require("harpoon"):list():select(i) end,
+                  desc = item.value,
+                  icon = { cat = "file", name = item.value },
                 }
               end
-              return wk_extra.add_keys(ret)
+
+              ret = vim.list_slice(ret, 1, 10)
+              for i, v in ipairs(ret) do
+                v[1] = tostring(i - 1)
+              end
+              return ret
             end,
           },
           -- better descriptions
