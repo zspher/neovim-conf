@@ -56,6 +56,26 @@ return {
           },
           { "<leader>t", group = "test" },
           { "<leader>r", group = "refactor" },
+          {
+            "<leader>h",
+            group = "harpoon",
+            icon = { cat = "filetype", name = "harpoon" },
+            expand = function()
+              local wk_extra = require "which-key.extras"
+              local ret = {} ---@type wk.Spec[]
+
+              for _, buf in ipairs(harpoon_to_buflist()) do
+                local name = wk_extra.bufname(buf)
+                ret[#ret + 1] = {
+                  "",
+                  function() vim.api.nvim_set_current_buf(buf) end,
+                  desc = name,
+                  icon = { cat = "file", name = name },
+                }
+              end
+              return wk_extra.add_keys(ret)
+            end,
+          },
           -- better descriptions
           { "gx", desc = "Open with system app" },
         },
@@ -259,7 +279,6 @@ return {
       harpoon:extend(extensions.builtins.navigate_with_number())
     end,
     keys = {
-      { "<leader>h", "", desc = "+harpoon", mode = { "n" } },
       {
         "<leader>ha",
         function() require("harpoon"):list():add() end,
