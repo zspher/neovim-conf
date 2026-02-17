@@ -42,6 +42,8 @@ return {
             proxy = "<c-w>",
             expand = function() return require("which-key.extras").expand.win() end,
           },
+          { "<leader>t", group = "test" },
+          { "<leader>r", group = "refactor" },
           -- better descriptions
           { "gx", desc = "Open with system app" },
         },

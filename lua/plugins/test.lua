@@ -97,7 +97,6 @@ return {
       require("neotest").setup(opts)
     end,
     keys = {
-      { "<leader>t", "", desc = "+test" },
       {
         "<leader>ta",
         function() require("neotest").run.attach() end,
