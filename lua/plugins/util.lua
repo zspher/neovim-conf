@@ -128,7 +128,9 @@ return {
   {
     "stevearc/resession.nvim",
     event = "VimEnter",
-    opts = {},
+    opts = {
+      auto_load = true,
+    },
     keys = {
       {
         "<leader>ql",
@@ -163,17 +165,19 @@ return {
       require("resession").setup(opts)
       local resession = require "resession"
 
-      vim.api.nvim_create_autocmd("UIEnter", {
-        callback = function()
-          if vim.fn.argc(-1) == 0 then
-            vim.schedule(
-              function()
-                resession.load(vim.fn.getcwd(), { silence_errors = true })
-              end
-            )
-          end
-        end,
-      })
+      if opts.auto_load then
+        vim.api.nvim_create_autocmd("UIEnter", {
+          callback = function()
+            if vim.fn.argc(-1) == 0 then
+              vim.schedule(
+                function()
+                  resession.load(vim.fn.getcwd(), { silence_errors = true })
+                end
+              )
+            end
+          end,
+        })
+      end
 
       vim.api.nvim_create_autocmd("VimLeavePre", {
         callback = function()
