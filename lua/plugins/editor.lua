@@ -1,5 +1,17 @@
 local oil_detail = false
 
+local function harpoon_to_buflist()
+  local harpoon_list = require("harpoon"):list().items
+  local cwd = vim.uv.cwd()
+  local buflist = {}
+  for _, v in ipairs(harpoon_list) do
+    local file = cwd .. "/" .. v.value
+    local buf = vim.fn.bufnr(file, false)
+    if buf ~= -1 then buflist[#buflist + 1] = buf end
+  end
+  return buflist
+end
+
 -- NOTE: development stuff, git, keymap hint, explorer, floating windows
 
 ---@module 'snacks'
@@ -278,14 +290,7 @@ return {
       {
         "<leader>bh",
         function()
-          local harpoon_list = require("harpoon"):list().items
-          local cwd = vim.uv.cwd()
-          local buflist = {}
-          for _, v in ipairs(harpoon_list) do
-            local file = cwd .. "/" .. v.value
-            local buf = vim.fn.bufnr(file, false)
-            if buf ~= -1 then buflist[#buflist + 1] = buf end
-          end
+          local buflist = harpoon_to_buflist()
           vim.list_extend(buflist, vim.fn.tabpagebuflist())
 
           Snacks.bufdelete.delete {
