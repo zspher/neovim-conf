@@ -469,7 +469,7 @@ return {
               icon = " ",
               key = "f",
               desc = "Find File",
-              action = ":lua Snacks.dashboard.pick('files')",
+              action = ":= Snacks.dashboard.pick('files')",
             },
             {
               icon = " ",
@@ -481,7 +481,7 @@ return {
               icon = " ",
               key = "g",
               desc = "Find Text",
-              action = ":lua Snacks.dashboard.pick('live_grep')",
+              action = ":= Snacks.dashboard.pick('live_grep')",
             },
             {
               icon = " ",
@@ -493,13 +493,13 @@ return {
               icon = " ",
               key = "c",
               desc = "Config",
-              action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
+              action = ":= Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
             },
             {
               icon = " ",
               key = "s",
               desc = "Restore Session",
-              section = "session",
+              action = ":= require('resession').load()",
             },
             {
               icon = "󰒲 ",

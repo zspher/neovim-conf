@@ -7,8 +7,9 @@ local function term_nav(dir)
   end
 end
 
----@module 'snacks'
+local save_session = true
 
+---@module 'snacks'
 ---@type LazySpec[]
 return {
   -- Snacks utils
@@ -125,45 +126,59 @@ return {
   -- keeping track of open buffers, window arrangement, and more.
   -- You can restore sessions when returning through the dashboard.
   {
-    "folke/persistence.nvim",
+    "stevearc/resession.nvim",
     event = "VimEnter",
     opts = {},
     keys = {
       {
-        "<leader>qs",
-        function() require("persistence").load() end,
-        desc = "Restore Session",
-      },
-      {
-        "<leader>qS",
-        function() require("persistence").select() end,
-        desc = "Select Session",
-      },
-      {
         "<leader>ql",
-        function() require("persistence").load { last = true } end,
+        function()
+          require("resession").load(vim.fn.getcwd(), { silence_errors = true })
+        end,
         desc = "Restore Last Session",
       },
       {
-        "<leader>qd",
-        function() require("persistence").stop() end,
-        desc = "Don't Save Current Session",
+        "<leader>qL",
+        function() require("resession").load() end,
+        desc = "List Sessions",
       },
       {
-        "<leader>qD",
+        "<leader>qs",
+        function() require("resession").save(vim.fn.getcwd()) end,
+        desc = "Save Current Session",
+      },
+      {
+        "<leader>qd",
         function()
-          require("persistence").stop()
-          vim.fn.delete(require("persistence").current())
+          require("resession").delete(
+            vim.fn.getcwd(),
+            { silence_errors = true }
+          )
+          save_session = false
         end,
-        desc = "Delete Current Session",
+        desc = "Delete Last Session",
       },
     },
     config = function(_, opts)
-      require("persistence").setup(opts)
+      require("resession").setup(opts)
+      local resession = require "resession"
+
       vim.api.nvim_create_autocmd("UIEnter", {
         callback = function()
           if vim.fn.argc(-1) == 0 then
-            vim.schedule(function() require("persistence").load() end)
+            vim.schedule(
+              function()
+                resession.load(vim.fn.getcwd(), { silence_errors = true })
+              end
+            )
+          end
+        end,
+      })
+
+      vim.api.nvim_create_autocmd("VimLeavePre", {
+        callback = function()
+          if save_session then
+            resession.save(vim.fn.getcwd(), { notify = false })
           end
         end,
       })
