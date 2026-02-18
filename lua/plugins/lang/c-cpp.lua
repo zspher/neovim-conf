@@ -76,7 +76,6 @@ return {
       }
       for _, lang in ipairs { "c", "cpp" } do
         dap.configurations[lang] = {
-          launch,
           {
             name = "Launch file",
             type = "codelldb",
@@ -96,6 +95,7 @@ return {
             processId = "${command:pickProcess}",
             cwd = "${workspaceFolder}",
           },
+          launch,
         }
       end
     end,
