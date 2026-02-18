@@ -130,6 +130,10 @@ return {
     event = "VimEnter",
     opts = {
       auto_load = true,
+      extensions = {
+        dap_fixed = {},
+        dap_view = {},
+      },
     },
     keys = {
       {
