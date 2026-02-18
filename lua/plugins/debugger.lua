@@ -121,6 +121,7 @@ return {
         "theHamsta/nvim-dap-virtual-text",
         opts = {},
       },
+      "stevearc/overseer.nvim",
     },
     keys = {
       {
@@ -296,6 +297,9 @@ return {
           numhl = sign[3],
         })
       end
+
+      -- overseer integration
+      require("overseer").enable_dap(true)
     end,
   },
 

@@ -196,6 +196,8 @@ return {
               "snacks_dashboard",
               "trouble",
               "noice",
+              "OverseerList",
+              "OverseerOutput",
             },
           },
 

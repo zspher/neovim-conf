@@ -19,18 +19,6 @@ return {
             function() vim.cmd.RustLsp "debuggables" end,
             { desc = "Rust Debuggables", buffer = bufnr }
           )
-          vim.keymap.set(
-            "n",
-            "<leader>ct",
-            function() vim.cmd.RustLsp "runnables" end,
-            { desc = "Rust run task", buffer = bufnr }
-          )
-          vim.keymap.set(
-            "n",
-            "<leader>cT",
-            function() vim.cmd.RustLsp { "runnables", bang = true } end,
-            { desc = "Rust restart task", buffer = bufnr }
-          )
         end,
         default_settings = {
           -- rust-analyzer language server configuration

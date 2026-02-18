@@ -551,4 +551,61 @@ return {
       },
     },
   },
+
+  -- runner
+  {
+    "stevearc/overseer.nvim",
+    ---@module 'overseer'
+    ---@type overseer.SetupOpts
+    opts = {
+      dap = false,
+      task_list = {
+        render = function(task)
+          local render = require "overseer.render"
+
+          return {
+            render.status_and_name(task),
+            render.join(render.duration(task), {
+              ---@diagnostic disable-next-line: assign-type-mismatch
+              { os.date("%H:%M:%S", task.time_end), "Comment" },
+            }),
+          }
+        end,
+      },
+    },
+    keys = {
+      {
+        "<leader>ct",
+        "<Cmd>OverseerRun<CR>",
+        desc = "Run Task",
+      },
+      {
+        "<leader>cT",
+        function()
+          local overseer = require "overseer"
+          local task_list = require "overseer.task_list"
+          local tasks = overseer.list_tasks {
+            status = {
+              overseer.STATUS.SUCCESS,
+              overseer.STATUS.FAILURE,
+              overseer.STATUS.CANCELED,
+            },
+            sort = task_list.sort_finished_recently,
+          }
+          if vim.tbl_isempty(tasks) then
+            vim.cmd "OverseerRun"
+          else
+            local most_recent = tasks[1]
+            overseer.run_action(most_recent, "restart")
+          end
+        end,
+        desc = "Restart Task",
+      },
+      {
+        "<leader>co",
+        "<Cmd>OverseerToggle<CR>",
+        desc = "Show Task Output",
+      },
+    },
+  },
 }
