@@ -302,7 +302,6 @@ return {
   -- fancy UI for the debugger
   {
     "igorlfs/nvim-dap-view",
-    lazy = false,
     keys = {
       {
         "<leader>du",

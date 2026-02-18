@@ -14,6 +14,7 @@ M.on_save = function(opts)
       table.insert(all_breakpoints, bp)
     end
   end
+  if #all_breakpoints == 0 then return nil end
   return {
     breakpoints = all_breakpoints,
   }
