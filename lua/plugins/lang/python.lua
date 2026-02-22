@@ -21,21 +21,6 @@ return {
               logLevel = "error",
             },
           },
-          keys = {
-            {
-              "<leader>co",
-              function()
-                vim.lsp.buf.code_action {
-                  apply = true,
-                  context = {
-                    only = { "source.organizeImports" },
-                    diagnostics = {},
-                  },
-                }
-              end,
-              desc = "Organize Imports",
-            },
-          },
           on_attach = function(client, _)
             -- Disable hover in favor of Pyright
             client.server_capabilities.hoverProvider = false
