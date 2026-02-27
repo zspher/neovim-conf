@@ -32,24 +32,6 @@ return {
           end,
         },
         emmet_language_server = {
-          filetypes = {
-            "astro",
-            "css",
-            "eruby",
-            "html",
-            "htmlangular",
-            "htmldjango",
-            "javascriptreact",
-            "less",
-            "pug",
-            "razor",
-            "sass",
-            "scss",
-            "svelte",
-            "templ",
-            "typescriptreact",
-            "vue",
-          },
           init_options = {
             preferences = {
               ["output.inlineBreak"] = "2",
@@ -77,26 +59,33 @@ return {
       },
     },
   },
-  -- formatter
   {
-    "stevearc/conform.nvim",
-    optional = true,
-    opts = {
-      formatters_by_ft = {
-        ["css"] = { "prettierd" },
-      },
-    },
+    "neovim/nvim-lspconfig",
+    opts = function(_, opts)
+      local ft = vim.lsp.config.emmet_language_server.filetypes or {}
+      opts.servers.emmet_language_server.filetypes =
+        vim.list_extend(ft, { "razor" })
+    end,
   },
 
+  -- formatter
+  -- {
+  --   "stevearc/conform.nvim",
+  --   optional = true,
+  --   opts = {
+  --     formatters_by_ft = {},
+  --   },
+  -- },
+
   -- linter
-  {
-    "mfussenegger/nvim-lint",
-    opts = {
-      linters_by_ft = {
-        html = { "htmlhint" },
-      },
-    },
-  },
+  -- {
+  --   "mfussenegger/nvim-lint",
+  --   opts = {
+  --     linters_by_ft = {
+  --       -- html = { "htmlhint" },
+  --     },
+  --   },
+  -- },
 
   -- syntax highlight
   {
