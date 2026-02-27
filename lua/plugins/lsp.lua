@@ -85,6 +85,17 @@ return {
       vim.keymap.del("n", "grt")
 
       local function register_keys(client)
+        if client == nil then return end
+
+        local options = require("lazy.core.plugin").values(
+          require("lazy.core.config").spec.plugins["nvim-lspconfig"],
+          "opts",
+          false
+        )
+        local maps = options.servers[client.name]
+            and options.servers[client.name].keys
+          or {}
+
         local picker = require "snacks.picker"
 
         ---@type LazyKeysSpec[]
@@ -152,17 +163,6 @@ return {
           { "<leader>cl", Snacks.picker.lsp_config, desc = "Lsp Info" },
         }
 
-        local options = require("lazy.core.plugin").values(
-          require("lazy.core.config").spec.plugins["nvim-lspconfig"],
-          "opts",
-          false
-        )
-
-        if client == nil then return end
-        local maps = options.servers[client.name]
-            and options.servers[client.name].keys
-          or {}
-
         vim.list_extend(spec, maps)
 
         local Keys = require "lazy.core.handler.keys"
@@ -185,7 +185,7 @@ return {
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
           local client = vim.lsp.get_client_by_id(args.data.client_id)
-          if client then return register_keys(client) end
+          if client then register_keys(client) end
         end,
       })
 
