@@ -28,8 +28,8 @@ return {
         },
       },
       formatters_by_ft = {
-        ["markdown"] = { "prettierd", "markdownlint-cli2" },
-        ["markdown.mdx"] = { "prettierd", "markdownlint-cli2" },
+        ["markdown"] = { "markdownlint-cli2" },
+        ["markdown.mdx"] = { "markdownlint-cli2" },
       },
     },
   },
@@ -38,9 +38,19 @@ return {
     "mfussenegger/nvim-lint",
     optional = true,
     opts = {
+      linters = {
+        ["markdownlint-cli2"] = {
+          condition = function(ctx)
+            return vim.fs.find(
+              { ".markdownlint.jsonc", ".markdownlint.yaml" },
+              { path = ctx.filename, upward = true }
+            )[1]
+          end,
+        },
+      },
       linters_by_ft = {
         -- i like the formatter but damn is this linter pedantic
-        -- ["markdown"] = { "markdownlint-cli2" },
+        ["markdown"] = { "markdownlint-cli2" },
       },
     },
   },
