@@ -90,10 +90,12 @@ return {
         qss = { css = true },
         css = { css = true, css_fn = true },
       },
-      user_default_options = {
-        names = false,
+      options = {
         always_update = true,
-        tailwind = "lsp",
+        parsers = {
+          names = { enable = false },
+          tailwind = { lsp = true },
+        },
       },
       buftypes = { "!nofile" },
     },
