@@ -2,25 +2,25 @@
 -- relevant issue: https://github.com/kovidgoyal/kitty/issues/719
 return function(INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN)
   -- vim.print("kitty sent:", INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN)
-  vim.opt.encoding = "utf-8"
-  vim.opt.clipboard = { "unnamed", "unnamedplus" }
   vim.cmd.colorscheme "catppuccin"
-  vim.opt.spell = false
-  vim.opt.list = false
-  vim.opt.statuscolumn = ""
-  vim.opt.signcolumn = "no"
-  vim.opt.compatible = false
-  vim.opt.number = false
-  vim.opt.relativenumber = false
-  vim.opt.termguicolors = true
-  vim.opt.showmode = false
-  vim.opt.ruler = false
-  vim.opt.laststatus = 0
+  vim.o.clipboard = "unnamed,unnamedplus"
   vim.o.cmdheight = 0
-  vim.opt.showcmd = false
-  vim.opt.scrollback = INPUT_LINE_NUMBER + CURSOR_COLUMN + CURSOR_LINE == 0
+  vim.o.compatible = false
+  vim.o.encoding = "utf-8"
+  vim.o.laststatus = 0
+  vim.o.list = false
+  vim.o.number = false
+  vim.o.relativenumber = false
+  vim.o.ruler = false
+  vim.o.scrollback = INPUT_LINE_NUMBER + CURSOR_COLUMN + CURSOR_LINE == 0
       and 10000
     or INPUT_LINE_NUMBER + CURSOR_LINE
+  vim.o.showcmd = false
+  vim.o.showmode = false
+  vim.o.signcolumn = "no"
+  vim.o.spell = false
+  vim.o.statuscolumn = ""
+  vim.o.termguicolors = true
   local term_buf = vim.api.nvim_create_buf(true, false)
   local term_io = vim.api.nvim_open_term(term_buf, {})
   vim.api.nvim_buf_set_keymap(term_buf, "n", "q", "<Cmd>q<CR>", {})

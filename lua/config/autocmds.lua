@@ -1,14 +1,14 @@
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "markdown", "yaml", "css", "json", "jsonc", "html", "xml" },
-  callback = function(ev)
-    vim.opt_local.tabstop = 2
-    vim.opt_local.shiftwidth = 2
+  callback = function()
+    vim.bo.tabstop = 2
+    vim.bo.shiftwidth = 2
   end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "dap-view", "dap-repl", "razor" },
-  callback = function() vim.opt_local.spell = false end,
+  pattern = { "dap-view", "dap-repl", "razor", "man" },
+  callback = function() vim.wo.spell = false end,
 })
 
 -- close some filetypes with <q>

@@ -122,8 +122,7 @@ return {
         },
       },
       dash = {
-        ---@diagnostic disable-next-line: undefined-field
-        width = tonumber(vim.opt.cc:get()[1]),
+        width = tonumber(vim.o.cc),
       },
     },
     ft = { "markdown", "norg", "rmd", "org", "codecompanion" },
