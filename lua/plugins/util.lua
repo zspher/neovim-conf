@@ -172,13 +172,16 @@ return {
       if opts.auto_load then
         vim.api.nvim_create_autocmd("UIEnter", {
           callback = function()
-            if vim.fn.argc(-1) == 0 then
+            local is_manpager = vim.list_contains(vim.v.argv, "+Man!")
+            if vim.fn.argc(-1) == 0 and not is_manpager then
               vim.schedule(
                 function()
                   resession.load(vim.fn.getcwd(), { silence_errors = true })
                 end
               )
             end
+
+            if is_manpager then save_session = false end
           end,
         })
       end
