@@ -251,11 +251,11 @@ return {
               end,
               color = function() return { fg = Snacks.util.color "Debug" } end,
             },
-            {
-              require("lazy.status").updates,
-              cond = require("lazy.status").has_updates,
-              color = function() return { fg = Snacks.util.color "Special" } end,
-            },
+            -- {
+            --   require("lazy.status").updates,
+            --   cond = require("lazy.status").has_updates,
+            --   color = function() return { fg = Snacks.util.color "Special" } end,
+            -- },
           },
           lualine_y = {
             {
