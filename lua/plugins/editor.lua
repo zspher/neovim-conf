@@ -113,9 +113,25 @@ return {
             builtin = false,
           },
         },
+        actions = {
+          trouble_open = function(...)
+            -- stylua: ignore
+            return require("trouble.sources.snacks").actions.trouble_open.action(...)
+          end,
+        },
+        win = {
+          input = {
+            keys = {
+              ["<a-t>"] = {
+                "trouble_open",
+                mode = { "n", "i" },
+              },
+            },
+          },
+        },
       },
     },
-    -- stylua: ignore start
+    -- stylua: ignore
     keys = {
       -- NOTE: git
       { "<leader>gb", function() Snacks.picker.git_log_line() end, desc = "Git Blame Line" },
@@ -182,7 +198,6 @@ return {
       -- ui
       { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
     },
-    -- stylua: ignore end
   },
 
   -- explorer
