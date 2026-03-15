@@ -14,6 +14,7 @@ return {
               require("schemastore").json.schemas()
             )
           end,
+          ---@type lspconfig.settings.jsonls
           settings = {
             json = {
               format = { enable = true },

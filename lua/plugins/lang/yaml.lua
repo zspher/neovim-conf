@@ -16,6 +16,7 @@ return {
               require("schemastore").yaml.schemas()
             )
           end,
+          ---@type lspconfig.settings.yamlls
           settings = {
             yaml = { schemaStore = { enable = false, url = "" } },
             schemas = {},

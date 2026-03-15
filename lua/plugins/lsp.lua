@@ -98,66 +98,23 @@ return {
 
         local picker = require "snacks.picker"
 
+        -- stylua: ignore
         ---@type LazyKeysSpec[]
         local spec = {
-          {
-            "gd",
-            picker.lsp_definitions,
-            desc = "Goto Definition",
-          },
+          { "gd", picker.lsp_definitions, desc = "Goto Definition" },
           { "gr", picker.lsp_references, desc = "References" },
           { "gI", picker.lsp_implementations, desc = "Goto Implementation" },
-          {
-            "gy",
-            picker.lsp_type_definitions,
-            desc = "Goto T[y]pe Definition",
-          },
+          { "gy", picker.lsp_type_definitions, desc = "Goto T[y]pe Definition" },
           { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
-          {
-            "]]",
-            function() Snacks.words.jump(vim.v.count1) end,
-            desc = "Next Reference",
-            cond = Snacks.words.is_enabled(),
-          },
-          {
-            "[[",
-            function() Snacks.words.jump(-vim.v.count1) end,
-            desc = "Prev Reference",
-            cond = Snacks.words.is_enabled(),
-          },
+          { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", cond = Snacks.words.is_enabled() },
+          { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", cond = Snacks.words.is_enabled() },
           { "<leader>ss", picker.lsp_symbols, desc = "LSP Symbols" },
-          {
-            "<leader>sS",
-            picker.lsp_workspace_symbols,
-            desc = "LSP Workspace Symbols",
-          },
-          {
-            "gai",
-            function() Snacks.picker.lsp_incoming_calls() end,
-            desc = "C[a]lls Incoming",
-          },
-          {
-            "gao",
-            function() Snacks.picker.lsp_outgoing_calls() end,
-            desc = "C[a]lls Outgoing",
-          },
-          {
-            "<leader>ca",
-            vim.lsp.buf.code_action,
-            desc = "Code Action",
-            mode = { "n", "x" },
-          },
-          {
-            "<leader>cc",
-            vim.lsp.codelens.run,
-            desc = "Run Codelens",
-            mode = { "n", "x" },
-          },
-          {
-            "<leader>cC",
-            vim.lsp.codelens.refresh,
-            desc = "Refresh & Display Codelens",
-          },
+          { "<leader>sS", picker.lsp_workspace_symbols, desc = "LSP Workspace Symbols" },
+          { "gai", function() Snacks.picker.lsp_incoming_calls() end, desc = "C[a]lls Incoming" },
+          { "gao", function() Snacks.picker.lsp_outgoing_calls() end, desc = "C[a]lls Outgoing" },
+          { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "x" } },
+          { "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "x" } },
+          { "<leader>cC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens" },
           { "<leader>cR", Snacks.rename.rename_file, desc = "Rename File" },
           { "<leader>cr", vim.lsp.buf.rename, desc = "Rename" },
           { "<leader>cl", Snacks.picker.lsp_config, desc = "Lsp Info" },
@@ -223,7 +180,12 @@ return {
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
         { path = "snacks.nvim", words = { "Snacks" } },
         { path = "lazy.nvim", words = { "LazyVim" } },
+        { path = "nvim-lspconfig", words = { "lspconfig.settings" } },
       },
     },
+    config = function(_, opts)
+      require "lspconfig"
+      require("lazydev").setup(opts)
+    end,
   },
 }

@@ -8,6 +8,7 @@ return {
       ---@type table<string, vim.lsp.Config>
       servers = {
         vtsls = {
+          ---@type lspconfig.settings.vtsls
           settings = {
             vtsls = {
               experimental = {

@@ -7,6 +7,7 @@ return {
       ---@type table<string, vim.lsp.Config>
       servers = {
         lua_ls = {
+          ---@type lspconfig.settings.lua_ls
           settings = {
             Lua = {
               workspace = {
