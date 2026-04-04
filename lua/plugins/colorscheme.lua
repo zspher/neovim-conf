@@ -28,11 +28,7 @@ return {
       },
       custom_highlights = function(c)
         return {
-          LineNrAbove = { fg = c.subtext0 },
-          LineNrBelow = { fg = c.subtext0 },
-          CursorLineNr = { fg = c.peach, style = { "bold" } },
-          LineNr = { fg = c.peach, style = { "bold" } },
-
+          LineNr = { fg = c.surface2 },
           RenderMarkdownCancelledTask = {
             fg = c.subtext0,
             style = { "strikethrough" },
