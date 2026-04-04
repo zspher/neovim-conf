@@ -74,16 +74,9 @@ return {
   },
   -- comments
   {
-    "folke/ts-comments.nvim",
+    "JoosepAlviste/nvim-ts-context-commentstring",
     event = "VeryLazy",
-    opts = {
-      lang = {
-        typst = {
-          "// %s", -- default commentstring when no treesitter node matches
-          "/* %s */",
-        },
-      },
-    },
+    opts = {},
   },
   {
     "danymat/neogen",
