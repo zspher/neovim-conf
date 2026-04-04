@@ -23,6 +23,7 @@ return {
       setup = {},
       codelens = {
         enabled = false,
+        exclude = {},
       },
       inlay_hints = {
         enabled = true,
@@ -58,23 +59,32 @@ return {
       end
 
       -- code lens
-      if opts.codelens.enabled and vim.lsp.codelens then
+      if opts.codelens.enabled then
         vim.api.nvim_create_autocmd("LspAttach", {
           callback = function(args)
-            local bufnr = args.buf
+            local buffer = args.buf
             local client = vim.lsp.get_client_by_id(args.data.client_id)
-            if client and client:supports_method "textDocument/codeLens" then
-              vim.lsp.codelens.refresh()
-              vim.api.nvim_create_autocmd(
-                { "BufEnter", "CursorHold", "InsertLeave" },
-                {
-                  buffer = bufnr,
-                  callback = vim.lsp.codelens.refresh,
-                }
+            if
+              client
+              and client:supports_method "textDocument/codeLens"
+              and vim.bo[buffer].buftype == ""
+              and not vim.tbl_contains(
+                opts.codelens.exclude,
+                vim.bo[buffer].filetype
               )
+            then
+              vim.lsp.codelens.enable(true, { bufnr = buffer })
             end
           end,
         })
+      end
+
+      if vim.lsp.codelens then
+        Snacks.toggle({
+          name = "Codelens",
+          get = function() return vim.lsp.codelens.is_enabled { bufnr = 0 } end,
+          set = function(state) vim.lsp.codelens.enable(state, { bufnr = 0 }) end,
+        }):map "<leader>ue"
       end
 
       -- for conflicting keymap warnings
@@ -114,7 +124,6 @@ return {
           { "gao", function() Snacks.picker.lsp_outgoing_calls() end, desc = "C[a]lls Outgoing" },
           { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "x" } },
           { "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "x" } },
-          { "<leader>cC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens" },
           { "<leader>cR", Snacks.rename.rename_file, desc = "Rename File" },
           { "<leader>cr", vim.lsp.buf.rename, desc = "Rename" },
           { "<leader>cl", Snacks.picker.lsp_config, desc = "Lsp Info" },
