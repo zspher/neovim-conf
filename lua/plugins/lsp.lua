@@ -19,7 +19,62 @@ return {
         -- },
       },
       ---@type table<string, vim.lsp.Config>
-      servers = {},
+      servers = {
+        ["*"] = {
+          keys = {
+            {
+              "<C-]>",
+              function() Snacks.picker.lsp_definitions() end,
+              desc = "Goto Definition",
+            },
+            {
+              "grr",
+              function() Snacks.picker.lsp_references() end,
+              desc = "References",
+            },
+            {
+              "gri",
+              function() Snacks.picker.lsp_implementations() end,
+              desc = "Goto Implementation",
+            },
+            {
+              "grt",
+              function() Snacks.picker.lsp_type_definitions() end,
+              desc = "Goto T[y]pe Definition",
+            },
+            {
+              "<leader>ss",
+              function() Snacks.picker.lsp_symbols() end,
+              desc = "LSP Symbols",
+            },
+            {
+              "<leader>sS",
+              function() Snacks.picker.lsp_workspace_symbols() end,
+              desc = "LSP Workspace Symbols",
+            },
+            {
+              "grc",
+              function() Snacks.picker.lsp_incoming_calls() end,
+              desc = "C[a]lls Incoming",
+            },
+            {
+              "gro",
+              function() Snacks.picker.lsp_outgoing_calls() end,
+              desc = "C[a]lls Outgoing",
+            },
+            {
+              "<leader>cR",
+              function() Snacks.rename.rename_file() end,
+              desc = "Rename File",
+            },
+            {
+              "<leader>cl",
+              function() Snacks.picker.lsp_config() end,
+              desc = "Lsp Info",
+            },
+          },
+        },
+      },
       setup = {},
       codelens = {
         enabled = false,
@@ -87,13 +142,6 @@ return {
         }):map "<leader>ue"
       end
 
-      -- for conflicting keymap warnings
-      vim.keymap.del("n", "grr")
-      vim.keymap.del({ "n", "x" }, "gra")
-      vim.keymap.del("n", "grn")
-      vim.keymap.del("n", "gri")
-      vim.keymap.del("n", "grt")
-
       local function register_keys(client)
         if client == nil then return end
 
@@ -106,28 +154,8 @@ return {
             and options.servers[client.name].keys
           or {}
 
-        local picker = require "snacks.picker"
-
-        -- stylua: ignore
         ---@type LazyKeysSpec[]
-        local spec = {
-          { "gd", picker.lsp_definitions, desc = "Goto Definition" },
-          { "gr", picker.lsp_references, desc = "References" },
-          { "gI", picker.lsp_implementations, desc = "Goto Implementation" },
-          { "gy", picker.lsp_type_definitions, desc = "Goto T[y]pe Definition" },
-          { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
-          { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", cond = Snacks.words.is_enabled() },
-          { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", cond = Snacks.words.is_enabled() },
-          { "<leader>ss", picker.lsp_symbols, desc = "LSP Symbols" },
-          { "<leader>sS", picker.lsp_workspace_symbols, desc = "LSP Workspace Symbols" },
-          { "gai", function() Snacks.picker.lsp_incoming_calls() end, desc = "C[a]lls Incoming" },
-          { "gao", function() Snacks.picker.lsp_outgoing_calls() end, desc = "C[a]lls Outgoing" },
-          { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "x" } },
-          { "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "x" } },
-          { "<leader>cR", Snacks.rename.rename_file, desc = "Rename File" },
-          { "<leader>cr", vim.lsp.buf.rename, desc = "Rename" },
-          { "<leader>cl", Snacks.picker.lsp_config, desc = "Lsp Info" },
-        }
+        local spec = options.servers["*"].keys
 
         vim.list_extend(spec, maps)
 
@@ -141,6 +169,7 @@ return {
           ---@diagnostic disable-next-line: inject-field
           key.cond = nil
           if cond then
+            ---@class vim.keymap.set.Opts
             local o = Keys.opts(key) --[[@as vim.keymap.set.Opts]]
             o.buffer = true
             vim.keymap.set(key.mode or "n", key.lhs, key.rhs, o)
@@ -155,11 +184,10 @@ return {
         end,
       })
 
-      if opts.capabilities then
-        vim.lsp.config("*", { capabilities = opts.capabilities })
-      end
+      if opts.servers["*"] then vim.lsp.config("*", opts.servers["*"]) end
 
       local function configure(server)
+        if server == "*" then return false end
         local server_opts = opts.servers[server] or {}
 
         local setup = opts.setup[server] or opts.setup["*"]
