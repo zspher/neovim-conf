@@ -89,6 +89,14 @@ return {
     dependencies = "vim-dadbod",
     keys = {
       { "<leader>D", "<cmd>DBUIToggle<CR>", desc = "Toggle DBUI" },
+      {
+        "<leader>fD",
+        function()
+          local file = vim.g.db_ui_save_location .. "/connections.json"
+          vim.cmd("e " .. file)
+        end,
+        desc = "Edit Database Connections",
+      },
     },
     init = function()
       local data_path = vim.fn.stdpath "data"
