@@ -308,106 +308,67 @@ return {
   {
     "ThePrimeagen/refactoring.nvim",
     dependencies = {
-      "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
+      "lewis6991/async.nvim",
     },
     keys = {
       {
         "<leader>rI",
-        function() require("refactoring").refactor "Inline Function" end,
+        function() return require("refactoring").inline_func() end,
+        mode = { "n", "x" },
         desc = "Inline Function",
+        expr = true,
       },
       {
         "<leader>ri",
-        function() return require("refactoring").refactor "Inline Variable" end,
+        function() return require("refactoring").inline_var() end,
         mode = { "n", "x" },
         desc = "Inline Variable",
         expr = true,
       },
       {
-        "<leader>rb",
-        function() return require("refactoring").refactor "Extract Block" end,
+        "<leader>re",
+        function() return require("refactoring").extract_var() end,
         mode = { "n", "x" },
-        desc = "Extract Block",
+        desc = "Extract Variable",
         expr = true,
       },
       {
         "<leader>rf",
-        function()
-          return require("refactoring").refactor "Extract Block To File"
-        end,
-        mode = { "n", "x" },
-        desc = "Extract Block To File",
-        expr = true,
-      },
-      {
-        "<leader>rP",
-        function() require("refactoring").debug.printf { below = false } end,
-        desc = "Debug Print",
-      },
-      {
-        "<leader>rp",
-        function() require("refactoring").debug.print_var { normal = true } end,
-        mode = { "n", "x" },
-        desc = "Debug Print Variable",
-      },
-      {
-        "<leader>rc",
-        function() require("refactoring").debug.cleanup {} end,
-        desc = "Debug Cleanup",
-      },
-      {
-        "<leader>rf",
-        function() return require("refactoring").refactor "Extract Function" end,
+        function() return require("refactoring").extract_func() end,
         mode = { "n", "x" },
         desc = "Extract Function",
         expr = true,
       },
       {
         "<leader>rF",
-        function()
-          return require("refactoring").refactor "Extract Function To File"
-        end,
+        function() return require("refactoring").extract_func_to_file() end,
         mode = { "n", "x" },
         desc = "Extract Function To File",
         expr = true,
       },
       {
-        "<leader>rx",
-        function() return require("refactoring").refactor "Extract Variable" end,
-        mode = { "n", "x" },
-        desc = "Extract Variable",
-        expr = true,
-      },
-      {
         "<leader>rp",
-        function() require("refactoring").debug.print_var {} end,
+        function()
+          return require("refactoring.debug").print_var {
+            output_location = "below",
+          } .. "iw"
+        end,
         mode = { "n", "x" },
+        expr = true,
         desc = "Debug Print Variable",
       },
-    },
-    opts = {
-      prompt_func_return_type = {
-        go = false,
-        java = false,
-        cpp = false,
-        c = false,
-        h = false,
-        hpp = false,
-        cxx = false,
+      {
+        "<leader>rc",
+        function()
+          return require("refactoring.debug").cleanup { restore_view = true }
+        end,
+        mode = { "n", "x" },
+        expr = true,
+        remap = true,
+        desc = "Debug Cleanup",
       },
-      prompt_func_param_type = {
-        go = false,
-        java = false,
-        cpp = false,
-        c = false,
-        h = false,
-        hpp = false,
-        cxx = false,
-      },
-      printf_statements = {},
-      print_var_statements = {},
-      show_success_message = true, -- shows a message with information about the refactor on success
     },
+    opts = {},
   },
 }
