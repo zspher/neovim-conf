@@ -17,7 +17,7 @@ return {
         "vimdoc",
         "regex",
       },
-      disable = {},
+      disable = { "csv" },
     },
     config = function(_, opts)
       local TS = require "nvim-treesitter"

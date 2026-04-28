@@ -18,6 +18,6 @@ vim.filetype.add {
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "comment", "csv" } },
+    opts = { ensure_installed = { "comment" } },
   },
 }
