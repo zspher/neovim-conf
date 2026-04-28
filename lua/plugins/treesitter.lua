@@ -35,16 +35,19 @@ return {
       if #to_install > 0 then TS.install(to_install, { summary = true }) end
 
       vim.api.nvim_create_autocmd("FileType", {
-        callback = function(args)
+        callback = vim.schedule_wrap(function(args)
           local bufnr = args.buf
           local ok, parser = pcall(vim.treesitter.get_parser, bufnr)
           if not ok or not parser then return end
           for _, lang in ipairs(opts.disable) do
             local ft = vim.treesitter.language.get_lang(vim.bo[bufnr].filetype)
-            if vim.treesitter.language.get_lang(lang) == ft then return end
+            if vim.treesitter.language.get_lang(lang) == ft then
+              vim.treesitter.stop(bufnr)
+              return
+            end
           end
           pcall(vim.treesitter.start)
-        end,
+        end),
       })
     end,
   },
