@@ -10,11 +10,15 @@ return {
         -- css
         cssmodules_ls = {},
         cssls = {
+          ---@type lspconfig.settings.cssls
           settings = {
             css = { lint = { unknownAtRules = "ignore" } },
           },
         },
-        tailwindcss = {},
+        tailwindcss = {
+          ---@type lspconfig.settings.tailwindcss
+          settings = {},
+        },
 
         -- html
         html = {
@@ -23,6 +27,8 @@ return {
               didChangeWorkspaceFolders = { dynamicRegistration = true },
             },
           },
+          ---@type lspconfig.settings.html
+          settings = {},
         },
         superhtml = {
           on_attach = function(client, _)

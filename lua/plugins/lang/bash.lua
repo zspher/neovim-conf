@@ -8,7 +8,10 @@ return {
       ---@type table<string, vim.lsp.Config>
       servers = {
         -- supports explainshell, shellcheck and shfmt.
-        bashls = {},
+        bashls = {
+          ---@type lspconfig.settings.bashls
+          settings = {},
+        },
       },
     },
   },

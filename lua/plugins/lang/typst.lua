@@ -6,6 +6,7 @@ return {
     opts = {
       ---@type table<string, vim.lsp.Config>
       servers = {
+        ---@type lspconfig.settings.tinymist
         tinymist = {
           single_file_support = true, -- Fixes LSP attachment in non-Git directories
           cmd_env = { SOURCE_DATE_EPOCH = "" },

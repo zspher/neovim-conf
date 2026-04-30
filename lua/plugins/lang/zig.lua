@@ -7,7 +7,10 @@ return {
     opts = {
       ---@type table<string, vim.lsp.Config>
       servers = {
-        zls = {},
+        zls = {
+          ---@type lspconfig.settings.zls
+          settings = {},
+        },
       },
     },
   },

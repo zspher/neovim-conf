@@ -16,9 +16,8 @@ return {
             "--completion-style=detailed",
             "--fallback-style=llvm",
           },
-          init_options = {
-            clangdFileStatus = true,
-          },
+          ---@type lspconfig.settings.clangd
+          settings = {},
           keys = {
             {
               "<leader>ch",

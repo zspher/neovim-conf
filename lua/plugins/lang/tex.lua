@@ -19,7 +19,7 @@ return {
       servers = {
         texlab = {
           settings = {
-            ["texlab"] = {
+            texlab = {
               build = {
                 executable = "tectonic",
                 args = {

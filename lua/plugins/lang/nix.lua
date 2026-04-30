@@ -9,8 +9,9 @@ return {
       ---@type table<string, vim.lsp.Config>
       servers = {
         nixd = {
+          ---@type lspconfig.settings.nixd
           settings = {
-            ["nixd"] = {
+            nixd = {
               formatting = { command = { "nixfmt" } },
               nixpkgs = { expr = "import <nixpkgs> { }" },
               ["options"] = {
