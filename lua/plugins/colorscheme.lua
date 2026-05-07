@@ -34,6 +34,7 @@ return {
             style = { "strikethrough" },
           },
           RenderMarkdownChecked = { fg = c.mauve },
+          CanolaExecutable = { fg = c.red },
 
           ["@lsp.type.variable"] = { link = "@variable" },
         }

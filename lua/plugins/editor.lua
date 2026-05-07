@@ -1,5 +1,3 @@
-local oil_detail = false
-
 local function harpoon_to_buflist()
   local harpoon_list = require("harpoon"):list().items
   local cwd = vim.uv.cwd()
@@ -201,77 +199,40 @@ return {
 
   -- explorer
   {
-    "stevearc/oil.nvim",
-    cmd = "Oil",
-    ---@module 'oil'
-    ---@type oil.SetupOpts
-    opts = {
-      skip_confirm_for_simple_edits = true,
-      delete_to_trash = true,
-      keymaps = {
-        ["q"] = "actions.close",
-        ["<C-h>"] = false,
-        ["<A-h>"] = "actions.select_split",
-        ["gd"] = {
-          desc = "Toggle file detail view",
-          callback = function()
-            oil_detail = not oil_detail
-            if oil_detail then
-              require("oil").set_columns {
-                "permissions",
-                { "size", highlight = "Comment" },
-                { "mtime", highlight = "Conceal" },
-                "icon",
-              }
-            else
-              require("oil").set_columns { "icon" }
-            end
-          end,
-        },
-      },
-      view_options = {
-        show_hidden = true,
-        highlight_filename = function(entry, _, _, _)
-          local state = vim.uv.fs_stat(entry.name)
-          if state and state.type == "file" then
-            local perms = string.format("%o", bit.band(state.mode, 511))
-            local l = { "1", "3", "5", "7" }
-            for _, v in ipairs(l) do
-              if perms:match(v) then return "Error" end
-            end
-          end
-          return nil
-        end,
-      },
-      win_options = {
-        signcolumn = "yes",
-      },
+    "barrettruth/canola.nvim",
+    branch = "canola",
+    dependencies = {
+      "barrettruth/canola-collection",
     },
-    config = function(_, opts)
-      require("oil").setup(opts)
-
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "OilActionsPost",
-        callback = function(event)
-          if event.data.actions.type == "move" then
-            require("snacks").rename.on_rename_file(
-              event.data.actions.src_url,
-              event.data.actions.dest_url
-            )
-          end
-        end,
-      })
+    init = function()
+      vim.g.canola = {
+        columns = {
+          "git_status",
+          "icon",
+          "permissions",
+        },
+        confirm = "delete",
+        hidden = { enabled = false },
+        keymaps = {
+          ["C-h"] = false,
+          ["<A-h>"] = {
+            callback = "actions.select",
+            opts = { horizontal = true },
+          },
+          ["C-l"] = false,
+          ["<A-l>"] = "actions.refresh",
+        },
+      }
+      vim.g.canola_git = {
+        format = "symbol",
+      }
+      vim.g.canola_ssh = {}
+      vim.g.canola_trash = {}
     end,
     keys = {
       {
         "<leader>e",
-        function()
-          if vim.bo.ft == "oil" then
-            require("oil").close()
-          else
-            require("oil").open(nil)
-          end
-        end,
+        function() require("canola").toggle() end,
         desc = "Explorer (Current Dir)",
       },
     },
@@ -333,23 +294,6 @@ return {
   },
 
   -- git stuff
-  {
-    "refractalize/oil-git-status.nvim",
-    config = true,
-    keys = {
-      {
-        "<leader>e",
-        function()
-          if vim.bo.ft == "oil" then
-            require("oil").close()
-          else
-            require("oil").open(nil)
-          end
-        end,
-        desc = "Explorer (Current Dir)",
-      },
-    },
-  },
   {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPost", "BufNewFile", "BufWritePre" },
