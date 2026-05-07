@@ -31,6 +31,7 @@ return {
           { "<leader>dp", group = "profiler" },
           { "<leader>f", group = "file/find" },
           { "<leader>g", group = "git" },
+          { "<leader>gh", group = "git stage" },
           { "<leader>q", group = "quit/session" },
           { "<leader>s", group = "search" },
           { "<leader>u", group = "ui" },
@@ -316,6 +317,12 @@ return {
       on_attach = function(buffer)
         local gs = package.loaded.gitsigns
 
+        Snacks.toggle({
+          name = "Git Signs",
+          get = function() return require("gitsigns.config").config.signcolumn end,
+          set = function(state) require("gitsigns").toggle_signs(state) end,
+        }):map "<leader>uG"
+
         local function map(mode, l, r, desc)
           vim.keymap.set(
             mode,
@@ -344,18 +351,14 @@ return {
         map("n", "[H", function() gs.nav_hunk("first") end, "First Hunk")
         map("n", "<leader>gB", function() gs.blame() end, "Blame Buffer")
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+
+        map({ "n", "x" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
+        map({ "n", "x" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
+        map("n", "<leader>ghS", gs.stage_buffer, "Stage Buffer")
+        map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
+        map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
       end,
     },
-  },
-  {
-    "gitsigns.nvim",
-    opts = function()
-      Snacks.toggle({
-        name = "Git Signs",
-        get = function() return require("gitsigns.config").config.signcolumn end,
-        set = function(state) require("gitsigns").toggle_signs(state) end,
-      }):map "<leader>uG"
-    end,
   },
 
   -- better diagnostics
