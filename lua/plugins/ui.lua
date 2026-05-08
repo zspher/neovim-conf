@@ -1,4 +1,4 @@
--- NOTE: ui stuff, bufferline, statusline, highlights
+-- NOTE: ui stuff, statusline, highlights
 
 ---@module 'snacks'
 ---@type LazySpec[]
@@ -21,56 +21,6 @@ return {
       }):map "<leader>ut"
       return { mode = "cursor", max_lines = 3 }
     end,
-  },
-  {
-    "akinsho/bufferline.nvim",
-    event = "VeryLazy",
-    keys = {
-      {
-        "<leader>bp",
-        "<Cmd>BufferLineTogglePin<CR>",
-        desc = "Toggle Pin",
-      },
-      {
-        "<leader>bP",
-        "<Cmd>BufferLineGroupClose ungrouped<CR>",
-        desc = "Delete Non-Pinned Buffers",
-      },
-      {
-        "<leader>br",
-        "<Cmd>BufferLineCloseRight<CR>",
-        desc = "Delete Buffers to the Right",
-      },
-      {
-        "<leader>bl",
-        "<Cmd>BufferLineCloseLeft<CR>",
-        desc = "Delete Buffers to the Left",
-      },
-      { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
-      { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
-      { "[B", "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer prev" },
-      { "]B", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
-    },
-    opts = {
-      options = {
-        close_command = function(n) Snacks.bufdelete(n) end,
-        right_mouse_command = function(n) Snacks.bufdelete(n) end,
-        diagnostics = "nvim_lsp",
-        indicator = { style = "none" },
-        always_show_bufferline = true,
-        offsets = {
-          {
-            filetype = "neo-tree",
-            text = "Neo-tree",
-            highlight = "Directory",
-            text_align = "left",
-          },
-          {
-            filetype = "snacks_layout_box",
-          },
-        },
-      },
-    },
   },
 
   {
@@ -267,6 +217,22 @@ return {
         inactive_winbar = {
           lualine_c = {
             filename,
+          },
+        },
+        tabline = {
+          lualine_a = {
+            {
+              "buffers",
+              filetype_names = {
+                snacks_picker_input = "Picker",
+                snacks_dashboard = "Dashboard",
+                canola = "Explorer",
+              },
+              fmt = function(name) return name .. " |" end,
+            },
+          },
+          lualine_z = {
+            { "tabs" },
           },
         },
       }
