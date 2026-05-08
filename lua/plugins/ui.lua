@@ -82,25 +82,6 @@ return {
     submodules = false,
   },
   {
-    "catgoose/nvim-colorizer.lua",
-    event = { "BufReadPre", "BufNewFile", "BufWritePre" },
-    opts = {
-      filetypes = {
-        "*",
-        qss = { css = true },
-        css = { css = true, css_fn = true },
-      },
-      options = {
-        always_update = true,
-        parsers = {
-          names = { enable = false },
-          tailwind = { lsp = true },
-        },
-      },
-      buftypes = { "!nofile" },
-    },
-  },
-  {
     "folke/snacks.nvim",
     ---@module 'snacks'
     ---@type snacks.Config
