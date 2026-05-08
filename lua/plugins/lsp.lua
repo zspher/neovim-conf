@@ -220,9 +220,9 @@ return {
         { path = "nvim-lspconfig", words = { "lspconfig.settings" } },
       },
     },
-    config = function(_, opts)
-      require "lspconfig"
-      require("lazydev").setup(opts)
-    end,
+    -- config = function(_, opts)
+    --   require "lspconfig"
+    --   require("lazydev").setup(opts)
+    -- end,
   },
 }
