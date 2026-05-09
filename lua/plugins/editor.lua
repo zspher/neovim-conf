@@ -201,6 +201,7 @@ return {
   -- explorer
   {
     "barrettruth/canola.nvim",
+    lazy = vim.fn.argc(-1) == 0,
     branch = "canola",
     dependencies = {
       "barrettruth/canola-collection",
@@ -210,7 +211,7 @@ return {
         columns = {
           "git_status",
           "icon",
-          "permissions",
+          -- "permissions",
         },
         confirm = "delete",
         hidden = { enabled = false },
