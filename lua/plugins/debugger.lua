@@ -117,10 +117,6 @@ return {
     dependencies = {
       "igorlfs/nvim-dap-view",
       -- virtual text for the debugger
-      {
-        "theHamsta/nvim-dap-virtual-text",
-        opts = {},
-      },
       "stevearc/overseer.nvim",
     },
     keys = {
@@ -333,6 +329,10 @@ return {
           size = 0.4,
           position = "right",
         },
+      },
+      virtual_text = {
+        enabled = true,
+        prefix = function() return " =" end,
       },
       winbar = {
         sections = {
