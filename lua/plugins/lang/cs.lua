@@ -87,18 +87,16 @@ return {
             true,
             true
           )
-          local opts = {
-            format_item = function(path) return vim.fn.fnamemodify(path, ":t") end,
-          }
-          local function cont(choice)
-            if choice == nil then
-              return nil
-            else
-              coroutine.resume(dap_run_co, choice)
-            end
-          end
 
-          vim.ui.select(items, opts, cont)
+          if #items == 1 then
+            coroutine.resume(dap_run_co, items[1])
+            return
+          end
+          vim.ui.select(items, {
+            format_item = function(path) return vim.fn.fnamemodify(path, ":t") end,
+          }, function(choice)
+            if choice then coroutine.resume(dap_run_co, choice) end
+          end)
         end)
       end
       local dap = require "dap"
