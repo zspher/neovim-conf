@@ -1,6 +1,6 @@
 local function findMain()
   local main_file = "main.tex"
-  local path = vim.uv.cwd() .. "/" .. main_file
+  local path = vim.fs.normalize(vim.uv.cwd() .. "/" .. main_file)
   if vim.uv.fs_stat(path) ~= nil then
     return path
   else

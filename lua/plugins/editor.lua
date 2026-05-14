@@ -3,7 +3,7 @@ local function harpoon_to_buflist()
   local cwd = vim.uv.cwd()
   local buflist = {}
   for _, v in ipairs(harpoon_list) do
-    local file = cwd .. "/" .. v.value
+    local file = vim.fs.normalize(cwd .. "/" .. v.value)
     local buf = vim.fn.bufnr(file, false)
     if buf ~= -1 then buflist[#buflist + 1] = buf end
   end
