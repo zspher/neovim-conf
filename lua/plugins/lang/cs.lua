@@ -8,39 +8,41 @@ return {
     ---@type RoslynNvimConfig
     opts = {
       silent = true,
-      filewatching = "off",
-    },
-    init = function()
-      vim.filetype.add {
-        extension = {
-          razor = "razor",
-          cshtml = "razor",
+      extensions = {
+        razor = {
+          enabled = true,
+          config = function()
+            local razor = vim.fs.joinpath(
+              vim.fn.fnamemodify(
+                vim.fn.resolve(
+                  vim.fn.exepath "Microsoft.CodeAnalysis.LanguageServer"
+                ),
+                ":h:h"
+              ),
+              ".razorExtension"
+            )
+
+            return {
+              path = vim.fs.joinpath(
+                razor,
+                "Microsoft.VisualStudioCode.RazorExtension.dll"
+              ),
+              args = {
+                "--razorSourceGenerator=" .. vim.fs.joinpath(
+                  razor,
+                  "Microsoft.CodeAnalysis.Razor.Compiler.dll"
+                ),
+                "--razorDesignTimePath=" .. vim.fs.joinpath(
+                  razor,
+                  "Targets",
+                  "Microsoft.NET.Sdk.Razor.DesignTime.targets"
+                ),
+              },
+            }
+          end,
         },
-      }
-      local razor = vim.fs.joinpath(
-        vim.fn.fnamemodify(vim.fn.resolve(vim.fn.exepath "roslyn-ls"), ":h:h"),
-        ".razorExtension"
-      )
-      local cmd = {
-        "roslyn-ls",
-        "--stdio",
-        "--logLevel=Information",
-        "--extensionLogDirectory="
-          .. vim.fs.dirname(vim.lsp.log.get_filename()),
-        "--razorSourceGenerator="
-          .. vim.fs.joinpath(razor, "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
-        "--razorDesignTimePath=" .. vim.fs.joinpath(
-          razor,
-          "Targets",
-          "Microsoft.NET.Sdk.Razor.DesignTime.targets"
-        ),
-        "--extension",
-        vim.fs.joinpath(razor, "Microsoft.VisualStudioCode.RazorExtension.dll"),
-      }
-      vim.lsp.config("roslyn", {
-        cmd = cmd,
-      })
-    end,
+      },
+    },
   },
   -- formatter
   {
@@ -100,6 +102,28 @@ return {
         end)
       end
       local dap = require "dap"
+
+      local web_launch = {
+        type = "coreclr",
+        name = "coreclr: Launch (web)",
+        request = "launch",
+        program = get_dll,
+        args = {},
+        cwd = "${fileDirname}",
+        console = "integratedTerminal",
+        stopAtEntry = false,
+        serverReadyAction = {
+          action = "openExternally",
+          pattern = "\\bNow listening on:\\s+(https?://\\S+)",
+        },
+        env = {
+          ASPNETCORE_ENVIRONMENT = "Development",
+        },
+        sourceFileMap = {
+          ["/Views"] = "${workspaceFolder}/Views",
+        },
+      }
+      dap.configurations.razor = { web_launch }
       dap.configurations.cs = {
         {
           type = "coreclr",
@@ -110,26 +134,7 @@ return {
           cwd = "${fileDirname}",
           console = "integratedTerminal",
         },
-        {
-          type = "coreclr",
-          name = "coreclr: Launch (web)",
-          request = "launch",
-          program = get_dll,
-          args = {},
-          cwd = "${fileDirname}",
-          console = "integratedTerminal",
-          stopAtEntry = false,
-          serverReadyAction = {
-            action = "openExternally",
-            pattern = "\\bNow listening on:\\s+(https?://\\S+)",
-          },
-          env = {
-            ASPNETCORE_ENVIRONMENT = "Development",
-          },
-          sourceFileMap = {
-            ["/Views"] = "${workspaceFolder}/Views",
-          },
-        },
+        web_launch,
       }
     end,
   },
