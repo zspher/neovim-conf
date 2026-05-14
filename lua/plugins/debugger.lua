@@ -297,7 +297,7 @@ return {
     keys = {
       {
         "<leader>du",
-        function() require("dap-view").toggle() end,
+        function() require("dap-view").toggle(true) end,
         desc = "Dap UI",
       },
       {
