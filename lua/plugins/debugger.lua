@@ -393,6 +393,18 @@ return {
       dap.listeners.after.event_initialized["dapui_config"] = function()
         dapview.open()
       end
+
+      local state = require "dap-view.state"
+      local util = require "dap-view.util"
+
+      --- FIX: dap-view not playing well with other win (e.g. overseer, trouble ...)
+      vim.api.nvim_create_autocmd("WinResized", {
+        callback = function()
+          if state.term_winnr and util.is_win_valid(state.winnr) then
+            require("dap-view.util.window").resize(state.winnr)
+          end
+        end,
+      })
     end,
   },
 }
