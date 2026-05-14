@@ -157,9 +157,9 @@ return {
         desc = "Run with Args",
       },
       {
-        "<F5>",
-        function() require("dap").continue() end,
-        desc = "Debugger: Start",
+        "<F9>",
+        function() require("dap").toggle_breakpoint() end,
+        desc = "Debugger: Toggle Breakpoint",
       },
       {
         "<F21>", -- Shift+F9
@@ -167,14 +167,14 @@ return {
         desc = "Set Condition Breakpoint",
       },
       {
-        "<F9>",
-        function() require("dap").toggle_breakpoint() end,
-        desc = "Debugger: Toggle Breakpoint",
-      },
-      {
         "<F33>", -- Control+F9
         function() require("dap").clear_breakpoints() end,
         desc = "Debugger: Clear All Breakpoints",
+      },
+      {
+        "<F5>",
+        function() require("dap").continue() end,
+        desc = "Debugger: Start",
       },
       {
         "<F17>", -- Shift+F5
@@ -183,13 +183,18 @@ return {
       },
       {
         "<F29>", -- Control+F5
-        function() require("dap").restart_frame() end,
-        desc = "Debugger: Restart",
+        function() require("dap").run_last() end,
+        desc = "Debugger: Run Last",
       },
       {
         "<F6>",
         function() require("dap").pause() end,
         desc = "Debugger: Pause",
+      },
+      {
+        "<F18>", -- Shift+F6
+        function() require("dap").restart_frame() end,
+        desc = "Debugger: Restart Frame",
       },
       {
         "<F7>",
