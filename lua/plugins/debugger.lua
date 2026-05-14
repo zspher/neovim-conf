@@ -244,7 +244,7 @@ return {
       for _, adapterType in ipairs { "node", "chrome", "msedge" } do
         local pwaType = "pwa-" .. adapterType
 
-        dap.adapters[pwaType] = {
+        local node_adapter = {
           type = "server",
           host = "localhost",
           port = "${port}",
@@ -252,20 +252,18 @@ return {
             command = "js-debug",
             args = { "${port}" },
           },
+          -- Define adapters without the "pwa-" prefix for VSCode compatibility
+          enrich_config = function(conf, on_config)
+            local config = vim.deepcopy(conf)
+            if not vim.startswith(conf.type, "pwa-") then
+              config.type = "pwa-" .. config.type
+            end
+            on_config(config)
+          end,
         }
 
-        -- Define adapters without the "pwa-" prefix for VSCode compatibility
-        dap.adapters[adapterType] = function(cb, config)
-          local nativeAdapter = dap.adapters[pwaType]
-
-          config.type = pwaType
-
-          if type(nativeAdapter) == "function" then
-            nativeAdapter(cb, config)
-          else
-            cb(nativeAdapter)
-          end
-        end
+        dap.adapters[pwaType] = node_adapter
+        dap.adapters[adapterType] = node_adapter
       end
 
       vim.api.nvim_set_hl(
