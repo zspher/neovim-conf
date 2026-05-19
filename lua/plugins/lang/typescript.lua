@@ -116,26 +116,27 @@ return {
         if not dap.configurations[language] then
           dap.configurations[language] = {
             {
+              name = "Launch File",
               type = "node",
               request = "launch",
-              name = "Launch file",
               program = get_program,
               cwd = "${workspaceFolder}",
               console = "integratedTerminal",
             },
             {
+              name = "Attach",
               type = "node",
               request = "attach",
-              name = "Attach",
               processId = "${command:pickProcess}",
               cwd = "${workspaceFolder}",
             },
             {
+              name = "Launch in Browser",
               type = "chrome",
               request = "launch",
-              name = "Start brave on port",
               runtimeExecutable = vim.fn.exepath "brave",
               webRoot = "${workspaceFolder}",
+              console = "integratedTerminal",
               url = function() return vim.fn.input("args", "http://localhost:") end,
             },
           }
