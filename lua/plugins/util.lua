@@ -187,6 +187,5 @@ return {
   -- library used by other plugins
   -- NOTE: still used by
   --       - neotest & co
-  --       - todo-comments
   { "nvim-lua/plenary.nvim", enabled = true },
 }

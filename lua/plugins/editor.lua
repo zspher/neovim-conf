@@ -474,7 +474,7 @@ return {
 
   -- better comments
   {
-    "folke/todo-comments.nvim",
+    "zspher/todo-comments.nvim",
     lazy = false,
     cmd = { "TodoTrouble" },
     opts = {},
