@@ -461,12 +461,13 @@ return {
         arrow = "",
       },
       options = {
+        show_all_diags_on_cursorline = true,
+        show_diags_only_under_cursor = true,
         show_source = {
           if_many = true,
         },
         multilines = {
           enabled = true,
-          always_show = true,
         },
       },
     },
