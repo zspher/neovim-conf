@@ -7,7 +7,10 @@ return {
     opts = {
       ---@type table<string, vim.lsp.Config>
       servers = {
-        taplo = {},
+        -- taplo = { },
+        tombi = {
+          settings = {},
+        },
       },
     },
   },
