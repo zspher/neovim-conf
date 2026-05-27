@@ -146,6 +146,7 @@ return {
         Snacks.bufdelete(function(buf) return not vim.list_contains(tab_buflist, buf) end)
       end, desc = "Delete Buffers other than the current layout" },
       { "<leader>bO", function() Snacks.bufdelete.other() end, desc = "Delete Other Buffers" },
+      { "<leader>bi", function() Snacks.bufdelete.invisible() end, desc = "Delete Invisible Buffers" },
 
       -- NOTE: picker
       { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
