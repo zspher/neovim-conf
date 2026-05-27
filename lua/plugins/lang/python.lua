@@ -32,14 +32,7 @@ return {
     "stevearc/conform.nvim",
     optional = true,
     opts = {
-      formatters_by_ft = {
-        bash = { "shfmt" },
-      },
-      formatters = {
-        shfmt = {
-          prepend_args = { "-i", vim.o.tabstop, "-ci" },
-        },
-      },
+      formatters_by_ft = {},
     },
   },
   -- linter
