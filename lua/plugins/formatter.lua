@@ -37,28 +37,4 @@ return {
       },
     },
   },
-  {
-    "folke/snacks.nvim",
-    optional = true,
-    opts = function()
-      Snacks.toggle({
-        name = "autoformat",
-        get = function() return not vim.g.disable_autoformat end,
-        set = function()
-          vim.g.disable_autoformat = not vim.g.disable_autoformat
-        end,
-      }):map "<leader>uF"
-
-      Snacks.toggle({
-        name = "buffer autoformat",
-        get = function()
-          return not vim.b[vim.api.nvim_get_current_buf()].disable_autoformat
-        end,
-        set = function()
-          local buf = vim.api.nvim_get_current_buf()
-          vim.b[buf].disable_autoformat = not vim.b[buf].disable_autoformat
-        end,
-      }):map "<leader>uf"
-    end,
-  },
 }

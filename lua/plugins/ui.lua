@@ -1,6 +1,5 @@
 -- NOTE: ui stuff, statusline, highlights
 
----@module 'snacks'
 ---@type LazySpec[]
 return {
   {
@@ -30,29 +29,6 @@ return {
     event = { "BufReadPre", "BufNewFile", "BufWritePre" },
     main = "rainbow-delimiters.setup",
     submodules = false,
-  },
-  {
-    "folke/snacks.nvim",
-    ---@module 'snacks'
-    ---@type snacks.Config
-    opts = {
-      ---@type table<string, snacks.win.Config>
-      styles = {},
-      indent = {
-        scope = {
-          hl = "SnacksIndent1",
-        },
-      },
-      image = {
-        math = { enabled = false },
-        doc = {
-          inline = false,
-        },
-        markdown = { enabled = true },
-        max_width = 20,
-        max_height = 10,
-      },
-    },
   },
 
   -- statusline
@@ -377,26 +353,4 @@ return {
 
   -- ui components
   { "MunifTanjim/nui.nvim", lazy = true },
-
-  {
-    "snacks.nvim",
-    opts = {
-      indent = { enabled = true },
-      dashboard = { enabled = false },
-      input = { enabled = true },
-      notifier = { enabled = true },
-      scope = { enabled = true },
-      scroll = { enabled = true },
-      statuscolumn = { enabled = false }, -- we set this in options.lua
-      toggle = { enabled = true },
-      words = { enabled = true },
-    },
-    keys = {
-      {
-        "<leader>un",
-        function() Snacks.notifier.hide() end,
-        desc = "Dismiss All Notifications",
-      },
-    },
-  },
 }
