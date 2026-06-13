@@ -382,6 +382,7 @@ return {
     "snacks.nvim",
     opts = {
       indent = { enabled = true },
+      dashboard = { enabled = false },
       input = { enabled = true },
       notifier = { enabled = true },
       scope = { enabled = true },
@@ -395,66 +396,6 @@ return {
         "<leader>un",
         function() Snacks.notifier.hide() end,
         desc = "Dismiss All Notifications",
-      },
-    },
-  },
-  {
-    "snacks.nvim",
-    opts = {
-      dashboard = {
-        preset = {
-          ---@type snacks.dashboard.Item[]
-          keys = {
-            {
-              icon = " ",
-              key = "f",
-              desc = "Find File",
-              action = ":= Snacks.dashboard.pick('files')",
-            },
-            {
-              icon = " ",
-              key = "n",
-              desc = "New File",
-              action = ":ene | startinsert",
-            },
-            {
-              icon = " ",
-              key = "g",
-              desc = "Find Text",
-              action = ":= Snacks.dashboard.pick('live_grep')",
-            },
-            {
-              icon = " ",
-              key = "r",
-              desc = "Recent Files",
-              action = ":lua Snacks.dashboard.pick('oldfiles')",
-            },
-            {
-              icon = " ",
-              key = "c",
-              desc = "Config",
-              action = ":= Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
-            },
-            {
-              icon = " ",
-              key = "s",
-              desc = "Restore Session",
-              action = ":= require('resession').load()",
-            },
-            {
-              icon = "󰒲 ",
-              key = "l",
-              desc = "Lazy",
-              action = ":Lazy",
-            },
-            {
-              icon = " ",
-              key = "q",
-              desc = "Quit",
-              action = ":qa",
-            },
-          },
-        },
       },
     },
   },
