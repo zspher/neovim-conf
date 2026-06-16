@@ -250,7 +250,7 @@ return {
         end, "Prev Hunk")
         map("n", "]H", function() gs.nav_hunk("last") end, "Last Hunk")
         map("n", "[H", function() gs.nav_hunk("first") end, "First Hunk")
-        map("n", "<leader>gB", function() gs.blame() end, "Blame Buffer")
+        map("n", "<leader>gb", function() gs.blame() end, "Blame Buffer")
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
 
         map({ "n", "x" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
@@ -295,16 +295,6 @@ return {
         "<leader>xX",
         "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
         desc = "Buffer Diagnostics (Trouble)",
-      },
-      {
-        "<leader>cs",
-        "<cmd>Trouble symbols toggle<cr>",
-        desc = "Symbols (Trouble)",
-      },
-      {
-        "<leader>cS",
-        "<cmd>Trouble lsp toggle<cr>",
-        desc = "LSP references/definitions/... (Trouble)",
       },
       {
         "<leader>xL",

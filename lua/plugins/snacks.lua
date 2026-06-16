@@ -173,15 +173,8 @@ return {
       },
     },
 
-    -- stylua: ignore
     keys = {
-      -- NOTE: git
-      { "<leader>gb", function() Snacks.picker.git_log_line() end, desc = "Git Blame Line" },
-      { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse (open)", mode = { "n", "x" } },
-      { "<leader>gY", function() Snacks.gitbrowse({open = function(url) vim.fn.setreg("+", url) end, notify = false}) end, desc = "Git Browse (copy)", mode = {"n", "x" } },
-      { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit (Root Dir)" },
-      { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Current File History" },
-      { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
+      -- stylua: ignore start
 
       -- NOTE: buffer
       { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
@@ -197,7 +190,8 @@ return {
       { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
       { "<leader><space>",function() Snacks.picker.files() end, desc = "Find Files" },
       { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
-      -- find
+
+      -- NOTE: find
       { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
       { "<leader>fB", function() Snacks.picker.buffers({ hidden = true, nofile = true }) end, desc = "Buffers (all)" },
       { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
@@ -205,21 +199,30 @@ return {
       { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
       { "<leader>fR", function() Snacks.picker.recent({ filter = { cwd = true }}) end, desc = "Recent (cwd)" },
       { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
-      -- git
-      { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (hunks)" },
+
+      -- NOTE: git
+      { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse (open)", mode = { "n", "x" } },
+      { "<leader>gY", function() Snacks.gitbrowse({open = function(url) vim.fn.setreg("+", url) end, notify = false}) end, desc = "Git Browse (copy)", mode = {"n", "x" } },
+      { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit (Root Dir)" },
+
+      { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log (buffer)" },
+      { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
+      { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Status (hunks)" },
       { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
       { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
       { "<leader>gi", function() Snacks.picker.gh_issue() end, desc = "GitHub Issues (open)" },
       { "<leader>gI", function() Snacks.picker.gh_issue({ state = "all" }) end, desc = "GitHub Issues (all)" },
       { "<leader>gp", function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
       { "<leader>gP", function() Snacks.picker.gh_pr({ state = "all" }) end, desc = "GitHub Pull Requests (all)" },
-      -- Grep
+
+      -- NOTE: grep
       { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
       { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
       { "<leader>sg", function() Snacks.picker.grep() end, desc = "Grep" },
       { "<leader>sp", function() Snacks.picker.lazy() end, desc = "Search for Plugin Spec" },
       { "<leader>sw", function() Snacks.picker.grep_word() end,  desc = "Visual selection or word", mode = { "n", "x" } },
-      -- search
+
+      -- NOTE: search
       { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
       { '<leader>s/', function() Snacks.picker.search_history() end, desc = "Search History" },
       { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
