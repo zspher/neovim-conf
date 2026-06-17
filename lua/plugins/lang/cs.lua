@@ -8,40 +8,6 @@ return {
     ---@type RoslynNvimConfig
     opts = {
       silent = true,
-      extensions = {
-        razor = {
-          enabled = true,
-          config = function()
-            local razor = vim.fs.joinpath(
-              vim.fn.fnamemodify(
-                vim.fn.resolve(
-                  vim.fn.exepath "Microsoft.CodeAnalysis.LanguageServer"
-                ),
-                ":h:h"
-              ),
-              ".razorExtension"
-            )
-
-            return {
-              path = vim.fs.joinpath(
-                razor,
-                "Microsoft.VisualStudioCode.RazorExtension.dll"
-              ),
-              args = {
-                "--razorSourceGenerator=" .. vim.fs.joinpath(
-                  razor,
-                  "Microsoft.CodeAnalysis.Razor.Compiler.dll"
-                ),
-                "--razorDesignTimePath=" .. vim.fs.joinpath(
-                  razor,
-                  "Targets",
-                  "Microsoft.NET.Sdk.Razor.DesignTime.targets"
-                ),
-              },
-            }
-          end,
-        },
-      },
     },
   },
   -- formatter
