@@ -77,20 +77,24 @@ return {
     ---@module "render-markdown"
     ---@type render.md.UserConfig
     opts = {
+      preset = "obsidian",
+      completions = { lsp = { enabled = true } },
       code = {
         sign = false,
         width = "block",
         right_pad = 1,
       },
       heading = {
-        enabled = false,
+        enabled = true,
+        width = "block",
+        position = "inline",
       },
       bullet = {
         icons = { "•", "◦" },
         right_pad = 1,
       },
       latex = {
-        enabled = false,
+        enabled = true,
       },
       win_options = { conceallevel = { rendered = 2 } },
       checkbox = {
