@@ -20,4 +20,13 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = { ensure_installed = { "comment" } },
   },
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      ---@type table<string, vim.lsp.Config>
+      servers = {
+        qmlls = {},
+      },
+    },
+  },
 }
