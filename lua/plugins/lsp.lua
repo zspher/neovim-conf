@@ -87,6 +87,10 @@ return {
     },
     config = function(_, opts)
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
+      vim.api.nvim_create_user_command("LspLog", function()
+        local log_path = vim.lsp.log.get_filename()
+        vim.cmd.split(log_path)
+      end, {})
 
       -- inlay hints
       if opts.inlay_hints.enabled then
