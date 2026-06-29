@@ -9,7 +9,7 @@ return {
         ---@type lspconfig.settings.tinymist
         tinymist = {
           single_file_support = true, -- Fixes LSP attachment in non-Git directories
-          cmd_env = { SOURCE_DATE_EPOCH = "" },
+          cmd_env = { SOURCE_DATE_EPOCH = 0 },
           settings = {
             formatterMode = "typstyle",
             exportPdf = "onSave",
