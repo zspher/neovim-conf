@@ -1,6 +1,6 @@
 # nvim
 
-uses 💤 [LazyVim](https://www.lazyvim.org/)
+uses 💤 [lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ## 🛠️ Installation
 
