@@ -78,7 +78,6 @@ return {
   },
 
   -- library used by other plugins
-  -- NOTE: still used by
-  --       - neotest & co
-  { "nvim-lua/plenary.nvim", enabled = true },
+  -- NOTE: still used by: none
+  { "nvim-lua/plenary.nvim", enabled = false },
 }
