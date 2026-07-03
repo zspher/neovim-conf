@@ -162,7 +162,6 @@ return {
         "<leader>td",
         function()
           require("neotest").run.run {
-            vim.fn.expand "%",
             strategy = "dap",
             suite = false,
           }
