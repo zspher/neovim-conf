@@ -47,33 +47,58 @@ return {
     "mfussenegger/nvim-dap",
     optional = true,
     opts = function()
-      local function get_dll()
+      local dap = require "dap"
+      local function get_target_path()
         return coroutine.create(function(dap_run_co)
-          local items = vim.fn.globpath(
-            vim.fn.getcwd(),
-            "**/bin/Debug/**/*.dll",
-            true,
-            true
+          local csproj = vim.fs.find(
+            function(name) return name:match "%.csproj$" ~= nil end,
+            {
+              path = vim.fs.dirname(vim.api.nvim_buf_get_name(0)),
+              upward = true,
+              type = "file",
+              limit = 1,
+            }
           )
 
-          if #items == 1 then
-            coroutine.resume(dap_run_co, items[1])
+          if not csproj[1] then
+            vim.notify(
+              "No .csproj found near current file",
+              vim.log.levels.ERROR
+            )
+            coroutine.resume(dap_run_co, dap.ABORT)
             return
           end
-          vim.ui.select(items, {
-            format_item = function(path) return vim.fn.fnamemodify(path, ":t") end,
-          }, function(choice)
-            if choice then coroutine.resume(dap_run_co, choice) end
-          end)
+
+          vim.system(
+            { "dotnet", "msbuild", csproj[1], "-getProperty:TargetPath" },
+            { text = true },
+            function(obj)
+              vim.schedule(function()
+                if obj.code ~= 0 then
+                  vim.notify(
+                    string.format(
+                      "msbuild failed (%d): %s",
+                      obj.code,
+                      vim.trim(obj.stderr or "")
+                    ),
+                    vim.log.levels.ERROR
+                  )
+                  coroutine.resume(dap_run_co, dap.ABORT)
+                  return
+                end
+
+                coroutine.resume(dap_run_co, (vim.trim(obj.stdout or "")))
+              end)
+            end
+          )
         end)
       end
-      local dap = require "dap"
 
       local web_launch = {
         type = "coreclr",
         name = "coreclr: Launch (web)",
         request = "launch",
-        program = get_dll,
+        program = get_target_path,
         args = {},
         cwd = "${fileDirname}",
         console = "integratedTerminal",
@@ -95,7 +120,7 @@ return {
           type = "coreclr",
           name = "coreclr: Launch",
           request = "launch",
-          program = get_dll,
+          program = get_target_path,
           args = {},
           cwd = "${fileDirname}",
           console = "integratedTerminal",
