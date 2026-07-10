@@ -33,7 +33,18 @@ return {
     "nvim-neotest/neotest",
     optional = true,
     dependencies = {
-      "nsidorenco/neotest-vstest",
+      {
+        "nsidorenco/neotest-vstest",
+        init = function()
+          vim.g.neotest_vstest = {
+            dap_settings = {
+              type = "coreclr",
+              console = "integratedTerminal",
+              cwd = "${fileDirname}",
+            },
+          }
+        end,
+      },
     },
     opts = {
       adapters = {
