@@ -5,18 +5,15 @@
 return {
   -- auto pairs
   {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    opts = function()
-      Snacks.toggle({
-        name = "autopair",
-        get = function() return not require("nvim-autopairs").state.disabled end,
-        set = function()
-          require("nvim-autopairs").state.disabled =
-            not require("nvim-autopairs").state.disabled
-        end,
-      }):map "<leader>up"
-    end,
+    "saghen/blink.pairs",
+    event = { "BufReadPre", "BufNewFile", "BufWritePre" },
+    dependencies = "saghen/blink.lib",
+    version = "*",
+    build = function() require("blink.pairs").download():pwait(60000) end,
+
+    --- @module 'blink.pairs'
+    --- @type blink.pairs.Config
+    opts = {},
   },
   -- comments
   {

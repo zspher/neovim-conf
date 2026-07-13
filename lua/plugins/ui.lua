@@ -22,15 +22,6 @@ return {
     end,
   },
 
-  {
-    "HiPhish/rainbow-delimiters.nvim",
-    lazy = true,
-    dependencies = "nvim-treesitter/nvim-treesitter",
-    event = { "BufReadPre", "BufNewFile", "BufWritePre" },
-    main = "rainbow-delimiters.setup",
-    submodules = false,
-  },
-
   -- statusline
   {
     "nvim-lualine/lualine.nvim",
