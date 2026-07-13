@@ -13,18 +13,15 @@ return {
       flavour = "mocha",
       transparent_background = true,
       integrations = {
-        fzf = true,
         harpoon = true,
         lsp_trouble = true,
-        mason = true,
         neotest = true,
-        neotree = true,
         noice = true,
         notify = true,
         which_key = true,
         treesitter = true,
-        treesitter_context = true,
-        snacks = true,
+        snacks = { enabled = true },
+        blink_pairs = true,
       },
       custom_highlights = function(c)
         return {
