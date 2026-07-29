@@ -122,6 +122,7 @@ return {
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
+      snippets = { preset = "luasnip" },
       completion = {
         menu = {
           draw = {
