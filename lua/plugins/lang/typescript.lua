@@ -1,3 +1,9 @@
+local function get_vue_server()
+  -- NOTE: nixos only
+  local vue = vim.fn.fnamemodify(vim.fn.exepath "vue-language-server", ":p:h:h")
+  return vim.fs.joinpath(vue, "lib/language-tools/packages/language-server")
+end
+
 ---@type LazySpec[]
 return {
 
@@ -7,10 +13,22 @@ return {
     opts = {
       ---@type table<string, vim.lsp.Config>
       servers = {
+        tsgo = {},
         vtsls = {
           ---@type lspconfig.settings.vtsls
           settings = {
             vtsls = {
+              tsserver = {
+                globalPlugins = {
+                  {
+                    name = "@vue/typescript-plugin",
+                    location = get_vue_server(),
+                    languages = { "vue" },
+                    configNamespace = "typescript",
+                    enableForWorkspaceTypeScriptVersions = true,
+                  },
+                },
+              },
               experimental = {
                 completion = {
                   enableServerSideFuzzyMatch = true,
@@ -18,22 +36,11 @@ return {
               },
             },
           },
-          keys = {
-            {
-              "<leader>co",
-              function()
-                vim.lsp.buf.code_action {
-                  apply = true,
-                  context = {
-                    only = { "source.organizeImports" },
-                    diagnostics = {},
-                  },
-                }
-              end,
-              desc = "Organize Imports",
-            },
+          filetypes = {
+            "vue",
           },
         },
+        vue_ls = {},
       },
     },
   },
