@@ -1,13 +1,3 @@
-local function findMain()
-  local main_file = "main.tex"
-  local path = vim.fs.normalize(vim.uv.cwd() .. "/" .. main_file)
-  if vim.uv.fs_stat(path) ~= nil then
-    return path
-  else
-    return "%f"
-  end
-end
-
 ---@type LazySpec[]
 return {
 
@@ -21,12 +11,12 @@ return {
           settings = {
             texlab = {
               build = {
+                filename = "default.pdf",
+                pdfDirectory = "build/default",
                 executable = "tectonic",
                 args = {
                   "-X",
-                  "compile",
-                  findMain(),
-                  "--synctex",
+                  "build",
                   "--keep-logs",
                   "--keep-intermediates",
                 },
@@ -99,7 +89,7 @@ return {
   -- extra
   {
     "iurimateus/luasnip-latex-snippets.nvim",
-    ft = { "tex", "markdown" },
+    ft = { "tex", "markdown", "plaintex" },
     opts = {
       allow_on_markdown = true,
       use_treesitter = true,
