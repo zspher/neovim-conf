@@ -13,11 +13,26 @@ return {
     opts = {
       ---@type table<string, vim.lsp.Config>
       servers = {
-        tsgo = {},
         vtsls = {
+          on_attach = function(client, bufnr)
+            vim.api.nvim_buf_create_user_command(
+              bufnr,
+              "LspSetTypescriptVersion",
+              function()
+                client:exec_cmd {
+                  title = "Set Typescript Version",
+                  command = "typescript.selectTypeScriptVersion",
+                }
+              end,
+              {
+                desc = "Set Typescript Version",
+              }
+            )
+          end,
           ---@type lspconfig.settings.vtsls
           settings = {
             vtsls = {
+              autoUseWorkspaceTsdk = true,
               tsserver = {
                 globalPlugins = {
                   {
@@ -37,6 +52,10 @@ return {
             },
           },
           filetypes = {
+            "javascript",
+            "javascriptreact",
+            "typescript",
+            "typescriptreact",
             "vue",
           },
         },
