@@ -71,7 +71,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
-      ensure_installed = { "tsx", "typescript", "javascript" },
+      ensure_installed = { "tsx", "typescript", "javascript", "vue" },
     },
   },
 

@@ -41,7 +41,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
-      ensure_installed = { "python" },
+      ensure_installed = { "python", "htmldjango" },
     },
   },
 
