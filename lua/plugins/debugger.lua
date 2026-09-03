@@ -48,7 +48,7 @@ local function edit_breakpoint()
         value = bp.condition,
         setter = function(v) bp.condition = v end,
       },
-      ["Hit Condition"] = {
+      ["Repeats"] = {
         value = bp.hitCondition,
         setter = function(v) bp.hitCondition = v end,
       },
