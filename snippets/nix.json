@@ -12,7 +12,6 @@
       "      perSystem = lib.genAttrs [",
       "        \"x86_64-linux\"",
       "        \"aarch64-linux\"",
-      "        \"x86_64-darwin\"",
       "        \"aarch64-darwin\"",
       "      ];",
       "       $0",
@@ -39,8 +38,8 @@
     "prefix": "persa",
     "body": "perSystem = lib.genAttrs lib.systems.flakeExposed"
   },
-  "pkgs": {
+  "pkgs alt": {
     "prefix": "pkgs =",
-    "body": "pkgs = nixpkgs.legacyPackages.\\${system};"
+    "body": "pkgs = import nixpkgs { inherit system; ${1|config.allowUnfree = true;,|} };"
   }
 }
