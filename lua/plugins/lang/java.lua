@@ -1,3 +1,8 @@
+local function get_jdtls()
+  local vue = vim.fn.fnamemodify(vim.fn.exepath "jdtls", ":p:h:h")
+  return vim.fs.joinpath(vue, "share/java/jdtls")
+end
+
 ---@type LazySpec[]
 return {
   -- lsp
@@ -7,6 +12,10 @@ return {
     ---@module "java"
     ---@type java.PartialConfig
     opts = {
+      jdtls = {
+        auto_install = false,
+        path = get_jdtls(),
+      },
       java_test = {
         path = vim.fn.stdpath "data" .. "/java/test",
       },
@@ -17,7 +26,6 @@ return {
         enable = false,
       },
       lombok = {
-        enable = false,
         path = vim.fn.stdpath "data" .. "/java/lombok.jar",
       },
       jdk = {
