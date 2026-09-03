@@ -39,7 +39,7 @@ return {
     "nvim-neotest/neotest",
     optional = true,
     dependencies = {
-      "sidlatau/neotest-dart",
+      "zspher/neotest-dart", -- TODO: remove when plenary removed
     },
     opts = {
       adapters = {

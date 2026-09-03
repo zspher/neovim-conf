@@ -140,7 +140,7 @@ return {
     },
   },
   {
-    "zspher/harpoon",
+    "zspher/harpoon", -- TODO: remove when plenary removed
     opts = {
       settings = {
         save_on_toggle = true,
@@ -365,7 +365,7 @@ return {
 
   -- better comments
   {
-    "zspher/todo-comments.nvim",
+    "zspher/todo-comments.nvim", -- TODO: remove when plenary removed
     lazy = false,
     cmd = { "TodoTrouble" },
     opts = {},
