@@ -266,6 +266,17 @@ return {
         dap.adapters[adapterType] = node_adapter
       end
 
+      dap.adapters.dart = {
+        type = "executable",
+        command = "dart",
+        args = { "debug_adapter" },
+      }
+      dap.adapters.flutter = {
+        type = "executable",
+        command = "flutter",
+        args = { "debug_adapter" },
+      }
+
       vim.api.nvim_set_hl(
         0,
         "DapStoppedLine",

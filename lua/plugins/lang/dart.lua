@@ -49,6 +49,28 @@ return {
   },
 
   -- dap
+  {
+    "mfussenegger/nvim-dap",
+    optional = true,
+    opts = function()
+      local dap = require "dap"
+      dap.configurations.dart = {
+        {
+          type = "dart",
+          name = "dart: launch",
+          request = "launch",
+          program = function()
+            local file = require("dap.utils").pick_file {
+              filter = vim.uv.cwd() .. "/bin/.*%.dart",
+              executables = false,
+            }
+            return file
+          end,
+          cwd = "${workspaceFolder}",
+        },
+      }
+    end,
+  },
 
   -- extra
 }
