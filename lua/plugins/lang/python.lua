@@ -24,6 +24,7 @@ return {
           ---@type lspconfig.settings.ruff
           settings = {},
         },
+        djlsp = {},
       },
     },
   },
