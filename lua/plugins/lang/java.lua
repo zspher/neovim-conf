@@ -54,7 +54,7 @@ return {
     "nvim-neotest/neotest",
     optional = true,
     dependencies = {
-      "zspher/neotest-java", -- TODO: remove when plenary removed
+      "rcasia/neotest-java",
     },
     opts = {
       adapters = {
