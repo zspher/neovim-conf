@@ -8,7 +8,8 @@ return {
     "saghen/blink.pairs",
     event = { "BufReadPre", "BufNewFile", "BufWritePre" },
     dependencies = "saghen/blink.lib",
-    build = function() require("blink.pairs").build():pwait(60000) end,
+    version = "*",
+    build = function() require("blink.pairs").download():pwait(60000) end,
 
     --- @module 'blink.pairs'
     --- @type blink.pairs.Config
