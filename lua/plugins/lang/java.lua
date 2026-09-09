@@ -7,6 +7,15 @@ end
 return {
   -- lsp
   {
+    "neovim/nvim-lspconfig",
+    opts = {
+      ---@type table<string, vim.lsp.Config>
+      servers = {
+        gradle_ls = {},
+      },
+    },
+  },
+  {
     "nvim-java/nvim-java",
     ft = { "java" },
     ---@module "java"
