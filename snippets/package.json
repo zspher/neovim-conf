@@ -13,6 +13,12 @@
           "nix"
         ],
         "path": "./nix.json"
+      },
+      {
+        "language": [
+          "xhtml"
+        ],
+        "path": "./xhtml.json"
       }
     ]
   }

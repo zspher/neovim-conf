@@ -1,0 +1,44 @@
+{
+  "Jakarta Faces XHTML Template": {
+    "prefix": "jinit",
+    "body": [
+      "<!DOCTYPE html>",
+      "<html xmlns=\"http://www.w3.org/1999/xhtml\"",
+      "      xmlns:h=\"http://xmlns.jcp.org/jsf/html\"",
+      "      xmlns:ui=\"http://xmlns.jcp.org/jsf/facelets\"${1|\nxmlns:p=\"primefaces\",|}",
+      "      xmlns:f=\"http://java.sun.com/jsf/core\">",
+      "",
+      "<h:head>",
+      "    <meta charset=\"UTF-8\"/>",
+      "    <title>${2:Page Title}</title>",
+      "</h:head>",
+      "<h:body>",
+      "    ${0}",
+      "</h:body>",
+      "</html>"
+    ],
+    "description": "Boilerplate for a modern Jakarta Faces XHTML page"
+  },
+  "JF Form": {
+    "prefix": "h:form",
+    "body": ["<h:form id=\"${1:id}\">", "${0}", "</h:form>"]
+  },
+  "JF Output Text": {
+    "prefix": "h:outputText",
+    "body": ["<h:outputText value=\"#{$1}\" />$0"]
+  },
+  "JF Input Text": {
+    "prefix": "h:inputText",
+    "body": ["<h:inputText id=\"$2\" value=\"#{$1}\" />$0"]
+  },
+  "JF Label": {
+    "prefix": "h:outputLabel",
+    "body": ["<h:outputLabel value=\"$1\" for=\"$2\" />$0"]
+  },
+  "JF Command Button": {
+    "prefix": "h:commandButton",
+    "body": [
+      "<h:commandButton value=\"${1:Submit}\" action=\"#{$2}\" ${3|update=\"@$4\",|} />$0"
+    ]
+  }
+}
