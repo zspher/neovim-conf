@@ -7,7 +7,9 @@ return {
     opts = {
       ---@type table<string, vim.lsp.Config>
       servers = {
-        lemminx = {},
+        lemminx = {
+          filetypes = { "xml", "xsd", "xsl", "xslt", "svg", "xhtml" },
+        },
       },
     },
   },
