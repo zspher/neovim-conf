@@ -9,6 +9,15 @@ return {
     opts = {
       silent = true,
     },
+    init = function()
+      -- TODO: remove on roslyn >= `5.12.0-1.26453.19`
+      vim.lsp.config("roslyn", {
+        cmd = {
+          "Microsoft.CodeAnalysis.LanguageServer",
+          "--stdio",
+        },
+      })
+    end,
   },
   -- formatter
   {
