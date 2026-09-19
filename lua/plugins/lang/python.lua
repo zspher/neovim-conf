@@ -56,9 +56,9 @@ return {
     opts = {
       adapters = {
         ["neotest-python"] = {
-          -- Here you can specify the settings for the adapter, i.e.
-          -- runner = "pytest",
-          -- python = ".venv/bin/python",
+          python = vim.env.UV_PROJECT_ENVIRONMENT == nil
+              and vim.fn.exepath "python"
+            or vim.fs.joinpath(vim.env.UV_PROJECT_ENVIRONMENT, "bin", "python"),
         },
       },
     },
