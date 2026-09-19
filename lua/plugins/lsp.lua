@@ -43,7 +43,7 @@ return {
               desc = "Goto T[y]pe Definition",
             },
             {
-              "<leader>ss",
+              "gO",
               function() Snacks.picker.lsp_symbols() end,
               desc = "LSP Symbols",
             },
@@ -55,12 +55,12 @@ return {
             {
               "grc",
               function() Snacks.picker.lsp_incoming_calls() end,
-              desc = "C[a]lls Incoming",
+              desc = "Calls In[c]oming",
             },
             {
               "gro",
               function() Snacks.picker.lsp_outgoing_calls() end,
-              desc = "C[a]lls Outgoing",
+              desc = "C[a]lls Outg[o]ing",
             },
             {
               "<leader>cR",
