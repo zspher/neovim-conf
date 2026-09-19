@@ -60,14 +60,28 @@ return {
 
   -- test suite
   {
+    "artur-shaik/jc.nvim",
+    ft = { "java" },
+    dependencies = { "nvim-java/nvim-java" },
+    opts = {
+      keys_prefix = "<leader>j",
+      default_mappings = false,
+      map_gf = false,
+    },
+    keys = {
+      { "gre", "<cmd>JCgotoTest<cr>", desc = "Goto T[e]st" },
+      { "<leader>cc", "<cmd>JCgenerateClass<cr>", desc = "Create Class" },
+    },
+  },
+  {
     "nvim-neotest/neotest",
     optional = true,
     dependencies = {
-      "rcasia/neotest-java",
+      "artur-shaik/jc.nvim",
     },
     opts = {
       adapters = {
-        ["neotest-java"] = {},
+        ["jc"] = function() return require("jc").neotest_adapter() end,
       },
     },
   },

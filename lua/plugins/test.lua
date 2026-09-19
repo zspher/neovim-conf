@@ -7,6 +7,7 @@ return {
       -- Can be a list of adapters like what neotest expects,
       -- or a list of adapter names,
       -- or a table of adapter names, mapped to adapter configs.
+      -- or a table of adapter names, mapped to a function (for defer)
       -- The adapter will then be automatically loaded with the config.
       adapters = {},
       -- Example for loading neotest-golang with a custom config
@@ -88,7 +89,8 @@ return {
                 error("Adapter " .. name .. " does not support setup")
               end
             end
-            adapters[#adapters + 1] = adapter
+            adapters[#adapters + 1] = type(config) == "function" and config()
+              or adapter -- for defer fun() return adapter() end
           end
         end
         opts.adapters = adapters
