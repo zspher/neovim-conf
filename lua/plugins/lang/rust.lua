@@ -7,19 +7,28 @@ return {
     opts = {
       server = {
         on_attach = function(_, bufnr)
-          vim.keymap.set(
+          local function map(mode, lhs, rhs, desc)
+            vim.keymap.set(mode, lhs, rhs, {
+              buf = bufnr,
+              desc = desc,
+            })
+          end
+          map(
             "n",
-            "<leader>cR",
-            function() vim.cmd.RustLsp "codeAction" end,
-            { desc = "Code Action", buffer = bufnr }
+            "<localleader>t",
+            "<cmd>RustLsp relatedTests<CR>",
+            "Goto Related T[e]st"
           )
-          vim.keymap.set(
+          map(
             "n",
-            "<leader>dr",
-            function() vim.cmd.RustLsp "debuggables" end,
-            { desc = "Rust Debuggables", buffer = bufnr }
+            "<localleader>e",
+            "<cmd>RustLsp explainError<CR>",
+            "Explain Error"
           )
+          map("n", "<localleader>o", "<cmd>RustLsp openCargo<CR>", "Open Cargo")
+          map("n", "<localleader>d", "<cmd>RustLsp openDocs<CR>", "Open Docs")
         end,
+        dap = { autoload_configurations = true },
         default_settings = {
           -- rust-analyzer language server configuration
           ["rust-analyzer"] = {
