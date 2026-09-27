@@ -20,9 +20,18 @@ return {
           settings = {},
           keys = {
             {
-              "<leader>ch",
+              "<localleader>h",
               "<cmd>LspClangdSwitchSourceHeader<cr>",
               desc = "Switch Source/Header (C/C++)",
+              ft = {
+                "c",
+                "c.doxygen",
+                "cpp",
+                "cpp.doxygen",
+                "objc",
+                "objcpp",
+                "cuda",
+              },
             },
           },
         },

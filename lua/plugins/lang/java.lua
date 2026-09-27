@@ -3,6 +3,8 @@ local function get_jdtls()
   return vim.fs.joinpath(vue, "share/java/jdtls")
 end
 
+local filetypes = { "java" }
+
 ---@type LazySpec[]
 return {
   -- lsp
@@ -64,13 +66,23 @@ return {
     ft = { "java" },
     dependencies = { "nvim-java/nvim-java" },
     opts = {
-      keys_prefix = "<leader>j",
+      keys_prefix = "<localleader>",
       default_mappings = false,
       map_gf = false,
     },
     keys = {
-      { "gre", "<cmd>JCgotoTest<cr>", desc = "Goto T[e]st" },
-      { "<leader>cc", "<cmd>JCgenerateClass<cr>", desc = "Create Class" },
+      {
+        "<localleader>t",
+        "<cmd>JCgotoTest<cr>",
+        desc = "Goto Related T[e]st",
+        ft = filetypes,
+      },
+      {
+        "<localleader>g",
+        "<cmd>JCgenerateClass<cr>",
+        desc = "Generate Class",
+        ft = filetypes,
+      },
     },
   },
   {

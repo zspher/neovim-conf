@@ -29,9 +29,10 @@ return {
               desc = "Pin main file",
             },
             {
-              "<leader>cb",
+              "<localleader>b",
               "<Cmd>LspTinymistExportPdf<CR>",
               desc = "Build Pdf Document",
+              ft = "typst",
             },
           },
         },

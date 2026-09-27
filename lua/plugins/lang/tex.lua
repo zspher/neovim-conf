@@ -1,3 +1,5 @@
+local filetypes = { "tex", "plaintex", "bib" }
+
 ---@type LazySpec[]
 return {
 
@@ -36,34 +38,40 @@ return {
           },
           keys = {
             {
-              "<leader>cb",
+              "<localleader>b",
               "<Cmd>LspTexlabBuild<CR>",
               desc = "Build Pdf Document",
+              ft = filetypes,
             },
             {
-              "<leader>cv",
+              "<localleader>v",
               "<Cmd>LspTexlabForward<CR>",
               desc = "Forward Search",
+              ft = filetypes,
             },
             {
-              "<leader>cx",
+              "<localleader>x",
               "<Cmd>LspTexlabCancelBuild<CR>",
               desc = "Cancel Build",
+              ft = filetypes,
             },
             {
-              "<leader>cC",
+              "<localleader>C",
               "<Cmd>LspTexlabCleanAuxiliary<CR>",
               desc = "Clean All",
+              ft = filetypes,
             },
             {
-              "<leader>cc",
+              "<localleader>c",
               "<Cmd>LspTexlabCleanArtifacts<CR>",
               desc = "Clean Artifacts",
+              ft = filetypes,
             },
             {
-              "<leader>ce",
+              "<localleader>e",
               "<Cmd>LspTexlabChangeEnvironment<CR>",
               desc = "Change Environmant",
+              ft = filetypes,
             },
           },
         },
