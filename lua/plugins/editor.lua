@@ -26,6 +26,7 @@ return {
         {
           mode = { "n", "v" },
           { "<leader><tab>", group = "tabs" },
+          { "<leader>a", group = "AI" },
           { "<leader>c", group = "code" },
           { "<leader>d", group = "debug" },
           { "<leader>dp", group = "profiler" },
