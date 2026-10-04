@@ -6,6 +6,7 @@ return {
   -- lsp
   {
     "neovim/nvim-lspconfig",
+    optional = true,
     opts = {
       ---@type table<string, vim.lsp.Config>
       servers = {
