@@ -10,6 +10,7 @@ return {
       servers = {
         -- taplo = { },
         tombi = {
+          ---@type lspconfig.settings.tombi
           settings = {},
         },
       },
