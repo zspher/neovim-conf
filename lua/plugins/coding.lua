@@ -103,7 +103,8 @@ return {
   {
     "saghen/blink.cmp",
     event = { "InsertEnter", "CmdlineEnter" },
-    version = "*",
+    -- version = "*",
+    build = function() require("blink.cmp").build():pwait() end,
     opts_extend = {
       "sources.completion.enabled_providers",
       "sources.compat",
