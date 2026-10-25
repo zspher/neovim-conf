@@ -111,6 +111,7 @@ return {
       -- you save the file running those queries can crash neovim to run use the
       -- default keymap: <leader>S
       vim.g.db_ui_execute_on_save = false
+      vim.g.dbext_default_ORA_bin = "sqlcl"
     end,
   },
 }
