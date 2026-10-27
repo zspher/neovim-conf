@@ -11,7 +11,15 @@ return {
         -- taplo = { },
         tombi = {
           ---@type lspconfig.settings.tombi
-          settings = {},
+          settings = {
+            tombi = {
+              format = {
+                rules = {
+                  ["line-width"] = tonumber(vim.o.cc),
+                },
+              },
+            },
+          },
         },
       },
     },
