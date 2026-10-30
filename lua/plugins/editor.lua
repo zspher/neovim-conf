@@ -101,11 +101,11 @@ return {
 
   -- explorer
   {
-    "https://git.sr.ht/~barrettruth/canola.nvim",
+    "barrettruth/canola.nvim",
     lazy = vim.fn.argc(-1) == 0,
     branch = "canola",
     dependencies = {
-      "https://git.sr.ht/~barrettruth/canola-collection",
+      "barrettruth/canola-collection",
     },
     init = function()
       vim.g.canola = {
