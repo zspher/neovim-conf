@@ -60,7 +60,7 @@ return {
             {
               "gro",
               function() Snacks.picker.lsp_outgoing_calls() end,
-              desc = "C[a]lls Outg[o]ing",
+              desc = "Calls Outg[o]ing",
             },
             {
               "<leader>cR",

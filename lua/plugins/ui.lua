@@ -61,7 +61,7 @@ return {
         }
       local filename = {
         "filename",
-        path = 3,
+        path = 1,
         symbols = {
           modified = "",
           readonly = "",
