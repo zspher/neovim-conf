@@ -1,6 +1,6 @@
 local function get_jdtls()
-  local vue = vim.fn.fnamemodify(vim.fn.exepath "jdtls", ":p:h:h")
-  return vim.fs.joinpath(vue, "share/java/jdtls")
+  local path = vim.fn.fnamemodify(vim.fn.exepath "jdtls", ":p:h:h")
+  return vim.fs.joinpath(path, "share/java/jdtls")
 end
 
 local filetypes = { "java" }
@@ -103,6 +103,28 @@ return {
   {
     "mfussenegger/nvim-dap",
     optional = true,
+    opts = function()
+      local dap = require "dap"
+
+      local function get_port()
+        return coroutine.create(function(dap_run_co)
+          vim.ui.input({
+            default = "8787",
+          }, function(input)
+            coroutine.resume(dap_run_co, tonumber(input))
+          end)
+        end)
+      end
+      dap.configurations.java = {
+        {
+          type = "java",
+          request = "attach",
+          name = "Attach to remote",
+          hostName = "127.0.0.1",
+          port = get_port,
+        },
+      }
+    end,
   },
 
   -- extra
