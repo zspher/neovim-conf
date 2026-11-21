@@ -163,10 +163,11 @@ return {
         win = {
           input = {
             keys = {
-              ["<a-t>"] = {
+              ["<M-t>"] = {
                 "trouble_open",
                 mode = { "n", "i" },
               },
+              ["<F1>"] = { "toggle_help_input", mode = { "n", "i" } },
             },
           },
         },
