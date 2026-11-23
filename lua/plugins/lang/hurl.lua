@@ -39,6 +39,18 @@ return {
         desc = "Show Last request",
         ft = filetypes,
       },
+      {
+        "<localleader>e",
+        "<cmd>HurlRunnerToEntry<CR>",
+        desc = "Run Api request to entry",
+        ft = filetypes,
+      },
+      {
+        "<localleader>E",
+        "<cmd>HurlRunnerToEnd<CR>",
+        desc = "Run Api request to end",
+        ft = filetypes,
+      },
     },
   },
 
