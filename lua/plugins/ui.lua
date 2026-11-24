@@ -272,7 +272,7 @@ return {
       },
       {
         "<leader>snh",
-        function() require("noice").cmd "history" end,
+        function() require("noice").cmd "pick" end,
         desc = "Noice History",
       },
       {
@@ -284,11 +284,6 @@ return {
         "<leader>snd",
         function() require("noice").cmd "dismiss" end,
         desc = "Dismiss All",
-      },
-      {
-        "<leader>snt",
-        function() require("noice").cmd "pick" end,
-        desc = "Noice Picker (Telescope/FzfLua)",
       },
       {
         "<c-f>",
