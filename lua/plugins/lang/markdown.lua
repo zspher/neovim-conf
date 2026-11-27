@@ -88,11 +88,15 @@ return {
       heading = {
         enabled = true,
         width = "block",
+        min_width = tonumber(vim.o.cc),
         position = "inline",
+        icons = function(ctx)
+          --- numbered headings
+          return table.concat(ctx.sections, ".") .. " "
+        end,
       },
       bullet = {
         icons = { "•", "◦" },
-        right_pad = 1,
       },
       latex = {
         enabled = true,
